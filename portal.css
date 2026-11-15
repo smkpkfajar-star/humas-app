@@ -78,5 +78,8 @@ a.card:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
 .badge { font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--brand-tint); color: var(--brand); }
 
 .foot { padding: 20px 16px; font-size: .8rem; color: var(--text-2); border-top: 1px solid var(--border); }
+.foot p { margin: 0; }
+.foot .foot__credit { margin-bottom: 4px; }
+.foot__credit strong { color: var(--text); font-weight: 600; }
 
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }

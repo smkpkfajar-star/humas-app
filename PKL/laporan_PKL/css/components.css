@@ -1100,3 +1100,7 @@ kbd {
 @media (prefers-reduced-motion: reduce) {
   .is-flash { animation: none; outline: 3px solid var(--status-warn-text); outline-offset: 4px; }
 }
+
+/* Kredit pengembang di halaman awal */
+.app-credit { margin-top: var(--space-4); font-size: var(--fs-micro); color: var(--text-secondary); }
+.app-credit strong { color: var(--text-primary); font-weight: 600; }
