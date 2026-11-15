@@ -1,0 +1,5 @@
+# File pengembangan yang tidak perlu ikut di-deploy
+**/__pycache__/
+**/*.pyc
+**/tools/
+**/docs/

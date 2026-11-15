@@ -1,0 +1,82 @@
+/* Gaya bersama halaman portal Superapp Humas (selaras dengan css/tokens.css aplikasi PKL) */
+:root {
+  --bg: #F8F9F7;
+  --surface: #FFFFFF;
+  --brand: #1E6B4B;
+  --brand-hover: #165239;
+  --brand-tint: #E6F2EC;
+  --text: #1F2933;
+  --text-2: #52606D;
+  --border: #DCE2DD;
+  --shadow: 0 2px 8px rgba(31, 41, 51, 0.04);
+  --shadow-up: 0 6px 20px rgba(31, 41, 51, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111714;
+    --surface: #1A221E;
+    --brand: #4FB98A;
+    --brand-hover: #6FCDA2;
+    --brand-tint: #1F3A2D;
+    --text: #E6ECE8;
+    --text-2: #A3B1A9;
+    --border: #2C3832;
+    --shadow: none;
+    --shadow-up: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+}
+main { flex: 1; }
+.wrap { width: 100%; max-width: 880px; margin: 0 auto; padding: 0 16px; }
+
+.top { background: var(--surface); border-bottom: 1px solid var(--border); }
+.top__inner { display: flex; align-items: center; gap: 12px; height: 64px; }
+.top__inner img { border-radius: 8px; }
+.top__title { margin: 0; font-weight: 700; line-height: 1.2; }
+.top__sub { margin: 0; font-size: .8rem; color: var(--text-2); }
+.top__back { margin-left: auto; color: var(--brand); font-size: .875rem; font-weight: 600; text-decoration: none; }
+.top__back:hover { text-decoration: underline; }
+
+.hero { padding: 40px 0 24px; }
+.hero h1 { margin: 0 0 8px; font-size: clamp(1.5rem, 4vw, 2rem); line-height: 1.25; letter-spacing: -0.01em; }
+.hero p { margin: 0; color: var(--text-2); max-width: 60ch; }
+
+.section-title { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-2); margin: 16px 0 12px; }
+
+.grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); padding-bottom: 40px; }
+.card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px; border-radius: 14px;
+  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow);
+  color: inherit; text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+a.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-up); border-color: var(--brand); }
+a.card:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.card--off { opacity: .6; }
+.card__icon {
+  flex: none; width: 44px; height: 44px; border-radius: 10px;
+  display: grid; place-items: center; background: var(--brand-tint); color: var(--brand);
+}
+.card__icon svg { width: 22px; height: 22px; }
+.card__body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.card__name { font-weight: 600; }
+.card__desc { font-size: .85rem; color: var(--text-2); }
+.card__go { color: var(--brand); font-size: 1.2rem; }
+.badge { font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--brand-tint); color: var(--brand); }
+
+.foot { padding: 20px 16px; font-size: .8rem; color: var(--text-2); border-top: 1px solid var(--border); }
+
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
