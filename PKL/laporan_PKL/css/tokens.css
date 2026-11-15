@@ -1,0 +1,85 @@
+/* ==========================================================================
+   Design Tokens — "Calm Academic Paper"
+   Sumber kebenaran: docs/design.md bagian 2
+   ========================================================================== */
+
+:root {
+  /* Latar Belakang & Permukaan */
+  --bg-canvas: #F8F9F7;        /* Putih gading lembut (anti-silau) */
+  --bg-surface: #FFFFFF;       /* Kartu formulir utama */
+  --bg-subtle: #F1F4F1;        /* Sidebar langkah & header tabel */
+  --bg-input: #FCFCFB;         /* Latar kolom input */
+
+  /* Warna Aksen Utama (Hijau Zamrud Tenang) */
+  --brand-primary: #1E6B4B;    /* Tombol utama & langkah aktif */
+  --brand-hover: #165239;      /* State hover tombol utama */
+  --brand-tint: #E6F2EC;       /* Highlight lembut tips & badge */
+  --brand-border: #B7D8C8;     /* Garis tepi aksen lembut */
+
+  /* Tipografi */
+  --text-primary: #1F2933;     /* Abu-abu arang */
+  --text-secondary: #52606D;   /* Label bantuan & subjudul */
+  --text-placeholder: #829AB1; /* Teks placeholder input */
+  --text-on-brand: #FFFFFF;
+
+  /* Garis & Bayangan */
+  --border-soft: #DCE2DD;
+  --border-strong: #C5CEC7;
+  --border-focus: #1E6B4B;
+  --shadow-card: 0 2px 8px rgba(31, 41, 51, 0.04);
+  --shadow-raised: 0 6px 20px rgba(31, 41, 51, 0.08);
+  --focus-ring: 0 0 0 3px rgba(30, 107, 75, 0.12);
+
+  /* Status Semantik */
+  --status-ok-bg: #E8F5E9;
+  --status-ok-text: #2E7D32;
+  --status-warn-bg: #FEF3C7;
+  --status-warn-text: #B45309;
+  --status-danger: #C62828;
+  --status-danger-bg: #FDECEC;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Spasi (skala 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Tipografi — design.md bagian 3 */
+  --font-ui: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --fs-step-title: 1.25rem;    /* 20px */
+  --fs-card-title: 1.05rem;    /* 17px */
+  --fs-body: 0.95rem;          /* 15.2px */
+  --fs-label: 0.875rem;        /* 14px */
+  --fs-help: 0.8125rem;        /* 13px */
+  --fs-micro: 0.75rem;         /* 12px */
+  --lh-body: 1.65;
+
+  /* Tata Letak */
+  --content-max-width: 780px;
+  --header-height: 60px;
+  --sidebar-width: 264px;
+  --bottom-bar-height: 68px;
+
+  /* Gerak */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+  }
+}
