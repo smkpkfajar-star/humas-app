@@ -246,3 +246,15 @@
   .brand__subtitle { display: none; }
   .brand__title { font-size: 0.925rem; }
 }
+
+/* Kredit pengembang di bawah indikator kelengkapan */
+.sidebar__credit { margin: var(--space-3) 0 0; font-size: var(--fs-micro); line-height: 1.5; color: var(--text-secondary); }
+.sidebar__credit strong { color: var(--text-primary); font-weight: 600; }
+
+/* Versi HP: sidebar disembunyikan, jadi kredit tampil di bawah area kerja */
+.workspace-credit { display: none; }
+@media (max-width: 899.98px) {
+  .workspace-credit { display: block; max-width: var(--content-max-width); margin: var(--space-6) auto 0; text-align: center; font-size: var(--fs-micro); line-height: 1.5; color: var(--text-secondary); }
+  .workspace-credit strong { color: var(--text-primary); font-weight: 600; }
+  .is-landing .workspace-credit { display: none; }
+}
