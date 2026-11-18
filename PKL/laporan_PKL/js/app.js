@@ -360,6 +360,7 @@
     PKL.writingGuides.init();   // contoh penulisan sesuai jurusan yang tersimpan
     PKL.wordCount.init();       // penghitung kata di bawah isian narasi
     PKL.autoRows.init();        // tombol jurnal & presensi otomatis
+    PKL.holidayMark.init();     // baris jurnal di tanggal merah diberi warna & label
     PKL.completeness.initJump(); // klik "Belum diisi: ..." -> langsung ke isiannya
     PKL.motion.init();          // animasi, perayaan 100%, tombol ke atas
     // 4) Pratinjau gambar dari IndexedDB, lalu bersihkan gambar yang tak lagi dipakai.

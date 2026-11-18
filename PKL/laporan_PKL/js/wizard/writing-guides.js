@@ -17,7 +17,7 @@
     list_kompetensi: ['Kompetensi / Materi', 'Target', 'Ketercapaian'],
     list_peralatan: ['Alat / Perangkat / Bahan', 'Fungsi'],
     list_kendala: ['Kendala', 'Solusi'],
-    list_jurnal: ['Hari, Tanggal', 'Kegiatan', 'Kompetensi', 'Output']
+    list_jurnal: ['Hari, Tanggal', 'Kegiatan yang Dilakukan']
   };
 
   function el(tag, cls, text) {

@@ -7,7 +7,7 @@ Dokumen ini mendefinisikan struktur objek JavaScript (`reportState`) yang dipeta
 | Jenis | Sintaks | Contoh |
 | :--- | :--- | :--- |
 | Teks | `{nama}` | `{siswa_nama}` |
-| Baris tabel berulang | `{#list}…{/list}` dalam 1 baris | `{#list_jurnal}{no} … {validasi}{/list_jurnal}` |
+| Baris tabel berulang | `{#list}…{/list}` dalam 1 baris | `{#list_jurnal}{no} | {tanggal} | {kegiatan}{/list_jurnal}` |
 | Gambar | `{%nama}` | `{%dudi_struktur_img}`, `{%foto}`, `{%lampiran_sk_penempatan}`, `{%lampiran_surat_selesai}` |
 
 Nilai `"IMAGE_BUFFER_FROM_INDEXEDDB"` di bawah berarti **string kunci IndexedDB** (misal `"img_struktur"`), bukan buffer — lihat `development.md` bagian 3.B.
@@ -113,11 +113,9 @@ Nilai `"IMAGE_BUFFER_FROM_INDEXEDDB"` di bawah berarti **string kunci IndexedDB*
     {
       "no": 1,
       "tanggal": "Senin, 01 Juli 2026",
-      "kegiatan": "Orientasi lingkungan kerja dan setup repository proyek",
-      "kompetensi": "Konfigurasi Lingkungan Pengembangan",
-      "output": "Repository lokal terhubung ke server staging",
-      "validasi": "Paraf"
+      "kegiatan": "Orientasi lingkungan kerja dan setup repository proyek (repository lokal terhubung ke server staging)"
     }
+    // Lampiran 2 hanya 3 kolom: No | Hari dan Tanggal | Kegiatan yang Dilakukan
   ],
 
   "list_presensi_bulanan": [

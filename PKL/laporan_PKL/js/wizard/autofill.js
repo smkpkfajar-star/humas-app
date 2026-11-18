@@ -113,8 +113,34 @@
     setOut('file_name', PKL.calc.fileName(PKL.state.get('siswa_nama'), PKL.state.get('siswa_kelas')));
   }
 
+  // ---------- Kompetensi keahlian di Langkah 1 (select #jurusan_kode) ----------
+
+  function jurusanSelect() { return PKL.$('[data-jurusan-select]'); }
+
+  function fillJurusanOptions() {
+    var sel = jurusanSelect();
+    if (!sel || sel.options.length > 1) return;
+    Object.keys(PKL.master.jurusan).forEach(function (kode) {
+      var opt = document.createElement('option');
+      opt.value = kode;
+      opt.textContent = PKL.master.kompetensiLabel(kode);
+      sel.appendChild(opt);
+    });
+    sel.addEventListener('change', function () {
+      // Sama seperti memilih kartu jurusan di halaman awal: radio, state, Kajur & contoh ikut berubah.
+      PKL.form.setValue('jurusan_kode', sel.value, 'user');
+    });
+  }
+
+  function syncJurusanSelect(kode) {
+    var sel = jurusanSelect();
+    if (sel && sel.value !== (kode || '')) sel.value = kode || '';
+  }
+
   function refreshAll() {
     var kode = PKL.state.get('jurusan_kode');
+    fillJurusanOptions();
+    syncJurusanSelect(kode);
     applySchoolDefaults();
     if (kode) applyJurusan(kode);
     fillDatalistGuru(kode);
@@ -129,7 +155,7 @@
       PKL.on('pkl:state-change', function (d) {
         if (d.source === 'auto') return;
         switch (d.key) {
-          case 'jurusan_kode': applyJurusan(d.value); fillDatalistGuru(d.value); break;
+          case 'jurusan_kode': applyJurusan(d.value); fillDatalistGuru(d.value); syncJurusanSelect(d.value); break;
           case 'tgl_mulai':
           case 'tgl_selesai': updateDuration(); break;
           case 'list_presensi_bulanan': updateAttendance(); break;

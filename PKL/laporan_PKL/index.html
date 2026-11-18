@@ -226,19 +226,27 @@
           </div>
         </section>
 
-        <!-- ============ SCENE 3 — Langkah 1: Identitas ============ -->
+        <!-- ============ Langkah 1: Halaman Judul, Pengesahan, Lampiran 1 ============ -->
         <section class="view" data-view="langkah-1" aria-labelledby="t-l1" hidden>
           <header class="view-header">
-            <span class="view-header__eyebrow">Langkah 1 dari 7</span>
-            <h1 class="view-header__title" id="t-l1">Identitas Siswa, Keluarga &amp; Pengesahan</h1>
-            <p class="view-header__lead">Data ini dipakai di Halaman Judul, Lembar Pengesahan, Kata Pengantar, dan Lampiran 1 — cukup diisi sekali.</p>
+            <span class="view-header__eyebrow">Langkah 1 dari 7 · Halaman Judul, Pengesahan &amp; Lampiran 1</span>
+            <h1 class="view-header__title" id="t-l1">Identitas Siswa, Pengesahan &amp; Keluarga</h1>
+            <p class="view-header__lead">Isi sesuai urutan laporan: Halaman Judul, Lembar Pengesahan, lalu Lampiran 1. Cukup diisi sekali — dipakai juga di Kata Pengantar.</p>
           </header>
 
           <div class="view-stack">
             <div class="card">
               <div class="card__header">
-                <span class="card__tag">A</span>
+                <span class="card__tag">Halaman Judul</span>
                 <h2 class="card__title">Data Siswa</h2>
+                <p class="card__desc">Nama, NIS/NISN, dan kelas tampil di Halaman Judul; data lengkapnya di Lampiran 1.</p>
+              </div>
+              <div class="field">
+                <label class="label" for="jurusan_kode">Kompetensi Keahlian</label>
+                <select class="select" id="jurusan_kode" data-jurusan-select>
+                  <option value="">Pilih kompetensi keahlian</option>
+                </select>
+                <p class="help">Sesuai pilihan di halaman awal — bisa diganti di sini. Tampil di Halaman Judul, Lembar Pengesahan, Kata Pengantar &amp; Bab I.</p>
               </div>
 
               <div class="field">
@@ -295,41 +303,27 @@
 
             <div class="card">
               <div class="card__header">
-                <span class="card__tag">B</span>
-                <h2 class="card__title">Data Orang Tua / Wali</h2>
-                <p class="card__desc">Ditampilkan pada Lampiran 1 (Biodata Siswa).</p>
+                <span class="card__tag">Halaman Judul</span>
+                <h2 class="card__title">Tahun Ajaran</h2>
               </div>
               <div class="field-grid">
                 <div class="field">
-                  <label class="label" for="ayah_nama">Nama Ayah</label>
-                  <input class="input" id="ayah_nama" name="ayah_nama" type="text">
+                  <label class="label" for="tahun_ajaran">Tahun Ajaran <span class="label__req" aria-hidden="true">*</span></label>
+                  <input class="input" id="tahun_ajaran" name="tahun_ajaran" type="text" required placeholder="2026/2027">
                 </div>
                 <div class="field">
-                  <label class="label" for="ayah_pekerjaan">Pekerjaan Ayah</label>
-                  <input class="input" id="ayah_pekerjaan" name="ayah_pekerjaan" type="text">
-                </div>
-                <div class="field">
-                  <label class="label" for="ibu_nama">Nama Ibu</label>
-                  <input class="input" id="ibu_nama" name="ibu_nama" type="text">
-                </div>
-                <div class="field">
-                  <label class="label" for="ibu_pekerjaan">Pekerjaan Ibu</label>
-                  <input class="input" id="ibu_pekerjaan" name="ibu_pekerjaan" type="text">
-                </div>
-                <div class="field">
-                  <label class="label" for="ortu_hp">No. HP Orang Tua</label>
-                  <input class="input" id="ortu_hp" name="ortu_hp" type="tel" inputmode="tel">
+                  <label class="label" for="tahun_cetak">Tahun Cetak</label>
+                  <input class="input" id="tahun_cetak" name="tahun_cetak" type="text" inputmode="numeric" maxlength="4" placeholder="2026">
                 </div>
               </div>
             </div>
 
             <div class="card">
               <div class="card__header">
-                <span class="card__tag">C</span>
-                <h2 class="card__title">Data Sekolah &amp; Pengesahan</h2>
+                <span class="card__tag">Lembar Pengesahan</span>
+                <h2 class="card__title">Pembimbing, Kajur, Kepala Sekolah &amp; Tanggal Pengesahan</h2>
                 <p class="card__desc">Nama terisi otomatis dari data sekolah, tetapi tetap bisa kamu ubah.</p>
               </div>
-
               <div class="callout callout--warn" data-sample-notice hidden style="margin-bottom: var(--space-5)">
                 <svg aria-hidden="true"><use href="#i-alert"/></svg>
                 <div>
@@ -385,21 +379,97 @@
                 </div>
               </div>
             </div>
+
+            <div class="card">
+              <div class="card__header">
+                <span class="card__tag">Lampiran 1</span>
+                <h2 class="card__title">Data Orang Tua / Wali</h2>
+                <p class="card__desc">Ditampilkan pada Lampiran 1 (Identitas Siswa, Orang Tua, Sekolah, dan Dunia Kerja).</p>
+              </div>
+              <div class="field-grid">
+                <div class="field">
+                  <label class="label" for="ayah_nama">Nama Ayah</label>
+                  <input class="input" id="ayah_nama" name="ayah_nama" type="text">
+                </div>
+                <div class="field">
+                  <label class="label" for="ayah_pekerjaan">Pekerjaan Ayah</label>
+                  <input class="input" id="ayah_pekerjaan" name="ayah_pekerjaan" type="text">
+                </div>
+                <div class="field">
+                  <label class="label" for="ibu_nama">Nama Ibu</label>
+                  <input class="input" id="ibu_nama" name="ibu_nama" type="text">
+                </div>
+                <div class="field">
+                  <label class="label" for="ibu_pekerjaan">Pekerjaan Ibu</label>
+                  <input class="input" id="ibu_pekerjaan" name="ibu_pekerjaan" type="text">
+                </div>
+                <div class="field">
+                  <label class="label" for="ortu_hp">No. HP Orang Tua</label>
+                  <input class="input" id="ortu_hp" name="ortu_hp" type="tel" inputmode="tel">
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- ============ SCENE 4 — Langkah 2: Profil DUDI ============ -->
+        <!-- ============ Langkah 2: Bab I ============ -->
         <section class="view" data-view="langkah-2" aria-labelledby="t-l2" hidden>
           <header class="view-header">
-            <span class="view-header__eyebrow">Langkah 2 dari 7 · Bab II</span>
-            <h1 class="view-header__title" id="t-l2">Profil Dunia Kerja (DUDI)</h1>
-            <p class="view-header__lead">Lengkapi profil perusahaan atau instansi tempatmu melaksanakan PKL.</p>
+            <span class="view-header__eyebrow">Langkah 2 dari 7 · Bab I</span>
+            <h1 class="view-header__title" id="t-l2">Bab I — Pendahuluan</h1>
+            <p class="view-header__lead">Paragraf umum sudah tersedia di templat. Tambahkan bagian yang spesifik untuk PKL-mu.</p>
           </header>
 
           <div class="view-stack">
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Identitas DUDI</h2>
+                <span class="card__tag">Bab I</span>
+                <h2 class="card__title">Pendahuluan</h2>
+              </div>
+              <div class="field">
+                <label class="label" for="bab1_latar_belakang">A. Latar Belakang (tambahan)</label>
+                <details class="guide" data-prompt="bab1_latar_belakang">
+                  <summary>Lihat contoh penulisan</summary>
+                  <div class="guide__body">
+                    <p>Jelaskan alasan memilih DUDI ini dan kaitannya dengan kompetensi keahlianmu.</p>
+                    <blockquote>Penulis memilih PT Inovasi Digital Nusantara sebagai tempat PKL karena perusahaan ini bergerak di bidang pengembangan aplikasi web yang sejalan dengan kompetensi Rekayasa Perangkat Lunak...</blockquote>
+                  </div>
+                </details>
+                <textarea class="textarea textarea--lg" id="bab1_latar_belakang" name="bab1_latar_belakang"></textarea>
+              </div>
+              <div class="field">
+                <label class="label" for="bab1_tujuan_khusus">B. Tujuan PKL — Tujuan Khusus</label>
+                <details class="guide" data-prompt="bab1_tujuan_khusus">
+                  <summary>Lihat contoh penulisan</summary>
+                  <div class="guide__body">
+                    <blockquote>1. Memahami alur pengembangan aplikasi web skala produksi.<br>2. Menerapkan penggunaan Git dalam kerja tim.</blockquote>
+                  </div>
+                </details>
+                <textarea class="textarea" id="bab1_tujuan_khusus" name="bab1_tujuan_khusus" placeholder="1. ...&#10;2. ..."></textarea>
+              </div>
+              <p class="help">Bagian <strong>B.1 Tujuan Umum</strong> dan <strong>C. Manfaat PKL</strong> sudah tertulis di templat — tidak perlu diisi.</p>
+              <div class="field">
+                <label class="label" for="bab1_ruang_lingkup">D. Ruang Lingkup dan Batasan Kegiatan</label>
+                <textarea class="textarea" id="bab1_ruang_lingkup" name="bab1_ruang_lingkup"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============ Langkah 3: Bab II ============ -->
+        <section class="view" data-view="langkah-3" aria-labelledby="t-l3" hidden>
+          <header class="view-header">
+            <span class="view-header__eyebrow">Langkah 3 dari 7 · Bab II</span>
+            <h1 class="view-header__title" id="t-l3">Bab II — Profil Dunia Kerja (DUDI)</h1>
+            <p class="view-header__lead">Lengkapi profil perusahaan atau instansi tempatmu PKL, sesuai urutan Bab II.</p>
+          </header>
+
+          <div class="view-stack">
+            <div class="card">
+              <div class="card__header">
+                <span class="card__tag">Bab II</span>
+                <h2 class="card__title">A. Sejarah Singkat Perusahaan atau Instansi</h2>
+                <p class="card__desc">Identitas DUDI ditulis di awal bagian A, lalu sejarah singkatnya.</p>
               </div>
               <div class="field">
                 <label class="label" for="dudi_nama">Nama DUDI <span class="label__req" aria-hidden="true">*</span></label>
@@ -423,32 +493,6 @@
                   <input class="input" id="dudi_pimpinan" name="dudi_pimpinan" type="text">
                 </div>
               </div>
-            </div>
-
-            <div class="card">
-              <div class="card__header">
-                <h2 class="card__title">Instruktur / Pembimbing Dunia Kerja</h2>
-              </div>
-              <div class="field-grid">
-                <div class="field">
-                  <label class="label" for="instruktur_nama">Nama Instruktur <span class="label__req" aria-hidden="true">*</span></label>
-                  <input class="input" id="instruktur_nama" name="instruktur_nama" type="text" required>
-                </div>
-                <div class="field">
-                  <label class="label" for="instruktur_jabatan">Jabatan</label>
-                  <input class="input" id="instruktur_jabatan" name="instruktur_jabatan" type="text">
-                </div>
-                <div class="field">
-                  <label class="label" for="instruktur_hp">No. HP Instruktur</label>
-                  <input class="input" id="instruktur_hp" name="instruktur_hp" type="tel" inputmode="tel">
-                </div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card__header">
-                <h2 class="card__title">Profil &amp; Sejarah</h2>
-              </div>
               <div class="field">
                 <label class="label" for="dudi_sejarah">Sejarah Singkat</label>
                 <details class="guide" data-prompt="dudi_sejarah">
@@ -460,32 +504,25 @@
                 </details>
                 <textarea class="textarea" id="dudi_sejarah" name="dudi_sejarah"></textarea>
               </div>
-              <div class="field">
-                <label class="label" for="dudi_visi">Visi</label>
-                <textarea class="textarea textarea--sm" id="dudi_visi" name="dudi_visi"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="dudi_misi">Misi</label>
-                <textarea class="textarea" id="dudi_misi" name="dudi_misi" placeholder="1. ...&#10;2. ..."></textarea>
-                <p class="help">Tulis satu misi per baris. Baris baru akan dipertahankan di dokumen Word.</p>
-              </div>
-              <div class="field">
-                <label class="label" for="dudi_kegiatan_utama">Bidang Usaha &amp; Kegiatan Utama</label>
-                <textarea class="textarea" id="dudi_kegiatan_utama" name="dudi_kegiatan_utama"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="dudi_fasilitas">Fasilitas &amp; Lingkungan Kerja</label>
-                <textarea class="textarea" id="dudi_fasilitas" name="dudi_fasilitas"></textarea>
-              </div>
             </div>
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Struktur Organisasi</h2>
-                <p class="card__desc">Foto atau scan bagan struktur organisasi. Gambar dikecilkan otomatis di perangkatmu.</p>
+                <span class="card__tag">Bab II</span>
+                <h2 class="card__title">B. Visi, Misi, dan Struktur Organisasi</h2>
+                <p class="card__desc">Foto atau scan bagan struktur organisasi dikecilkan otomatis di perangkatmu.</p>
               </div>
               <div class="field">
-                <span class="label">Gambar Struktur Organisasi</span>
+                <label class="label" for="dudi_visi">1. Visi</label>
+                <textarea class="textarea textarea--sm" id="dudi_visi" name="dudi_visi"></textarea>
+              </div>
+              <div class="field">
+                <label class="label" for="dudi_misi">2. Misi</label>
+                <textarea class="textarea" id="dudi_misi" name="dudi_misi" placeholder="1. ...&#10;2. ..."></textarea>
+                <p class="help">Tulis satu misi per baris, boleh diawali 1. 2. 3. — di laporan nomornya otomatis disesuaikan (a. b. c.) karena berada di bawah subjudul "2. Misi".</p>
+              </div>
+              <div class="field">
+                <span class="label">3. Gambar Struktur Organisasi</span>
                 <div class="image-slot" data-image-slot="dudi_struktur_img">
                   <input type="hidden" name="dudi_struktur_img" data-image-key>
                   <label class="dropzone">
@@ -501,70 +538,62 @@
                 <input class="input" id="dudi_struktur_ket" name="dudi_struktur_ket" type="text" placeholder="Struktur organisasi divisi ...">
               </div>
             </div>
+
+            <div class="card">
+              <div class="card__header">
+                <span class="card__tag">Bab II</span>
+                <h2 class="card__title">C. Bidang Usaha dan Kegiatan Utama</h2>
+              </div>
+              <div class="field">
+                <label class="label" for="dudi_kegiatan_utama">Uraian Bidang Usaha &amp; Kegiatan Utama</label>
+                <textarea class="textarea" id="dudi_kegiatan_utama" name="dudi_kegiatan_utama"></textarea>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <span class="card__tag">Bab II</span>
+                <h2 class="card__title">D. Fasilitas dan Lingkungan Kerja</h2>
+              </div>
+              <div class="field">
+                <label class="label" for="dudi_fasilitas">Uraian Fasilitas &amp; Lingkungan Kerja</label>
+                <textarea class="textarea" id="dudi_fasilitas" name="dudi_fasilitas"></textarea>
+              </div>
+            </div>
           </div>
         </section>
 
-        <!-- ============ SCENE 5 — Langkah 3: Pendahuluan & Jadwal ============ -->
-        <section class="view" data-view="langkah-3" aria-labelledby="t-l3" hidden>
+        <!-- ============ Langkah 4: Bab III & IV ============ -->
+        <section class="view" data-view="langkah-4" aria-labelledby="t-l4" hidden>
           <header class="view-header">
-            <span class="view-header__eyebrow">Langkah 3 dari 7 · Bab I &amp; Bab III.A</span>
-            <h1 class="view-header__title" id="t-l3">Pendahuluan &amp; Jadwal Pelaksanaan</h1>
-            <p class="view-header__lead">Tentukan judul laporan, konteks PKL, dan jadwal resmi pelaksanaan.</p>
+            <span class="view-header__eyebrow">Langkah 4 dari 7 · Bab III &amp; Bab IV</span>
+            <h1 class="view-header__title" id="t-l4">Bab III Pelaksanaan &amp; Bab IV Analisis</h1>
+            <p class="view-header__lead">Isi berurutan seperti di laporan: Bab III bagian A–D, lalu Bab IV bagian A–D.</p>
           </header>
 
           <div class="view-stack">
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Tahun Ajaran</h2>
+                <span class="card__tag">Bab III</span>
+                <h2 class="card__title">A. Waktu dan Tempat Pelaksanaan</h2>
+                <p class="card__desc">Nama &amp; alamat DUDI diambil dari Bab II. Tanggal di sini dipakai untuk membuat Jurnal &amp; Presensi otomatis.</p>
               </div>
+              <h3 class="subsection__title">Instruktur / Pembimbing Dunia Kerja</h3>
               <div class="field-grid">
                 <div class="field">
-                  <label class="label" for="tahun_ajaran">Tahun Ajaran <span class="label__req" aria-hidden="true">*</span></label>
-                  <input class="input" id="tahun_ajaran" name="tahun_ajaran" type="text" required placeholder="2026/2027">
+                  <label class="label" for="instruktur_nama">Nama Instruktur <span class="label__req" aria-hidden="true">*</span></label>
+                  <input class="input" id="instruktur_nama" name="instruktur_nama" type="text" required>
                 </div>
                 <div class="field">
-                  <label class="label" for="tahun_cetak">Tahun Cetak</label>
-                  <input class="input" id="tahun_cetak" name="tahun_cetak" type="text" inputmode="numeric" maxlength="4" placeholder="2026">
+                  <label class="label" for="instruktur_jabatan">Jabatan</label>
+                  <input class="input" id="instruktur_jabatan" name="instruktur_jabatan" type="text">
+                </div>
+                <div class="field">
+                  <label class="label" for="instruktur_hp">No. HP Instruktur</label>
+                  <input class="input" id="instruktur_hp" name="instruktur_hp" type="tel" inputmode="tel">
                 </div>
               </div>
-            </div>
-
-            <div class="card">
-              <div class="card__header">
-                <h2 class="card__title">Bab I — Pendahuluan</h2>
-                <p class="card__desc">Paragraf umum sudah tersedia di templat. Tambahkan bagian yang spesifik untuk PKL-mu.</p>
-              </div>
-              <div class="field">
-                <label class="label" for="bab1_latar_belakang">Latar Belakang (tambahan)</label>
-                <details class="guide" data-prompt="bab1_latar_belakang">
-                  <summary>Lihat contoh penulisan</summary>
-                  <div class="guide__body">
-                    <p>Jelaskan alasan memilih DUDI ini dan kaitannya dengan kompetensi keahlianmu.</p>
-                    <blockquote>Penulis memilih PT Inovasi Digital Nusantara sebagai tempat PKL karena perusahaan ini bergerak di bidang pengembangan aplikasi web yang sejalan dengan kompetensi Rekayasa Perangkat Lunak...</blockquote>
-                  </div>
-                </details>
-                <textarea class="textarea textarea--lg" id="bab1_latar_belakang" name="bab1_latar_belakang"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="bab1_tujuan_khusus">Tujuan Khusus</label>
-                <details class="guide" data-prompt="bab1_tujuan_khusus">
-                  <summary>Lihat contoh penulisan</summary>
-                  <div class="guide__body">
-                    <blockquote>1. Memahami alur pengembangan aplikasi web skala produksi.<br>2. Menerapkan penggunaan Git dalam kerja tim.</blockquote>
-                  </div>
-                </details>
-                <textarea class="textarea" id="bab1_tujuan_khusus" name="bab1_tujuan_khusus" placeholder="1. ...&#10;2. ..."></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="bab1_ruang_lingkup">Ruang Lingkup</label>
-                <textarea class="textarea" id="bab1_ruang_lingkup" name="bab1_ruang_lingkup"></textarea>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card__header">
-                <h2 class="card__title">Jadwal Pelaksanaan</h2>
-              </div>
+              <h3 class="subsection__title" style="margin-top: var(--space-5)">Tabel 3.1 Jadwal Pelaksanaan PKL</h3>
               <div class="field-grid">
                 <div class="field">
                   <label class="label" for="tgl_mulai">Tanggal Mulai <span class="label__req" aria-hidden="true">*</span></label>
@@ -583,7 +612,7 @@
                 <div class="field">
                   <label class="label" for="hari_kerja">Hari Kerja</label>
                   <input class="input" id="hari_kerja" name="hari_kerja" type="text" placeholder="Senin s.d. Jumat">
-                  <p class="help">Dipakai untuk membuat tanggal Jurnal &amp; Presensi otomatis (Langkah 6). Kosong = Senin s.d. Jumat.</p>
+                  <p class="help">Hari di luar ini ditandai <strong>kuning</strong> di Jurnal (Langkah 6). Kosong = Senin s.d. Jumat.</p>
                 </div>
                 <div class="field">
                   <label class="label" for="jam_kerja">Jam Kerja</label>
@@ -591,21 +620,11 @@
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- ============ SCENE 6 — Langkah 4: Pelaksanaan & Analisis ============ -->
-        <section class="view" data-view="langkah-4" aria-labelledby="t-l4" hidden>
-          <header class="view-header">
-            <span class="view-header__eyebrow">Langkah 4 dari 7 · Bab III &amp; Bab IV</span>
-            <h1 class="view-header__title" id="t-l4">Pelaksanaan &amp; Analisis</h1>
-            <p class="view-header__lead">Uraikan kegiatanmu, lalu isi tabel kompetensi, peralatan, dan kendala.</p>
-          </header>
-
-          <div class="view-stack">
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Uraian Kegiatan Harian dan Mingguan</h2>
+                <span class="card__tag">Bab III</span>
+                <h2 class="card__title">B. Uraian Kegiatan Harian dan Mingguan</h2>
               </div>
               <div class="field">
                 <label class="visually-hidden" for="bab3_uraian_kegiatan">Uraian kegiatan</label>
@@ -622,7 +641,8 @@
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Tabel 3.2 Kompetensi yang Dicapai</h2>
+                <span class="card__tag">Bab III</span>
+                <h2 class="card__title">C. Kompetensi yang Dicapai (Tabel 3.2)</h2>
               </div>
               <div class="repeater" data-repeater="list_kompetensi" data-add-label="Kompetensi">
                 <ol class="repeater__list"></ol>
@@ -649,7 +669,8 @@
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Tabel 3.3 Peralatan &amp; Bahan</h2>
+                <span class="card__tag">Bab III</span>
+                <h2 class="card__title">D. Peralatan dan Bahan yang Digunakan (Tabel 3.3)</h2>
               </div>
               <div class="repeater" data-repeater="list_peralatan">
                 <ol class="repeater__list"></ol>
@@ -675,7 +696,8 @@
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Bab IV — Analisis Kegiatan</h2>
+                <span class="card__tag">Bab IV</span>
+                <h2 class="card__title">A. Analisis Kegiatan yang Dilakukan</h2>
               </div>
               <div class="field">
                 <label class="label" for="bab4_analisis">Analisis Kegiatan</label>
@@ -685,7 +707,8 @@
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Tabel 4.1 Kendala &amp; Solusi</h2>
+                <span class="card__tag">Bab IV</span>
+                <h2 class="card__title">B. Kendala yang Dihadapi dan Solusinya (Tabel 4.1)</h2>
               </div>
               <div class="repeater" data-repeater="list_kendala">
                 <ol class="repeater__list"></ol>
@@ -711,11 +734,19 @@
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Pembelajaran &amp; Kesesuaian</h2>
+                <span class="card__tag">Bab IV</span>
+                <h2 class="card__title">C. Pembelajaran yang Diperoleh</h2>
               </div>
               <div class="field">
                 <label class="label" for="bab4_pembelajaran">Pembelajaran yang Diperoleh</label>
                 <textarea class="textarea" id="bab4_pembelajaran" name="bab4_pembelajaran"></textarea>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <span class="card__tag">Bab IV</span>
+                <h2 class="card__title">D. Kesesuaian dengan Kompetensi Keahlian</h2>
               </div>
               <div class="field">
                 <label class="label" for="bab4_kesesuaian">Kesesuaian dengan Kompetensi Keahlian</label>
@@ -725,18 +756,19 @@
           </div>
         </section>
 
-        <!-- ============ SCENE 7 — Langkah 5: Penutup ============ -->
+        <!-- ============ Langkah 5: Bab V & Daftar Pustaka ============ -->
         <section class="view" data-view="langkah-5" aria-labelledby="t-l5" hidden>
           <header class="view-header">
-            <span class="view-header__eyebrow">Langkah 5 dari 7 · Bab V &amp; Lampiran 5</span>
-            <h1 class="view-header__title" id="t-l5">Penutup, Refleksi Diri &amp; Daftar Pustaka</h1>
-            <p class="view-header__lead">Tutup laporan dengan kesimpulan, saran untuk tiga pihak, dan refleksi pengalamanmu.</p>
+            <span class="view-header__eyebrow">Langkah 5 dari 7 · Bab V &amp; Daftar Pustaka</span>
+            <h1 class="view-header__title" id="t-l5">Bab V Penutup &amp; Daftar Pustaka</h1>
+            <p class="view-header__lead">Tutup laporan dengan kesimpulan dan saran untuk tiga pihak, lalu tulis daftar pustaka.</p>
           </header>
 
           <div class="view-stack">
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Kesimpulan</h2>
+                <span class="card__tag">Bab V</span>
+                <h2 class="card__title">A. Kesimpulan</h2>
               </div>
               <div class="field">
                 <label class="visually-hidden" for="bab5_kesimpulan">Kesimpulan</label>
@@ -746,51 +778,26 @@
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Saran</h2>
+                <span class="card__tag">Bab V</span>
+                <h2 class="card__title">B. Saran</h2>
               </div>
               <div class="field">
-                <label class="label" for="saran_sekolah">Untuk Sekolah</label>
+                <label class="label" for="saran_sekolah">1. Saran untuk Sekolah</label>
                 <textarea class="textarea textarea--sm" id="saran_sekolah" name="saran_sekolah"></textarea>
               </div>
               <div class="field">
-                <label class="label" for="saran_dudi">Untuk Dunia Kerja (DUDI)</label>
+                <label class="label" for="saran_dudi">2. Saran untuk Dunia Kerja (DUDI)</label>
                 <textarea class="textarea textarea--sm" id="saran_dudi" name="saran_dudi"></textarea>
               </div>
               <div class="field">
-                <label class="label" for="saran_siswa">Untuk Siswa PKL Berikutnya</label>
+                <label class="label" for="saran_siswa">3. Saran untuk Siswa PKL Berikutnya</label>
                 <textarea class="textarea textarea--sm" id="saran_siswa" name="saran_siswa"></textarea>
               </div>
             </div>
 
             <div class="card">
               <div class="card__header">
-                <h2 class="card__title">Refleksi Diri Siswa</h2>
-                <p class="card__desc">Lampiran 5 — jawab dengan jujur berdasarkan pengalamanmu.</p>
-              </div>
-              <div class="field">
-                <label class="label" for="refleksi_1">1. Pengalaman apa yang paling berkesan selama PKL?</label>
-                <textarea class="textarea textarea--sm" id="refleksi_1" name="refleksi_1"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="refleksi_2">2. Keterampilan apa saja yang paling berkembang?</label>
-                <textarea class="textarea textarea--sm" id="refleksi_2" name="refleksi_2"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="refleksi_3">3. Tantangan terbesar apa yang kamu hadapi dan bagaimana mengatasinya?</label>
-                <textarea class="textarea textarea--sm" id="refleksi_3" name="refleksi_3"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="refleksi_4">4. Bagaimana PKL memengaruhi rencana kariermu?</label>
-                <textarea class="textarea textarea--sm" id="refleksi_4" name="refleksi_4"></textarea>
-              </div>
-              <div class="field">
-                <label class="label" for="refleksi_5">5. Pesan untuk adik kelas yang akan PKL?</label>
-                <textarea class="textarea textarea--sm" id="refleksi_5" name="refleksi_5"></textarea>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card__header">
+                <span class="card__tag">Daftar Pustaka</span>
                 <h2 class="card__title">Daftar Pustaka</h2>
               </div>
               <div class="field">
@@ -808,12 +815,12 @@
           </div>
         </section>
 
-        <!-- ============ SCENE 8 — Langkah 6: Lampiran ============ -->
+        <!-- ============ Langkah 6: Lampiran 2–6 ============ -->
         <section class="view" data-view="langkah-6" aria-labelledby="t-l6" hidden>
           <header class="view-header">
-            <span class="view-header__eyebrow">Langkah 6 dari 7 · Lampiran 2, 3, 4, 6</span>
-            <h1 class="view-header__title" id="t-l6">Jurnal, Presensi &amp; Dokumen Lampiran</h1>
-            <p class="view-header__lead">Kelola jurnal harian, rekap kehadiran, foto kegiatan, dan scan surat resmi.</p>
+            <span class="view-header__eyebrow">Langkah 6 dari 7 · Lampiran 2–6</span>
+            <h1 class="view-header__title" id="t-l6">Lampiran 2–6</h1>
+            <p class="view-header__lead">Isi berurutan: jurnal harian, presensi, foto kegiatan, refleksi diri, lalu scan surat resmi. Lampiran 1 sudah terisi dari Langkah 1.</p>
           </header>
 
           <div class="view-stack">
@@ -821,7 +828,7 @@
               <div class="card__header">
                 <span class="card__tag">Lampiran 2</span>
                 <h2 class="card__title">Jurnal Harian</h2>
-                <p class="card__desc">Klik <strong>Buat Tanggal Otomatis</strong> untuk membuat satu baris per hari kerja dari tanggal PKL, lalu isi kegiatannya. Bisa juga isi lewat Excel / Google Sheets lalu impor file CSV.</p>
+                <p class="card__desc">Klik <strong>Buat Tanggal Otomatis</strong> untuk membuat satu baris per hari dari tanggal PKL, lalu isi kegiatannya. Baris <strong style="color:var(--status-warn-text)">kuning</strong> = Sabtu/Minggu (di luar hari kerja), baris <strong style="color:var(--status-danger)">merah</strong> = tanggal merah/cuti bersama. Bila libur, biarkan kosong — baris kuning/merah yang kosong otomatis tidak dicetak. Bila DUDI meminta masuk, isi kegiatannya. Bisa juga isi lewat Excel / Google Sheets lalu impor file CSV.</p>
               </div>
               <div class="card-toolbar">
                 <button type="button" class="btn btn--primary btn--sm" data-action="jurnal-auto">
@@ -838,7 +845,7 @@
                 <summary>Cara mengisi lewat Excel / Google Sheets</summary>
                 <div class="guide__body">
                   <p>1. Klik <strong>Unduh Contoh CSV</strong>, lalu buka di Excel atau impor ke Google Sheets.</p>
-                  <p>2. Isi satu hari per baris. Jangan ubah judul kolom: <em>tanggal, kegiatan, kompetensi, output, validasi</em>.</p>
+                  <p>2. Isi satu hari per baris. Cukup dua kolom, jangan ubah judulnya: <em>tanggal, kegiatan</em>. Kolom lain (mis. kompetensi, output, paraf) diabaikan.</p>
                   <p>3. Simpan sebagai CSV — di Excel: <strong>File → Save As → CSV UTF-8 (Comma delimited)</strong>; di Google Sheets: <strong>File → Download → CSV</strong>.</p>
                   <p>4. Klik <strong>Impor dari CSV</strong> dan pilih file tersebut. Tanggal seperti <em>01/07/2026</em> otomatis menjadi <em>Rabu, 01 Juli 2026</em>.</p>
                 </div>
@@ -851,10 +858,7 @@
                     <span class="repeater__no" data-row-no>1</span>
                     <div class="repeater__fields" style="--cols: 2">
                       <div class="field"><label class="label">Hari, Tanggal</label><input class="input" data-field="tanggal" type="text" placeholder="Senin, 01 Juli 2026"></div>
-                      <div class="field"><label class="label">Kompetensi</label><input class="input" data-field="kompetensi" type="text"></div>
-                      <div class="field field--span"><label class="label">Kegiatan</label><textarea class="textarea" data-field="kegiatan" rows="2"></textarea></div>
-                      <div class="field"><label class="label">Output / Hasil</label><input class="input" data-field="output" type="text"></div>
-                      <div class="field"><label class="label">Validasi</label><input class="input" data-field="validasi" type="text" value="Paraf"></div>
+                      <div class="field field--span"><label class="label">Kegiatan yang Dilakukan</label><textarea class="textarea" data-field="kegiatan" rows="2"></textarea></div>
                     </div>
                     <div class="repeater__actions">
                       <button type="button" class="icon-btn" data-row-action="up" aria-label="Pindah ke atas"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
@@ -877,10 +881,10 @@
               </div>
               <div class="card-toolbar">
                 <button type="button" class="btn btn--primary btn--sm" data-action="presensi-auto">
-                  <svg aria-hidden="true"><use href="#i-sparkle"/></svg>Isi Bulan Otomatis
+                  <svg aria-hidden="true"><use href="#i-sparkle"/></svg>Hitung dari Jurnal
                 </button>
               </div>
-              <p class="help card-toolbar__help">Membuat baris per bulan dari tanggal PKL (Langkah 3); Hadir diisi jumlah hari kerja. Tinggal sesuaikan Izin/Sakit/Alpa.</p>
+              <p class="help card-toolbar__help">Isi jurnal dulu, lalu klik. Hadir = jumlah hari di jurnal yang kegiatannya terisi (termasuk Sabtu/Minggu/tanggal merah yang diisi). Izin/Sakit/Alpa diisi sendiri. Klik lagi bila jurnal berubah.</p>
               <div class="inline-status" data-presensi-status role="status" aria-live="polite" hidden></div>
               <div class="repeater repeater--no-number" data-repeater="list_presensi_bulanan" data-max="6" data-max-label="bulan">
                 <ol class="repeater__list"></ol>
@@ -950,6 +954,34 @@
                 <div class="repeater__footer">
                   <button type="button" class="btn btn--dashed" data-action="add-row"><svg aria-hidden="true"><use href="#i-plus"/></svg>Tambah Foto</button>
                 </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card__header">
+                <span class="card__tag">Lampiran 5</span>
+                <h2 class="card__title">Refleksi Diri Siswa setelah PKL</h2>
+                <p class="card__desc">Jawab dengan jujur berdasarkan pengalamanmu.</p>
+              </div>
+              <div class="field">
+                <label class="label" for="refleksi_1">1. Pengalaman apa yang paling berkesan selama PKL?</label>
+                <textarea class="textarea textarea--sm" id="refleksi_1" name="refleksi_1"></textarea>
+              </div>
+              <div class="field">
+                <label class="label" for="refleksi_2">2. Keterampilan apa saja yang paling berkembang?</label>
+                <textarea class="textarea textarea--sm" id="refleksi_2" name="refleksi_2"></textarea>
+              </div>
+              <div class="field">
+                <label class="label" for="refleksi_3">3. Tantangan terbesar apa yang kamu hadapi dan bagaimana mengatasinya?</label>
+                <textarea class="textarea textarea--sm" id="refleksi_3" name="refleksi_3"></textarea>
+              </div>
+              <div class="field">
+                <label class="label" for="refleksi_4">4. Bagaimana PKL memengaruhi rencana kariermu?</label>
+                <textarea class="textarea textarea--sm" id="refleksi_4" name="refleksi_4"></textarea>
+              </div>
+              <div class="field">
+                <label class="label" for="refleksi_5">5. Pesan untuk adik kelas yang akan PKL?</label>
+                <textarea class="textarea textarea--sm" id="refleksi_5" name="refleksi_5"></textarea>
               </div>
             </div>
 
@@ -1089,6 +1121,7 @@
   <script src="js/wizard/image-slots.js"></script>
   <script src="js/wizard/generate-panel.js"></script>
   <script src="js/wizard/auto-rows.js"></script>
+  <script src="js/wizard/holiday-mark.js"></script>
   <script src="js/wizard/word-count.js"></script>
   <script src="js/core/completeness.js"></script>
   <script src="js/app.js"></script>

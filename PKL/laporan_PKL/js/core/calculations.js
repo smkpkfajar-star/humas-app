@@ -182,24 +182,44 @@
     return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
   }
 
-  /** Semua tanggal hari kerja (ISO) dari mulai s.d. selesai; [] bila tanggal tidak valid. */
-  function workingDates(startISO, endISO, days) {
+  /** Tiap tanggal (ISO) dari mulai s.d. selesai yang harinya termasuk `days`. */
+  function eachWorkday(startISO, endISO, days, fn) {
     var res = duration(startISO, endISO);
-    if (!res || res.error) return [];
+    if (!res || res.error) return;
     days = days || DEFAULT_WORKDAYS;
-    var out = [];
     var d = parseISO(startISO);
     for (var i = 0; i < res.totalDays; i++) {
-      if (days.indexOf(d.getDay()) !== -1) out.push(toISO(d));
+      if (days.indexOf(d.getDay()) !== -1) fn(toISO(d));
       d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1, 12);
     }
+  }
+
+  /**
+   * Semua tanggal hari kerja (ISO) dari mulai s.d. selesai; [] bila tanggal tidak valid.
+   * `holidays` = { "2026-08-17": "Proklamasi Kemerdekaan", … } → tanggal itu dilewati.
+   */
+  function workingDates(startISO, endISO, days, holidays) {
+    var out = [];
+    eachWorkday(startISO, endISO, days, function (iso) {
+      if (!(holidays && Object.prototype.hasOwnProperty.call(holidays, iso))) out.push(iso);
+    });
     return out;
   }
 
-  /** Hari kerja per bulan: [{ bulan: "Juli 2026", hari: 23 }, …] berurutan. */
-  function workdaysPerMonth(startISO, endISO, days) {
+  /** Tanggal merah yang jatuh pada hari kerja: [{ iso, keterangan }, …] berurutan. */
+  function holidaysOnWorkdays(startISO, endISO, days, holidays) {
     var out = [];
-    workingDates(startISO, endISO, days).forEach(function (iso) {
+    if (!holidays) return out;
+    eachWorkday(startISO, endISO, days, function (iso) {
+      if (Object.prototype.hasOwnProperty.call(holidays, iso)) out.push({ iso: iso, keterangan: holidays[iso] });
+    });
+    return out;
+  }
+
+  /** Hari kerja per bulan: [{ bulan: "Juli 2026", hari: 23 }, …] berurutan (tanpa tanggal merah). */
+  function workdaysPerMonth(startISO, endISO, days, holidays) {
+    var out = [];
+    workingDates(startISO, endISO, days, holidays).forEach(function (iso) {
       var d = parseISO(iso);
       var label = BULAN[d.getMonth()] + ' ' + d.getFullYear();
       var last = out[out.length - 1];
@@ -230,6 +250,7 @@
   PKL.calc = {
     workdays: workdays,
     workingDates: workingDates,
+    holidaysOnWorkdays: holidaysOnWorkdays,
     workdaysPerMonth: workdaysPerMonth,
     parseIndoDate: parseIndoDate,
     describeDays: describeDays,

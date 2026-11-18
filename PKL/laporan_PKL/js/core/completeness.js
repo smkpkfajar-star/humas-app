@@ -137,7 +137,10 @@
       var ctl = empty && PKL.$('[data-field]:not([type="hidden"])', empty);
       return { box: rep.closest('.card') || rep, focus: ctl || PKL.$('[data-action="add-row"]', rep) };
     }
-    var el = PKL.$('[name="' + key + '"]:not([type="hidden"])');
+    var byId = document.getElementById(key);
+    var el = byId && byId.type !== 'hidden' && byId.closest('[data-view^="langkah-"]')
+      ? byId
+      : PKL.$('[name="' + key + '"]:not([type="hidden"])');
     if (!el) return null;
     var box = el.closest('[role="radiogroup"]') || el.closest('.field') || el;
     return { box: box, focus: el };

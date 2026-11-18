@@ -400,15 +400,15 @@
 
       // =================================================== LAMPIRAN 2 — JURNAL
       list_jurnal: {
-        lead: 'Satu baris per hari kerja. Tulis singkat dan spesifik apa yang kamu kerjakan hari itu, lalu mintakan paraf pembimbing.',
-        points: ['Kegiatan: pekerjaan utama hari itu (bukan "membantu")', 'Kompetensi: keterampilan yang dilatih', 'Output: hasil nyata (file, unit selesai, jumlah pekerjaan)'],
+        lead: 'Satu baris per hari. Tulis singkat dan spesifik apa yang kamu kerjakan hari itu, sekalian hasilnya.',
+        points: ['Pekerjaan utama hari itu (bukan sekadar "membantu")', 'Sebut hasil nyatanya di akhir kalimat (file, unit selesai, jumlah pekerjaan)'],
         avoid: 'Menulis kegiatan yang sama persis setiap hari.',
         ex: {
-          DKV: L('Senin, 06 Juli 2026 | Membuat 3 desain konten Instagram promo produk kopi | Desain konten media sosial | 3 file JPG siap unggah', 'Selasa, 07 Juli 2026 | Foto produk kemasan keripik di mini studio | Fotografi produk | 24 foto terpilih'),
-          RPL: L('Senin, 06 Juli 2026 | Membuat migrasi tabel peminjaman dan relasinya | Perancangan basis data | Migrasi berjalan tanpa error', 'Selasa, 07 Juli 2026 | Membuat halaman formulir peminjaman | Pemrograman web | Halaman form dan validasi'),
-          TITL: L('Senin, 06 Juli 2026 | Menarik kabel NYM untuk 2 grup penerangan lantai 1 | Instalasi penerangan | 2 grup kabel terpasang', 'Selasa, 07 Juli 2026 | Mengukur tahanan isolasi instalasi lantai 1 | Pengukuran listrik | Hasil ukur tercatat di form'),
-          TSM: L('Senin, 06 Juli 2026 | Servis berkala 4 sepeda motor matik | Servis berkala | 4 unit selesai', 'Selasa, 07 Juli 2026 | Membongkar dan membersihkan CVT | Servis CVT | 2 unit CVT selesai diservis'),
-          TKR: L('Senin, 06 Juli 2026 | Servis berkala 10.000 km mobil MPV | Perawatan berkala | 2 unit selesai', 'Selasa, 07 Juli 2026 | Mengganti kampas rem depan | Servis rem cakram | 1 unit selesai dan uji jalan')
+          DKV: L('Senin, 06 Juli 2026 | Membuat 3 desain konten Instagram promo produk kopi (3 file JPG siap unggah)', 'Selasa, 07 Juli 2026 | Foto produk kemasan keripik di mini studio (24 foto terpilih)'),
+          RPL: L('Senin, 06 Juli 2026 | Membuat migrasi tabel peminjaman dan relasinya (migrasi berjalan tanpa error)', 'Selasa, 07 Juli 2026 | Membuat halaman formulir peminjaman (halaman form dan validasi)'),
+          TITL: L('Senin, 06 Juli 2026 | Menarik kabel NYM untuk 2 grup penerangan lantai 1 (2 grup kabel terpasang)', 'Selasa, 07 Juli 2026 | Mengukur tahanan isolasi instalasi lantai 1 (hasil ukur tercatat di form)'),
+          TSM: L('Senin, 06 Juli 2026 | Servis berkala 4 sepeda motor matik (4 unit selesai)', 'Selasa, 07 Juli 2026 | Membongkar dan membersihkan CVT (2 unit CVT selesai diservis)'),
+          TKR: L('Senin, 06 Juli 2026 | Servis berkala 10.000 km mobil MPV (2 unit selesai)', 'Selasa, 07 Juli 2026 | Mengganti kampas rem depan (1 unit selesai dan uji jalan)')
         },
         table: true
       }

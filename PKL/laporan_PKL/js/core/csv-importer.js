@@ -14,17 +14,15 @@
 (function (PKL) {
   'use strict';
 
-  var COLUMNS = ['tanggal', 'kegiatan', 'kompetensi', 'output', 'validasi'];
+  // Lampiran 2 hanya No | Hari dan Tanggal | Kegiatan. Kolom lain di file siswa diabaikan.
+  var COLUMNS = ['tanggal', 'kegiatan'];
   var MAX_BYTES = 2 * 1024 * 1024;
   var MAX_ROWS = 1000;
 
   /** Variasi judul kolom yang dikenali (setelah dinormalisasi: huruf kecil, tanpa simbol). */
   var ALIASES = {
     tanggal: ['tanggal', 'haritanggal', 'hari', 'tgl', 'date', 'waktu'],
-    kegiatan: ['kegiatan', 'uraiankegiatan', 'aktivitas', 'kegiatanharian', 'activity', 'uraian'],
-    kompetensi: ['kompetensi', 'kompetensiyangdicapai', 'materi', 'kompetensimateri'],
-    output: ['output', 'hasil', 'outputhasil', 'hasilkerja', 'luaran'],
-    validasi: ['validasi', 'paraf', 'ttd', 'tandatangan', 'parafinstruktur']
+    kegiatan: ['kegiatan', 'uraiankegiatan', 'aktivitas', 'kegiatanharian', 'activity', 'uraian', 'kegiatanyangdilakukan']
   };
 
   function normHeader(s) {
@@ -179,10 +177,7 @@
       };
       var row = {
         tanggal: normalizeDate(get('tanggal')),
-        kegiatan: get('kegiatan'),
-        kompetensi: get('kompetensi'),
-        output: get('output'),
-        validasi: get('validasi') || 'Paraf'
+        kegiatan: get('kegiatan')
       };
       if (!row.kegiatan && !row.tanggal) { skipped++; return; }
       rows.push(row);
@@ -205,8 +200,8 @@
   function template() {
     var lines = [
       COLUMNS.join(','),
-      '"Senin, 01 Juli 2026","Orientasi lingkungan kerja dan pengenalan tim","Etika dan budaya kerja","Memahami alur kerja divisi","Paraf"',
-      '02/07/2026,"Instalasi perangkat lunak, konfigurasi akun kerja","Konfigurasi lingkungan kerja","Laptop siap dipakai","Paraf"'
+      '"Senin, 01 Juli 2026","Orientasi lingkungan kerja dan pengenalan tim"',
+      '02/07/2026,"Instalasi perangkat lunak dan konfigurasi akun kerja, laptop siap dipakai"'
     ];
     return '﻿' + lines.join('\r\n') + '\r\n';
   }

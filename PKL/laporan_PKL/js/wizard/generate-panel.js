@@ -44,6 +44,7 @@
         el('[data-template-picker]').hidden = true;
         saveAs(res.blob, res.fileName);
         var msg = 'Laporan berhasil dibuat: ' + res.fileName + ' (' + formatBytes(res.blob.size) + '). Cek folder Unduhan.';
+        if (res.notes && res.notes.length) msg += ' ' + res.notes.join(' ');
         if (res.warnings.length) msg += ' Catatan: ' + res.warnings.join(' ');
         showStatus(res.warnings.length ? 'warn' : 'ok', msg);
         PKL.toast(res.fileName + ' tersimpan di folder Unduhan.', { title: 'Laporan berhasil dibuat 🎉', duration: 7000 });
@@ -52,9 +53,12 @@
         PKL.imageSlots.collectGarbage();
       })
       .catch(function (err) {
-        if (err && err.code === 'NEED_TEMPLATE') {
+        // Templat belum ada, atau yang tersimpan di perangkat versi lama (mis. jurnal 6 kolom).
+        if (err && (err.code === 'NEED_TEMPLATE' || err.code === 'OUTDATED_TEMPLATE')) {
           el('[data-template-picker]').hidden = false;
-          showStatus('warn', 'Pilih file templat terlebih dahulu, lalu laporan akan langsung dibuat.');
+          showStatus('warn', err.code === 'OUTDATED_TEMPLATE'
+            ? err.message + ' Laporan langsung dibuat setelah file dipilih.'
+            : 'Pilih file templat terlebih dahulu, lalu laporan akan langsung dibuat.');
           el('[data-action="pick-template"]').focus();
         } else {
           showStatus('error', err && err.message ? err.message : 'Gagal membuat laporan.');

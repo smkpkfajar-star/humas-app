@@ -11,6 +11,7 @@ Perbaikan:
      proporsional (label | ":" sempit | isi lebar) dan layout tetap.
   2. Sampul: "KOMPETENSI KEAHLIAN …" (nama kompetensi di baris sendiri), nama
      sekolah, dan "DI <DUDI>" huruf kapital; teks alternatif logo diperbarui.
+  2b. Lampiran 2 (jurnal) disederhanakan: No | Hari dan Tanggal | Kegiatan.
   3. Paragraf isian panjang ditandai RAW (lihat RAW_FIELDS) agar setiap baris
      yang diketik siswa menjadi paragraf Word sendiri dengan format templat
      (indentasi baris pertama, daftar bernomor menggantung, pustaka APA).
@@ -179,6 +180,56 @@ def fix_competency_table(els, text_width):
     no, capai = 600, 1760   # "Tercapai (100%)" muat satu baris
     rest = text_width - no - capai
     els[i] = set_table_widths(els[i], [no, rest // 2, rest - rest // 2, capai])
+    return els
+
+
+JOURNAL_KEEP = 3   # No | Hari dan Tanggal | Kegiatan yang Dilakukan
+
+
+def fix_journal_table(els, text_width):
+    """Lampiran 2 (Jurnal Harian) disederhanakan menjadi 3 kolom: No | Hari dan Tanggal |
+    Kegiatan yang Dilakukan. Kolom Kompetensi, Hasil/Output, dan Paraf dihapus dari
+    setiap baris (judul, baris loop, baris data); kolom Kegiatan mendapat sisa lebar."""
+    i = find_index(els, lambda e: e.startswith("<w:tbl>") and "list_jurnal" in text_of(e), "tabel Lampiran 2 jurnal")
+    tbl = els[i]
+    header = text_of(re.search(r"<w:tr\b.*?</w:tr>", tbl, re.S).group(0))
+    expect(header.startswith("NoHari dan TanggalKegiatan yang Dilakukan"), f"judul kolom jurnal tak terduga: {header!r}")
+
+    def trim_row(m):
+        row = m.group(0)
+        cells = list(re.finditer(r"<w:tc>.*?</w:tc>", row, re.S))
+        expect(len(cells) == 6, f"baris jurnal harus 6 sel, ditemukan {len(cells)}")
+        dropped = "".join(text_of(c.group(0)) for c in cells[JOURNAL_KEEP:])
+        expect("{%" not in dropped, "sel yang dihapus berisi perintah loop")
+        return row[:cells[0].start()] + "".join(c.group(0) for c in cells[:JOURNAL_KEEP]) + row[cells[-1].end():]
+
+    tbl = re.sub(r"<w:tr\b.*?</w:tr>", trim_row, tbl, flags=re.S)
+    no, tanggal = 600, 2400   # "Kamis, 31 Desember 2026" muat satu baris
+    els[i] = set_table_widths(tbl, [no, tanggal, text_width - no - tanggal])
+    return els
+
+
+REFLECTION_Q = re.compile(r"^[1-5]\. ")
+PARAF_OLD = "Rincian kegiatan kerja harian yang dilaksanakan selama masa PKL beserta paraf pengesahan dari instruktur dunia kerja tercantum secara lengkap pada Lampiran 2."
+PARAF_NEW = "Rincian kegiatan kerja harian yang dilaksanakan selama masa PKL tercantum secara lengkap pada Lampiran 2."
+
+
+def fix_numbering(els):
+    """Penomoran bertingkat seragam (BAB → A. → 1. → a. → 1)):
+    pertanyaan Lampiran 5 (tingkat "1.") diberi indentasi 340 twip, sama seperti
+    butir "1." Lampiran 6 dan subbab "1." di Bab I–V. Juga kalimat Bab III.B yang
+    masih menyebut paraf (kolom paraf jurnal sudah dihapus) diperbarui."""
+    # Teks persis (bukan startswith) agar tidak mengenai baris Daftar Isi "Lampiran 5 … ....".
+    start = find_index(els, lambda e: text_of(e) == "Lampiran 5 Refleksi Diri Siswa setelah PKL", "judul Lampiran 5")
+    end = find_index(els, lambda e: text_of(e) == "Lampiran 6 Surat Penempatan dan Surat Keterangan Selesai PKL", "judul Lampiran 6", start)
+    qs = [i for i in range(start + 1, end) if REFLECTION_Q.match(text_of(els[i]))]
+    expect(len(qs) == 5, f"5 pertanyaan refleksi, ditemukan {len(qs)}")
+    for i in qs:
+        expect("<w:ind " not in els[i].split("</w:pPr>")[0], "pertanyaan refleksi sudah berindentasi")
+        els[i] = add_ppr_child(els[i], '<w:ind w:left="340"/>', "ind")
+    k = find_index(els, lambda e: text_of(e) == PARAF_OLD, "kalimat paraf di Bab III.B")
+    expect(els[k].count(PARAF_OLD) == 1, "kalimat paraf dalam satu run")
+    els[k] = els[k].replace(PARAF_OLD, PARAF_NEW)
     return els
 
 
@@ -354,6 +405,10 @@ def tidy_document(xml: str) -> tuple[str, list[str]]:
     log.append(f"tabel identitas & tanda tangan: lebar kolom tetap (lebar teks {text_width} twip)")
     els = fix_competency_table(els, text_width)
     log.append("tabel 3.2: kolom Target dilebarkan (3,2 cm -> 4,9 cm), Ketercapaian 3,1 cm")
+    els = fix_journal_table(els, text_width)
+    log.append("lampiran 2 jurnal: 3 kolom saja (No | Hari dan Tanggal | Kegiatan); Kompetensi, Output, Paraf dihapus")
+    els = fix_numbering(els)
+    log.append("penomoran: pertanyaan Lampiran 5 menjorok seperti tingkat '1.'; kalimat paraf Bab III.B diperbarui")
     els = fix_cover_caps(els)
     log.append("sampul: kompetensi, sekolah, DUDI huruf kapital")
     els, n_nip = remove_nip(els)

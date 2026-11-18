@@ -30,7 +30,7 @@ Membangun aplikasi web statis berbasis **HTML5, CSS3, dan Vanilla JavaScript (ES
 * Properti `no` (`1, 2, 3, ...`) digenerate otomatis oleh JavaScript sebelum proses render dokumen.
 
 ### FR-04: Impor Massal Jurnal Harian via CSV
-* Sistem menyediakan tombol unduh templat `.csv` standar (`tanggal,kegiatan,kompetensi,output,validasi`).
+* Sistem menyediakan tombol unduh templat `.csv` standar (`tanggal,kegiatan`; Lampiran 2 hanya 3 kolom: No, Hari dan Tanggal, Kegiatan).
 * Siswa dapat mengunggah file `.csv` yang sudah diisi di Excel/Google Sheets untuk langsung mengisi puluhan baris pada `list_jurnal`.
 
 ### FR-05: Kalkulasi Otomatis Durasi & Presensi

@@ -613,6 +613,40 @@ kbd {
 .repeater__fields .textarea { background: var(--bg-surface); }
 .repeater__fields .textarea { min-height: 70px; }
 
+/* Jurnal (js/wizard/holiday-mark.js): MERAH = tanggal merah / cuti bersama, KUNING = Sabtu/Minggu / di luar hari kerja */
+.repeater__row--libur {
+  border-color: var(--status-danger);
+  border-left-width: 5px;
+  background: var(--status-danger-bg);
+}
+.repeater__row--libur .repeater__no { background: var(--status-danger); color: #fff; }
+.repeater__row--libur [data-field="tanggal"] { border-color: var(--status-danger); color: var(--status-danger); font-weight: 700; }
+.row-flag {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm, 6px);
+  background: var(--status-danger);
+  color: #fff;
+  font-size: var(--fs-help);
+  line-height: 1.4;
+}
+.row-flag svg { width: 16px; height: 16px; flex: none; }
+
+.repeater__row--akhir-pekan {
+  border-color: #F59E0B;
+  border-left-width: 5px;
+  background: var(--status-warn-bg);
+}
+.repeater__row--akhir-pekan .repeater__no { background: #F59E0B; color: #422006; }
+.repeater__row--akhir-pekan [data-field="tanggal"] { border-color: #F59E0B; color: var(--status-warn-text); font-weight: 700; }
+.row-flag--kuning { background: #FBBF24; color: #422006; }
+.row-flag strong { text-transform: uppercase; letter-spacing: .04em; }
+
 .repeater__actions { display: flex; flex-direction: column; gap: 2px; margin-top: 24px; }
 
 /* Presensi: kolom "Bulan" lebih lebar dari kolom angka agar "September 2026" tidak terpotong */

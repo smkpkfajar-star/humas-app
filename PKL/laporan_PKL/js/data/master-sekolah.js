@@ -35,11 +35,36 @@
     return v;
   }
 
+  /**
+   * "hari_libur": { "2026-08-17": "Proklamasi Kemerdekaan", … } → objek bersih.
+   * Tanggal salah format / mustahil dilewati dan dicatat sebagai masalah.
+   */
+  function loadHolidays(raw) {
+    var out = {};
+    if (raw === undefined) return out;
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+      problems.push('"hari_libur" harus berupa daftar { "2026-08-17": "Keterangan", … } — tanggal merah tidak dilewati.');
+      return out;
+    }
+    Object.keys(raw).forEach(function (iso) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso.trim());
+      var d = m && new Date(+m[1], +m[2] - 1, +m[3], 12);
+      if (!m || d.getMonth() !== +m[2] - 1) {
+        problems.push('Tanggal libur "' + iso + '" tidak valid — tulis TAHUN-BULAN-TANGGAL, mis. "2026-08-17". Diabaikan.');
+        return;
+      }
+      out[iso.trim()] = str(raw[iso]) || 'Hari libur';
+    });
+    return out;
+  }
+
   function load() {
     var raw = window.PKL_PENGATURAN;
     if (!raw || typeof raw !== 'object') {
       problems.push('File pengaturan.js tidak terbaca. Periksa koma dan tanda kutip, atau pastikan file ada di folder aplikasi.');
-      return JSON.parse(JSON.stringify(DEFAULT));
+      var def = JSON.parse(JSON.stringify(DEFAULT));
+      def.hari_libur = {};
+      return def;
     }
 
     var out = {
@@ -48,7 +73,8 @@
         kota: pick(raw.sekolah && raw.sekolah.kota, 'sekolah.kota', DEFAULT.sekolah.kota)
       },
       kepala_sekolah: pick(raw.kepala_sekolah, 'kepala_sekolah', DEFAULT.kepala_sekolah),
-      prodi: {}
+      prodi: {},
+      hari_libur: loadHolidays(raw.hari_libur)
     };
 
     var prodi = raw.prodi && typeof raw.prodi === 'object' ? raw.prodi : {};
@@ -104,6 +130,8 @@
     sekolah: cfg.sekolah,
     kepsek: { nama: cfg.kepala_sekolah },
     jurusan: jurusan,
+    /** Tanggal merah & cuti bersama: { "2026-08-17": "Proklamasi Kemerdekaan", … }. */
+    hariLibur: cfg.hari_libur,
     guruPembimbing: semuaPendamping.map(function (n) { return { nama: n }; }),
 
     /** Daftar pendamping untuk combobox: sesuai prodi; bila prodi kosong → semua pendamping. */

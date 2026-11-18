@@ -118,12 +118,12 @@ Karena JavaScript di browser tidak menjalankan mesin tata letak Microsoft Word, 
 
 ## 6. Catatan Implementasi Tahap 3 — Impor CSV Jurnal
 
-* **File contoh** `Contoh_Jurnal_Harian_PKL.csv`: pemisah koma, ber-BOM UTF-8, kolom `tanggal,kegiatan,kompetensi,output,validasi`.
+* **File contoh** `Contoh_Jurnal_Harian_PKL.csv`: pemisah koma, ber-BOM UTF-8, kolom `tanggal,kegiatan` (Lampiran 2 hanya No | Hari dan Tanggal | Kegiatan). Kolom lain di file siswa — kompetensi, output, paraf, dll. — diabaikan.
 * **Toleransi input:** pemisah `,` / `;` (Excel lokal Indonesia) / Tab dideteksi otomatis; baris `sep=;` dihormati; UTF-8 (dengan/tanpa BOM) atau ANSI Windows-1252 (fallback otomatis); sel ber-kutip berisi koma, `""`, dan baris baru (Alt+Enter → `
 `).
-* **Judul kolom fleksibel** (huruf besar/kecil & simbol diabaikan): mis. `Hari/Tanggal`, `Uraian Kegiatan`, `Hasil`, `Paraf`. Urutan kolom bebas; kolom tambahan (mis. `No`) diabaikan. Bila tidak ada judul yang dikenali, kolom dibaca berurutan sesuai file contoh.
+* **Judul kolom fleksibel** (huruf besar/kecil & simbol diabaikan): mis. `Hari/Tanggal`, `Uraian Kegiatan`, `Kegiatan yang Dilakukan`. Urutan kolom bebas; kolom tambahan (mis. `No`) diabaikan. Bila tidak ada judul yang dikenali, kolom dibaca berurutan sesuai file contoh.
 * **Tanggal** `01/07/2026`, `1-7-2026`, `2026-07-01` → `Rabu, 01 Juli 2026` (hari-dulu; format AS ditukar bila bulan > 12). Teks bebas dibiarkan.
-* **Baris** tanpa kegiatan & tanggal dilewati; `validasi` kosong → `Paraf`; maksimal 1000 baris; file maks. 2 MB; file `.xlsx` ditolak dengan petunjuk *Save As CSV*.
+* **Baris** tanpa kegiatan & tanggal dilewati; jurnal hanya berisi tanggal & kegiatan; maksimal 1000 baris; file maks. 2 MB; file `.xlsx` ditolak dengan petunjuk *Save As CSV*.
 * **Jurnal sudah berisi** → dialog *Tambahkan di Akhir / Ganti Semua / Batal*. Jurnal kosong → langsung diisi.
 * **Catatan uji:** `TextDecoder('windows-1252')` di Node.js berperilaku seperti latin1 (0x96 ≠ "–"); browser mengikuti standar WHATWG. Uji encoding ANSI harus dijalankan di browser.
 
@@ -150,6 +150,7 @@ Karena JavaScript di browser tidak menjalankan mesin tata letak Microsoft Word, 
 | Isian Judul Laporan | **Ditiadakan**: baris judul di sampul dan frasa ' dengan judul "…"' di Kata Pengantar dihapus. Judul di draft lama dibuang (`DROPPED_KEYS`). |
 | Lembar Pengesahan: jarak nama tidak seragam, sel rata tengah, hanya nama Kepsek tebal | Semua blok tanda tangan seragam: jabatan → 4 baris ruang tanda tangan → **nama tebal**; sel rata atas sehingga nama sejajar; jarak antarbaris tanda tangan tetap (18 pt). Format tebal lama (`<w:b w:val="0"/>`) diganti, tidak digandakan. |
 | Tabel 3.2: kolom Target 3,2 cm → isi terlipat 3–4 baris | No 1,1 · Kompetensi 4,9 · **Target 4,9** · Ketercapaian 3,1 cm (total tetap selebar teks) |
+| Lampiran 2 (jurnal) 6 kolom terlalu padat untuk 6 bulan | Disederhanakan jadi 3 kolom: No (1,1 cm) · Hari dan Tanggal (4,2 cm) · Kegiatan (sisa lebar) — `fix_journal_table` di `tools/tidy_template.py`. Templat lama yang masih memuat `{validasi}` ditolak (`OUTDATED_TEMPLATE`) agar siswa memilih file baru. |
 | Sampul campur kapital-kecil, baris kompetensi terlalu panjang | Kapital (`w:caps`), nama kompetensi di baris sendiri; teks alternatif logo = nama sekolah terbaru |
 | Isian multi-baris jadi `<w:br/>` → hanya paragraf pertama menjorok, daftar tidak rapi | Tag `{@nama}`: setiap baris = paragraf Word dengan format templat; baris `1.` / `a.` / `-` = daftar menggantung; Daftar Pustaka menggantung (APA) |
 
@@ -185,25 +186,33 @@ Diuji dengan simulasi "isian paling tidak masuk akal" (24 skenario, semua lolos)
 
 ## 11. Penanda Bab di Langkah Pengisian
 
-* Setiap langkah di sidebar & dropdown HP diberi label bab (`bab` di `js/wizard/steps.js`): 1 Hlm. Awal · 2 Bab II · 3 Bab I · 4 Bab III–IV · 5 Bab V · 6 Lamp. 2–4, 6 · 7 Unduh. Rincian lengkap (`sub`) ada di tooltip, Ringkasan, dan checklist Langkah 7.
+* **Urutan langkah & kartu mengikuti urutan templat** agar siswa tidak bingung: 1 Hlm. Awal (Halaman Judul → Lembar Pengesahan → Lampiran 1) · 2 Bab I · 3 Bab II · 4 Bab III–IV · 5 Bab V & Daftar Pustaka · 6 Lamp. 2–6 · 7 Unduh.
+* Setiap kartu diberi tag lokasinya di laporan (`Halaman Judul`, `Bab III`, `Lampiran 5`, …) dan judul kartu memakai judul subbab templat (mis. "A. Waktu dan Tempat Pelaksanaan").
+* Penempatan yang mengikuti templat: Tahun Ajaran → Langkah 1 (Halaman Judul); Instruktur & Tabel 3.1 Jadwal Pelaksanaan → Langkah 4 (Bab III.A); Refleksi Diri → Langkah 6 (Lampiran 5).
+* Label bab ada di `bab` pada `js/wizard/steps.js`; `required` tiap langkah harus berisi isian yang memang ada di section langkah itu (dipakai untuk lompat ke isian dari checklist). Rincian lengkap (`sub`) ada di tooltip, Ringkasan, dan checklist Langkah 7.
 * Label satu baris sehingga sidebar tetap tanpa scroll (diuji 50 ukuran layar).
 
 ## 12. File Pengaturan Sekolah (`pengaturan.js`)
 
 * Letak: **folder utama aplikasi**, di samping `index.html`. Isinya JSON yang diawali `window.PKL_PENGATURAN =` dan diakhiri `;` — sengaja bukan `.json` murni karena browser memblokir pembacaan file `.json` saat aplikasi dibuka dengan klik ganda (`file://`).
 * Isi: `sekolah.nama`, `sekolah.kota`, `kepala_sekolah`, dan `prodi.{DKV|RPL|TITL|TSM|TKR}` berisi `nama`, `kajur`, `pendamping` (daftar nama).
+* `hari_libur`: `{ "2026-08-17": "Proklamasi Kemerdekaan", … }` — tanggal merah & cuti bersama SKB 3 Menteri (sudah terisi 2026 & 2027). Perbarui tiap SKB baru terbit. Tanggal salah format dilewati dan dicatat sebagai masalah pengaturan.
 * **Combobox Guru Pembimbing (Pendamping)** di Langkah 1 menampilkan pendamping sesuai prodi siswa dan berganti saat prodi diganti; siswa tetap bisa mengetik nama lain. Prodi tanpa daftar → semua pendamping ditampilkan.
 * **Kajur** terisi otomatis sesuai prodi (aturan isi otomatis biasa: isian yang diketik siswa tidak ditimpa).
 * Nama berawalan `Contoh` → peringatan "nama contoh" di Langkah 1 sampai semua diganti.
 * Salah ketik / data tidak lengkap → aplikasi tetap jalan dengan bawaan dan menampilkan daftar masalah (halaman awal & Langkah 1, juga di console). Diuji di `pengaturan-test.js` (koma hilang, prodi hilang, Kajur kosong, pendamping bukan daftar, kode prodi tak dikenal).
 * Setelah mengubah `pengaturan.js`, muat ulang aplikasi (F5). Draft siswa ikut memakai Kajur baru selama isian Kajur belum diubah manual.
 
+* **Kompetensi keahlian** dipilih di halaman awal dan tampil lagi sebagai pilihan di Langkah 1 (`select#jurusan_kode`, tanpa atribut `name`, disinkronkan di `autofill.js` dengan radio halaman awal). Wajib diisi (`required` Langkah 1) karena dipakai di Halaman Judul, Pengesahan, Kata Pengantar & Bab I; mengganti pilihan ikut mengganti Kajur & contoh penulisan.
+
+* **Penomoran bertingkat** mengikuti aturan laporan: BAB → A. → 1. → a. → 1) → a), tiap tingkat menjorok 340 twip (± 0,6 cm). Templat: subbab A. (Heading2), 1. (Heading3, kiri 340), daftar a. (kiri 1049, gantung 369); pertanyaan Lampiran 5 menjorok seperti butir 1. Lampiran 6 (`fix_numbering` di `tools/tidy_template.py`). Isian siswa: nomor yang diketik (1. / a. / 1) / a) / -) **dinomori ulang** sesuai posisinya (`paragraphsXml` di `docx-generator.js`) — di bawah subbab A. tingkat pertama 1., di bawah subjudul 1. (indentasi templat ≥ 340, mis. Tujuan Khusus, Misi, Saran, jawaban Refleksi) tingkat pertama a.; jenis penanda berbeda di dalam daftar = sub-daftar; nomor dimulai lagi setelah paragraf biasa; bullet tetap •.
+
 ## 13. Fitur Pembantu Siswa
 
 | Fitur | Letak | Perilaku |
 |---|---|---|
-| **Buat Tanggal Otomatis** (Jurnal) | Langkah 6, `js/wizard/auto-rows.js` | Satu baris per hari kerja dari Tanggal Mulai–Selesai (Langkah 3). Hari kerja dibaca dari isian *Hari Kerja* ("Senin s.d. Sabtu", "Senin, Rabu, Jumat"; kosong = Senin–Jumat) via `PKL.calc.workdays()`. Baris yang sudah berisi tidak diubah/dihapus; hanya tanggal yang belum ada ditambahkan, lalu diurutkan. Hari libur nasional tidak dikenali — siswa menghapus barisnya sendiri. |
-| **Isi Bulan Otomatis** (Presensi) | Langkah 6, `auto-rows.js` | Satu baris per bulan (maks. 6), Hadir = jumlah hari kerja di bulan itu. Bulan yang sudah ada tidak ditimpa. |
+| **Buat Tanggal Otomatis** (Jurnal) | Langkah 6, `js/wizard/auto-rows.js` + `js/wizard/holiday-mark.js` | Satu baris untuk **setiap hari** dari Tanggal Mulai–Selesai (Langkah 4 · Bab III.A), termasuk Sabtu, Minggu & tanggal merah — DUDI bisa saja meminta siswa masuk. Warna baris: **merah** = tanggal merah/cuti bersama (`hari_libur` di `pengaturan.js`), **kuning** = di luar isian *Hari Kerja* (kosong = Senin–Jumat → Sabtu & Minggu kuning; "Senin s.d. Sabtu" → hanya Minggu). Merah didahulukan. Warna juga berlaku untuk baris impor CSV & ketik manual, ikut berubah saat Hari Kerja diganti, dan hanya tampil di form (.docx tidak berwarna). Saat laporan dibuat, baris kuning/merah yang kegiatannya kosong **otomatis dilewati** (`skipEmptyOffDays` di `LISTS`, docx-generator.js) dan jumlahnya disebut di pesan sukses; baris hari kerja biasa yang kosong tetap dicetak agar kekurangan jurnal terlihat. Baris yang sudah berisi tidak diubah/dihapus. |
+| **Hitung dari Jurnal** (Presensi) | Langkah 6, `auto-rows.js` | Satu baris per bulan PKL (maks. 6). **Hadir = jumlah tanggal unik di jurnal yang kegiatannya terisi**, termasuk Sabtu/Minggu/tanggal merah yang diisi; baris jurnal di luar tanggal PKL tidak dihitung. Jurnal masih kosong → cadangan: jumlah hari kerja tanpa tanggal merah (status kuning, diminta klik lagi setelah jurnal diisi). Bulan yang sudah ada: hanya Hadir yang diperbarui (dengan konfirmasi); Izin/Sakit/Alpa tidak diubah. |
 | **Penghitung kata** | Semua isian narasi, `js/wizard/word-count.js` | "57 kata · saran minimal 80 kata (kurang 23)". Target di `TARGETS` hanya saran, tidak memengaruhi status Lengkap. Alamat & Daftar Pustaka tidak diberi penghitung. |
 | **Lompat ke isian kosong** | Checklist Langkah 7, `completeness.js` | Nama isian di "Belum diisi: …" bisa diklik → pindah ke langkahnya, kursor di isian, isian disorot sebentar. Tabel kosong → kursor ke baris kosong pertama. |
 
