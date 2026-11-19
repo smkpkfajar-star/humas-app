@@ -14,7 +14,7 @@
    */
   PKL.steps = [
     { id: 'langkah-1', bab: 'Hlm. Awal', no: 1, title: 'Identitas',   full: 'Identitas Siswa, Pengesahan & Keluarga', sub: 'Halaman Judul · Pengesahan · Lampiran 1',
-      required: ['jurusan_kode', 'siswa_nama', 'siswa_nis', 'siswa_nisn', 'siswa_kelas', 'siswa_jk', 'tahun_ajaran', 'guru_nama', 'kaprog_nama', 'kepsek_nama', 'tgl_pengesahan'] },
+      required: ['jurusan_kode', 'siswa_nama', 'siswa_nis', 'siswa_nisn', 'siswa_kelas', 'siswa_jk', 'tahun_ajaran', 'guru_nama', 'kaprog_nama', 'kepsek_nama'] },
     { id: 'langkah-2', bab: 'Bab I', no: 2, title: 'Pendahuluan', full: 'Bab I — Pendahuluan', sub: 'Bab I',
       required: ['bab1_latar_belakang'] },
     { id: 'langkah-3', bab: 'Bab II', no: 3, title: 'Profil DUDI', full: 'Bab II — Profil Dunia Kerja (DUDI)', sub: 'Bab II',

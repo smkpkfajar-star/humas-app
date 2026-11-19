@@ -107,7 +107,8 @@
    * hanya string, angka, boolean, dan array berisi objek datar yang lolos.
    */
   /** Isian yang sudah tidak dipakai (NIP dihapus dari laporan) — dibuang dari draft & backup lama. */
-  var DROPPED_KEYS = { guru_nip: 1, kaprog_nip: 1, kepsek_nip: 1, instruktur_nip: 1, judul_laporan: 1 };
+  var DROPPED_KEYS = { guru_nip: 1, kaprog_nip: 1, kepsek_nip: 1, instruktur_nip: 1, judul_laporan: 1,
+    tgl_pengesahan: 1 };   // kini otomatis: tanggal generate + 2 hari (PKL.calc.approvalDate)
 
   function sanitize(input) {
     var out = {};

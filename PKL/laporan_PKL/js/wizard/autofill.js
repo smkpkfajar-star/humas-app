@@ -109,6 +109,12 @@
     Object.keys(t).forEach(function (k) { setOut(k, String(t[k])); });
   }
 
+  /** Pratinjau tanggal pengesahan otomatis (dihitung ulang saat generate). */
+  function updateApprovalDate() {
+    var text = PKL.calc.formatDate(PKL.calc.approvalDate());
+    PKL.$$('[data-approval-date]').forEach(function (el) { el.value = text; });
+  }
+
   function updateFileName() {
     setOut('file_name', PKL.calc.fileName(PKL.state.get('siswa_nama'), PKL.state.get('siswa_kelas')));
   }
@@ -147,6 +153,7 @@
     updateDuration();
     updateAttendance();
     updateFileName();
+    updateApprovalDate();
   }
 
   PKL.autofill = {

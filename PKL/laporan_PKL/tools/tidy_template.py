@@ -12,6 +12,9 @@ Perbaikan:
   2. Sampul: "KOMPETENSI KEAHLIAN …" (nama kompetensi di baris sendiri), nama
      sekolah, dan "DI <DUDI>" huruf kapital; teks alternatif logo diperbarui.
   2b. Lampiran 2 (jurnal) disederhanakan: No | Hari dan Tanggal | Kegiatan.
+  2c. Alur halaman: paragraf kosong pemisah halaman → "page break before" pada judul
+     (tanpa halaman kosong); tanda tangan & tabel kecil utuh satu halaman; paragraf
+     gambar spasi tunggal. Lihat fix_page_flow().
   3. Paragraf isian panjang ditandai RAW (lihat RAW_FIELDS) agar setiap baris
      yang diketik siswa menjadi paragraf Word sendiri dengan format templat
      (indentasi baris pertama, daftar bernomor menggantung, pustaka APA).
@@ -23,6 +26,8 @@ tampil sama di semua aplikasi; field PAGE/PAGEREF & tab leader tidak.
 
 import re
 
+# Placeholder gambar (sama dengan IMAGE_TAGS di convert-template.py).
+IMAGE_TAGS = ["dudi_struktur_img", "foto", "lampiran_sk_penempatan", "lampiran_surat_selesai"]
 # Isian panjang yang dirender sebagai paragraf (tag {@nama} di Docxtemplater).
 RAW_FIELDS = [
     "bab1_latar_belakang", "bab1_tujuan_khusus", "bab1_ruang_lingkup",
@@ -367,6 +372,100 @@ def fix_cover_caps(els):
     return els
 
 
+# --------------------------------------------------------------- Alur halaman
+
+PAGE_BREAK_P = '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'
+
+
+def keep_table_with_next(tbl: str, include_last: bool) -> str:
+    """keepNext pada paragraf tiap sel → baris tabel tidak terpisah halaman.
+    include_last=False: tabel utuh satu halaman; True: tabel juga menempel ke paragraf sesudahnya."""
+    rows = re.findall(r"<w:tr\b.*?</w:tr>", tbl, re.S)
+    for idx, row in enumerate(rows):
+        if idx == len(rows) - 1 and not include_last:
+            break
+        new_row = re.sub(r"<w:p\b.*?</w:p>", lambda m: add_ppr_child(m.group(0), "<w:keepNext/>", "keepNext"), row, flags=re.S)
+        tbl = tbl.replace(row, new_row, 1)
+    return tbl
+
+
+def fix_page_flow(els):
+    """Cegah halaman kosong & potongan halaman yang nanggung.
+
+    1. Paragraf kosong berisi pemisah halaman sebelum judul BAB / Lampiran diganti
+       "Page break before" pada judulnya. Paragraf kosong itu bisa terdorong sendirian
+       ke halaman baru saat halaman sebelumnya pas penuh → halaman kosong.
+    2. Blok yang harus utuh satu halaman: tabel kecil (Tabel 3.1, identitas, presensi,
+       Lampiran 1), tanda tangan pengesahan + "Mengetahui", tanda tangan Kata Pengantar.
+    """
+    removed = 0
+    out = []
+    pending_break = False
+    for e in els:
+        if e == PAGE_BREAK_P:
+            pending_break = True
+            removed += 1
+            continue
+        if pending_break:
+            expect(e.startswith("<w:p") and re.search(r'<w:pStyle w:val="Heading[12]"/>', e),
+                   "pemisah halaman tidak diikuti judul BAB/Lampiran: " + text_of(e)[:40])
+            e = add_ppr_child(e, "<w:pageBreakBefore/>", "pageBreakBefore")
+            pending_break = False
+        out.append(e)
+    expect(not pending_break and removed >= 8, f"paragraf pemisah halaman: {removed}")
+    els = out
+
+    def idx_text(start_text, kind="<w:p"):
+        return find_index(els, lambda e: e.startswith(kind) and text_of(e).startswith(start_text), start_text)
+
+    # Lembar pengesahan: kalimat "Disahkan di", tabel tanda tangan, dan Kepala Sekolah satu halaman.
+    d = idx_text("Disahkan di")
+    els[d] = add_ppr_child(els[d], "<w:keepNext/>", "keepNext")
+    t = find_index(els, lambda e: e.startswith("<w:tbl>") and "Instruktur Dunia Kerja," in text_of(e), "tabel tanda tangan")
+    els[t] = keep_table_with_next(els[t], include_last=True)
+    k = idx_text("Mengetahui,")
+    els[k] = add_ppr_child(els[k], "<w:keepLines/>", "keepLines")
+
+    # Kata Pengantar: tanda tangan penulis tidak sendirian di halaman baru.
+    s = idx_text("{{kota_pengesahan}}, {{tgl_pengesahan}}")
+    els[s - 1] = add_ppr_child(els[s - 1], "<w:keepNext/>", "keepNext")
+
+    # Tabel kecil utuh satu halaman.
+    n = 0
+    for i, e in enumerate(els):
+        if not e.startswith("<w:tbl>"):
+            continue
+        txt = text_of(e)
+        if txt.startswith("Nama:") or txt.startswith("KeteranganRincian Pelaksanaan") or txt.startswith("KeteranganUraian"):
+            els[i] = keep_table_with_next(e, include_last=False)
+            n += 1
+        elif txt.startswith("BulanHadir"):
+            els[i] = keep_table_with_next(e, include_last=True)   # + "Persentase Kehadiran"
+            n += 1
+    expect(n == 5, f"tabel kecil yang dijaga utuh: {n}, seharusnya 5")
+
+    # Paragraf gambar spasi tunggal: dengan spasi 1,5 Word ikut membesarkan tinggi baris
+    # gambar 1,5x sehingga gambar besar (scan surat) terdorong ke halaman berikutnya.
+    img_re = re.compile(r"\{\{\s*(?:\w+\.)?(" + "|".join(IMAGE_TAGS) + r")\s*\}\}")
+    n_img = 0
+    for i, e in enumerate(els):
+        def single(m):
+            p = m.group(0)
+            if not img_re.search(text_of(p)):
+                return p
+            if "<w:spacing " in p.split("</w:pPr>")[0]:
+                sp = re.search(r"<w:spacing [^>]*/>", p).group(0)
+                new = re.sub(r' w:line(?:Rule)?="[^"]*"', "", sp).replace("<w:spacing ", '<w:spacing w:line="240" w:lineRule="auto" ', 1)
+                return p.replace(sp, new, 1)
+            return add_ppr_child(p, '<w:spacing w:line="240" w:lineRule="auto"/>', "spacing")
+        new = re.sub(r"<w:p\b.*?</w:p>", single, e, flags=re.S) if e.startswith("<w:tbl>") else single(re.match(r"[\s\S]*", e))
+        if new != e:
+            els[i] = new
+            n_img += new.count('w:line="240"') - e.count('w:line="240"')
+    expect(n_img == len(IMAGE_TAGS), f"paragraf gambar spasi tunggal: {n_img}, seharusnya {len(IMAGE_TAGS)}")
+    return els, removed
+
+
 # --------------------------------------------------------------- Langkah 5
 
 def mark_raw_paragraphs(els):
@@ -419,6 +518,9 @@ def tidy_document(xml: str) -> tuple[str, list[str]]:
     log.append("judul laporan ditiadakan: baris judul di sampul & frasa judul di Kata Pengantar dihapus")
     els = fix_logo_alt(els)
     log.append(f'teks alternatif logo -> "Logo {SCHOOL_NAME}"')
+    els, n_breaks = fix_page_flow(els)
+    log.append(f"alur halaman: {n_breaks} paragraf pemisah halaman -> 'page break before' pada judul (tanpa halaman kosong); "
+               "tanda tangan & tabel kecil dijaga utuh satu halaman")
     els, marked = mark_raw_paragraphs(els)
     log.append(f"{len(marked)} paragraf isian panjang -> paragraf Word terpisah")
     return head + "".join(els) + tail, log

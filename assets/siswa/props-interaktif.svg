@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" width="420" height="260" role="img" aria-labelledby="props-title props-desc">
+  <title id="props-title">Kumpulan Properti Interaktif Anak Sekolah</title>
+  <desc id="props-desc">Kumpulan elemen pendukung terpisah (buku, dokumen tercentang, laptop, lampu ide, balon sapaan, dan lencana bintang) siap dianimasikan mengambang di sekitar karakter.</desc>
+  <!--
+    Setiap elemen memiliki ID unik agar bisa diambil terpisah atau dianimasikan melayang (float):
+    - #prop-buku
+    - #prop-dokumen-ok
+    - #prop-laptop
+    - #prop-lampu-ide
+    - #prop-balon-halo
+    - #prop-lencana-bintang
+  -->
+
+  <!-- 1. Buku Catatan SMK -->
+  <g id="prop-buku" data-part="prop-book" transform="translate(26 24)">
+    <rect x="6" y="4" width="66" height="78" rx="10" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.4"/>
+    <rect x="16" y="4" width="8" height="78" fill="#165239"/>
+    <rect x="31" y="18" width="31" height="12" rx="3" fill="#E6F2EC"/>
+    <rect x="31" y="37" width="24" height="4" rx="2" fill="#E6F2EC" opacity="0.7"/>
+    <rect x="31" y="46" width="18" height="4" rx="2" fill="#E6F2EC" opacity="0.5"/>
+    <path d="M12 76 H66" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- 2. Dokumen Laporan Tercentang -->
+  <g id="prop-dokumen-ok" data-part="prop-doc-checked" transform="translate(166 24)">
+    <rect x="4" y="4" width="64" height="78" rx="11" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4"/>
+    <rect x="15" y="18" width="26" height="6" rx="3" fill="#1E6B4B" opacity="0.8"/>
+    <rect x="15" y="32" width="42" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="15" y="44" width="34" height="5" rx="2.5" fill="#CBD5E1"/>
+    <rect x="15" y="56" width="22" height="5" rx="2.5" fill="#CBD5E1"/>
+    <circle cx="58" cy="68" r="15" fill="#1E6B4B" stroke="#FFFFFF" stroke-width="3"/>
+    <path d="M51.5 68 L56 72.5 L65 63.5" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 3. Laptop Pelajar -->
+  <g id="prop-laptop" data-part="prop-laptop" transform="translate(294 32)">
+    <rect x="10" y="6" width="82" height="54" rx="8" fill="#E2E8F0" stroke="#1F2933" stroke-width="2.4"/>
+    <rect x="17" y="13" width="68" height="40" rx="4" fill="#1E6B4B"/>
+    <rect x="24" y="21" width="28" height="5" rx="2.5" fill="#FFFFFF" opacity="0.85"/>
+    <rect x="24" y="31" width="46" height="4" rx="2" fill="#E6F2EC" opacity="0.55"/>
+    <rect x="24" y="39" width="36" height="4" rx="2" fill="#E6F2EC" opacity="0.45"/>
+    <path d="M2 60 H100 C100 66 95 69 89 69 H13 C7 69 2 66 2 60 Z" fill="#94A3B8" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect x="42" y="62" width="18" height="3" rx="1.5" fill="#E2E8F0"/>
+  </g>
+
+  <!-- 4. Lampu Ide -->
+  <g id="prop-lampu-ide" data-part="prop-idea" transform="translate(65 188)">
+    <circle cx="0" cy="0" r="34" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2.4"/>
+    <g stroke="#F4B942" stroke-width="2.6" stroke-linecap="round">
+      <path d="M0 -25 V-20"/>
+      <path d="M-18 -17 L-14 -13"/>
+      <path d="M18 -17 L14 -13"/>
+      <path d="M-23 0 H-18"/>
+      <path d="M23 0 H18"/>
+    </g>
+    <path d="M-11 -2 C-11 -11 -6 -16 0 -16 C6 -16 11 -11 11 -2 C11 4 7.5 7 6.5 11 H-6.5 C-7.5 7 -11 4 -11 -2 Z" fill="#FDE68A" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    <rect x="-5.5" y="11" width="11" height="6" rx="2" fill="#64748B" stroke="#1F2933" stroke-width="2"/>
+    <path d="M-3 -2 L0 3 L3 -2" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 5. Balon Sapaan "Halo!" -->
+  <g id="prop-balon-halo" data-part="prop-speech-bubble" transform="translate(152 152)">
+    <path d="M14 6 H96 C104 6 110 12 110 20 V46 C110 54 104 60 96 60 H36 L20 72 L24 60 H14 C6 60 0 54 0 46 V20 C0 12 6 6 14 6 Z" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2.6" stroke-linejoin="round"/>
+    <text x="55" y="40" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="700" fill="#1E6B4B">Halo!</text>
+  </g>
+
+  <!-- 6. Lencana Bintang Prestasi -->
+  <g id="prop-lencana-bintang" data-part="prop-badge-star" transform="translate(345 188)">
+    <path d="M-12 14 L-18 36 L-5 29 L2 38 L5 18 Z" fill="#1E6B4B" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M12 14 L18 36 L5 29 L-2 38 L-5 18 Z" fill="#2A8A61" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="0" cy="-2" r="24" fill="#F4B942" stroke="#1F2933" stroke-width="2.4"/>
+    <circle cx="0" cy="-2" r="18" fill="#FDE68A"/>
+    <path d="M0 -13 L3.2 -4.5 L12 -4 L5 1.8 L7.4 10.5 L0 5.5 L-7.4 10.5 L-5 1.8 L-12 -4 L-3.2 -4.5 Z" fill="#1E6B4B"/>
+  </g>
+</svg>

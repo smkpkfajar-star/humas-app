@@ -1,7 +1,8 @@
 /**
  * Engine generate .docx di browser (FR-07).
  *
- *   PKL.docx.generate(onProgress) → Promise<{ blob, fileName, warnings }>
+ *   PKL.docx.generate(onProgress) → Promise<{ blob, fileName, warnings, pageCount }>  (Daftar Isi terisi)
+ *   PKL.docx.render(onProgress)   → Promise<{ zip, fileName, warnings }>  (untuk pratinjau PDF)
  *   PKL.docx.buildData(state)     → objek data siap render (murni, bisa diuji)
  *   PKL.docx.useTemplateFile(f)   → pakai templat pilihan pengguna (fallback file://)
  *
@@ -14,12 +15,12 @@
   var TEMPLATE_URL = 'assets/templates/Template_Laporan_PKL_Otomatis_v12.docx';
   // Revisi templat: naikkan bila v12 dibuat ulang dengan perubahan struktur,
   // agar templat lama yang tersimpan di perangkat (file://) tidak dipakai lagi.
-  var TEMPLATE_CACHE_KEY = '__template_v12r6__';
-  var OLD_CACHE_KEYS = ['__template_v12__', '__template_v12r2__', '__template_v12r3__', '__template_v12r4__', '__template_v12r5__'];
+  var TEMPLATE_CACHE_KEY = '__template_v12r7__';
+  var OLD_CACHE_KEYS = ['__template_v12__', '__template_v12r2__', '__template_v12r3__', '__template_v12r4__', '__template_v12r5__', '__template_v12r6__'];
   var TEMPLATE_MARKER = '{@daftar_pustaka}';
   var DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
 
-  var DATE_FIELDS = ['tgl_mulai', 'tgl_selesai', 'tgl_pengesahan'];
+  var DATE_FIELDS = ['tgl_mulai', 'tgl_selesai'];
   var IMAGE_FIELDS = ['dudi_struktur_img', 'lampiran_sk_penempatan', 'lampiran_surat_selesai'];
 
   /**
@@ -96,8 +97,8 @@
     return spec.numbered ? PKL.calc.numberRows(clean) : clean;
   }
 
-  /** State aplikasi → data untuk templat (fungsi murni). */
-  function buildData(state) {
+  /** State aplikasi → data untuk templat (fungsi murni; `now` opsional untuk uji). */
+  function buildData(state, now) {
     var s = state || {};
     var data = {};
     Object.keys(s).forEach(function (k) {
@@ -107,6 +108,8 @@
     delete data.jurusan_kode;
 
     DATE_FIELDS.forEach(function (k) { data[k] = PKL.calc.formatDate(s[k]) || ''; });
+    // Lembar Pengesahan & tanda tangan Kata Pengantar: otomatis 2 hari setelah laporan dibuat.
+    data.tgl_pengesahan = PKL.calc.formatDate(PKL.calc.approvalDate(now));
 
     var jurnalInfo = { hariKerja: s.hari_kerja, skipped: 0 };
     Object.keys(LISTS).forEach(function (name) {
@@ -148,7 +151,8 @@
     if (text.indexOf('{siswa_nama}') === -1 || text.indexOf('{#list_jurnal}') === -1) {
       throw new Error('File ini bukan Template_Laporan_PKL_Otomatis_v12.docx.');
     }
-    if (text.indexOf(TEMPLATE_MARKER) === -1 || text.indexOf('{validasi}') !== -1) {
+    // r7: paragraf pemisah halaman kosong sudah diganti "page break before" (tools/tidy_template.py).
+    if (text.indexOf(TEMPLATE_MARKER) === -1 || text.indexOf('{validasi}') !== -1 || text.indexOf('<w:br w:type="page"/>') !== -1) {
       var old = new Error('Ini templat v12 versi lama (sebelum dirapikan / jurnal masih 6 kolom). Pilih file Template_Laporan_PKL_Otomatis_v12.docx yang terbaru.');
       old.code = 'OUTDATED_TEMPLATE';
       throw old;
@@ -194,6 +198,19 @@
 
   // ---------------------------------------------------------------- Gambar
 
+  /**
+   * Batas tinggi tampil scan Lampiran 6 (px @96 dpi). Halaman memuat ±858 px isi;
+   * judul Lampiran 6 + sub-judul + scan harus muat satu halaman, kalau tidak judulnya
+   * tertinggal sendirian. Scan lama yang tersimpan setinggi 820 px ikut diperkecil.
+   */
+  var SCAN_MAX_H = 700;
+
+  function fitSize(key, data, w, h) {
+    var scan = key === data.lampiran_sk_penempatan || key === data.lampiran_surat_selesai;
+    if (scan && h > SCAN_MAX_H) return [Math.round(w * SCAN_MAX_H / h), SCAN_MAX_H];
+    return [w, h];
+  }
+
   /** Muat semua gambar yang dirujuk data → { key: { buffer, size: [w, h] } }. */
   function loadImages(data, warnings) {
     var keys = [];
@@ -205,7 +222,7 @@
       return PKL.images.get(key).then(function (rec) {
         if (!rec || !rec.blob) return;
         return rec.blob.arrayBuffer().then(function (buf) {
-          store[key] = { buffer: buf, size: [rec.displayWidth, rec.displayHeight] };
+          store[key] = { buffer: buf, size: fitSize(key, data, rec.displayWidth, rec.displayHeight) };
         });
       });
     })).then(function () {
@@ -349,7 +366,8 @@
     return new Error('Gagal menyusun dokumen: ' + (e && e.message ? e.message : 'kesalahan tidak dikenal'));
   }
 
-  function generate(onProgress) {
+  /** Render templat → { zip (PizZip terisi), fileName, warnings, notes }. */
+  function render(onProgress) {
     var progress = onProgress || function () {};
     var warnings = [];
     var data = buildData(PKL.state.all());
@@ -381,9 +399,8 @@
         } catch (e) {
           throw friendlyRenderError(e);
         }
-        var blob = doc.getZip().generate({ type: 'blob', mimeType: DOCX_MIME, compression: 'DEFLATE' });
         return {
-          blob: blob,
+          zip: doc.getZip(),
           fileName: PKL.calc.fileName(PKL.state.get('siswa_nama'), PKL.state.get('siswa_kelas')),
           warnings: warnings,
           notes: data._jurnal_libur_dilewati
@@ -394,8 +411,48 @@
     });
   }
 
+  /**
+   * Nomor halaman Daftar Isi: dokumen ditata ke halaman A4 di wadah tersembunyi
+   * (PKL.pageLayout, aturan pemotongan seperti Word), lalu hasil field PAGEREF
+   * diisi. Word tetap menawarkan pembaruan saat dibuka (updateFields).
+   */
+  function fillToc(res) {
+    var host = document.createElement('div');
+    host.className = 'pv-offscreen';
+    host.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(host);
+    var cleanup = function () { if (host.parentNode) host.parentNode.removeChild(host); };
+    return PKL.pageLayout.layout(res.zip, host).then(function (lay) {
+      var file = res.zip.file('word/document.xml');
+      var out = PKL.pageLayout.fillTocXml(file.asText(), lay.bookmarks);
+      res.zip.file('word/document.xml', out.xml);
+      res.pageCount = lay.pageCount;
+      res.tocFilled = out.count;
+      lay.destroy();
+      cleanup();
+      return res;
+    }, function (err) {
+      cleanup();
+      if (window.console) console.warn('Daftar Isi tidak terisi otomatis:', err);
+      res.warnings.push('Nomor halaman Daftar Isi belum terisi otomatis; di Word tekan Ctrl+A lalu F9.');
+      return res;
+    });
+  }
+
+  function generate(onProgress) {
+    var progress = onProgress || function () {};
+    return render(progress).then(function (res) {
+      progress('Mengisi Daftar Isi…');
+      return fillToc(res);
+    }).then(function (res) {
+      res.blob = res.zip.generate({ type: 'blob', mimeType: DOCX_MIME, compression: 'DEFLATE' });
+      return res;
+    });
+  }
+
   PKL.docx = {
     TEMPLATE_URL: TEMPLATE_URL,
+    render: render,
     buildData: buildData,
     cleanText: cleanText,
     paragraphsXml: paragraphsXml,

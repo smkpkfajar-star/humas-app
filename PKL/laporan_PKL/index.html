@@ -18,6 +18,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/interaksi.css">
+  <link rel="stylesheet" href="css/print-view.css">
+  <link rel="stylesheet" href="css/hero-stage.css">
+  <link rel="stylesheet" href="vendor/fonts/arimo.css">
 </head>
 <body class="is-landing">
 
@@ -132,66 +135,69 @@
         <section class="view" data-view="mulai" aria-labelledby="t-mulai">
           <div class="landing">
 
-            <!-- Kiri: penjelasan -->
-            <div class="landing__intro">
-              <img class="hero__logo" src="assets/logo-sekolah.png" alt="Logo SMK Tamansiswa Jetis" width="72" height="72">
-              <p class="hero__eyebrow">SMK Tamansiswa Jetis</p>
-              <h1 class="hero__title" id="t-mulai">Susun Laporan PKL langkah demi langkah</h1>
-              <p class="hero__lead">Isi 7 langkah singkat, lalu unduh laporan berformat Word yang sudah rapi sesuai templat sekolah.</p>
+            <div class="landing__hero">
+              <!-- Teks pembuka -->
+              <div class="landing__intro">
+                <p class="landing__school"><img src="assets/logo-sekolah.png" alt="" width="26" height="26">SMK Tamansiswa Jetis</p>
+                <h1 class="landing__title" id="t-mulai">Susun Laporan PKL langkah demi langkah</h1>
+                <p class="landing__lead">Isi 7 langkah singkat, lalu unduh laporan Word atau PDF yang sudah rapi sesuai templat sekolah.</p>
 
-              <ul class="landing__points">
-                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Tersimpan otomatis di perangkat ini</li>
-                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Contoh penulisan sesuai jurusanmu</li>
-                <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hasil langsung jadi file Word (.docx)</li>
-              </ul>
+                <ul class="landing__points">
+                  <li><svg aria-hidden="true"><use href="#i-check"/></svg>Tersimpan otomatis di perangkat ini</li>
+                  <li><svg aria-hidden="true"><use href="#i-check"/></svg>Contoh penulisan sesuai jurusanmu</li>
+                  <li><svg aria-hidden="true"><use href="#i-shield"/></svg>Data tidak dikirim ke server mana pun</li>
+                </ul>
 
-              <div class="draft-card" id="draft-card" hidden>
-                <span class="draft-card__icon"><svg aria-hidden="true"><use href="#i-history"/></svg></span>
-                <div class="draft-card__body">
-                  <p class="draft-card__title">Draft tersimpan ditemukan</p>
-                  <p class="draft-card__meta"><span data-draft-name>—</span> · terakhir diubah <span data-draft-time>—</span></p>
+                <div class="draft-card" id="draft-card" hidden>
+                  <span class="draft-card__icon"><svg aria-hidden="true"><use href="#i-history"/></svg></span>
+                  <div class="draft-card__body">
+                    <p class="draft-card__title">Draft tersimpan ditemukan</p>
+                    <p class="draft-card__meta"><span data-draft-name>—</span> · terakhir diubah <span data-draft-time>—</span></p>
+                  </div>
+                  <a class="btn btn--primary" href="#/ringkasan" data-action="continue-draft">Lanjutkan Draft</a>
                 </div>
-                <a class="btn btn--primary" href="#/ringkasan" data-action="continue-draft">Lanjutkan Draft</a>
               </div>
 
-              <p class="privacy-note">
-                <svg aria-hidden="true"><use href="#i-shield"/></svg>
-                Data diproses di perangkatmu sendiri dan tidak dikirim ke server mana pun.
-              </p>
-
-              <p class="app-credit">Aplikasi kerja sama <strong>Jurusan DKV</strong>, <strong>Jurusan RPL</strong>, dan <strong>Humas</strong> SMK Tamansiswa Jetis.</p>
+              <!-- Panggung karakter (assets/siswa → tools/build-karakter.py → js/data/karakter-svg.js) -->
+              <div class="hero-stage" data-hero-stage aria-hidden="true">
+                <div class="hero-stage__chars" data-hero-chars></div>
+                <div class="hero-chip hero-chip--doc"><span class="hero-chip__icon" data-prop="prop-dokumen-ok"></span><span class="hero-chip__text"><strong>Word &amp; PDF</strong>rapi sesuai templat</span></div>
+                <div class="hero-chip hero-chip--toc"><span class="hero-chip__icon" data-prop="prop-lencana-bintang"></span><span class="hero-chip__text"><strong>Daftar isi</strong>terisi otomatis</span></div>
+                <span class="hero-bubble" data-prop="prop-balon-halo"></span>
+              </div>
             </div>
 
-            <!-- Kanan: pilih jurusan -->
+            <!-- Pilih jurusan & mulai -->
             <div class="landing__pick card">
               <fieldset>
                 <legend class="visually-hidden">Kompetensi Keahlian</legend>
-                <div class="card__header">
-                  <h2 class="card__title">Pilih Kompetensi Keahlian</h2>
+                <div class="landing__pick-head">
+                  <h2 class="card__title">Pilih kompetensi keahlianmu</h2>
                   <p class="card__desc">Dipakai untuk contoh penulisan dan mengisi otomatis Ketua Program Keahlian.</p>
                 </div>
                 <div class="major-grid">
-                  <label class="major"><input type="radio" name="jurusan_kode" value="DKV"><span class="major__code">DKV</span><span class="major__name">Desain Komunikasi Visual</span></label>
-                  <label class="major"><input type="radio" name="jurusan_kode" value="RPL"><span class="major__code">RPL</span><span class="major__name">Rekayasa Perangkat Lunak</span></label>
-                  <label class="major"><input type="radio" name="jurusan_kode" value="TITL"><span class="major__code">TITL</span><span class="major__name">Teknik Instalasi Tenaga Listrik</span></label>
-                  <label class="major"><input type="radio" name="jurusan_kode" value="TSM"><span class="major__code">TSM</span><span class="major__name">Teknik dan Bisnis Sepeda Motor</span></label>
-                  <label class="major"><input type="radio" name="jurusan_kode" value="TKR"><span class="major__code">TKR</span><span class="major__name">Teknik Kendaraan Ringan</span></label>
+                  <label class="major"><input type="radio" name="jurusan_kode" value="DKV"><span class="major__code">DKV</span><span class="major__name">Desain Komunikasi Visual</span><svg class="major__check" aria-hidden="true"><use href="#i-check"/></svg></label>
+                  <label class="major"><input type="radio" name="jurusan_kode" value="RPL"><span class="major__code">RPL</span><span class="major__name">Rekayasa Perangkat Lunak</span><svg class="major__check" aria-hidden="true"><use href="#i-check"/></svg></label>
+                  <label class="major"><input type="radio" name="jurusan_kode" value="TITL"><span class="major__code">TITL</span><span class="major__name">Teknik Instalasi Tenaga Listrik</span><svg class="major__check" aria-hidden="true"><use href="#i-check"/></svg></label>
+                  <label class="major"><input type="radio" name="jurusan_kode" value="TSM"><span class="major__code">TSM</span><span class="major__name">Teknik dan Bisnis Sepeda Motor</span><svg class="major__check" aria-hidden="true"><use href="#i-check"/></svg></label>
+                  <label class="major"><input type="radio" name="jurusan_kode" value="TKR"><span class="major__code">TKR</span><span class="major__name">Teknik Kendaraan Ringan</span><svg class="major__check" aria-hidden="true"><use href="#i-check"/></svg></label>
                 </div>
                 <p class="help help--error" id="err-jurusan" role="alert" hidden>Pilih kompetensi keahlian terlebih dahulu.</p>
               </fieldset>
 
               <div class="landing-actions">
-                <a class="btn btn--primary btn--lg" href="#/langkah-1" data-action="start-new">
-                  Mulai Laporan Baru
-                  <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
-                </a>
                 <button type="button" class="btn btn--secondary btn--lg" data-action="import-json">
                   <svg aria-hidden="true"><use href="#i-upload"/></svg>
                   Impor Backup
                 </button>
+                <a class="btn btn--primary btn--lg" href="#/langkah-1" data-action="start-new">
+                  Mulai Laporan Baru
+                  <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                </a>
               </div>
             </div>
 
+            <p class="app-credit">Aplikasi kerja sama <strong>Jurusan DKV</strong>, <strong>Jurusan RPL</strong>, dan <strong>Humas</strong> SMK Tamansiswa Jetis.</p>
           </div>
         </section>
 
@@ -373,8 +379,9 @@
                     <input class="input" id="kota_pengesahan" name="kota_pengesahan" type="text" value="Yogyakarta">
                   </div>
                   <div class="field">
-                    <label class="label" for="tgl_pengesahan">Tanggal Pengesahan</label>
-                    <input class="input" id="tgl_pengesahan" name="tgl_pengesahan" type="date">
+                    <label class="label" for="tgl_pengesahan_auto">Tanggal Pengesahan</label>
+                    <input class="input" id="tgl_pengesahan_auto" type="text" readonly aria-describedby="tgl_pengesahan_help" data-approval-date>
+                    <p class="help" id="tgl_pengesahan_help">Otomatis: 2 hari setelah laporan dibuat (Generate / Simpan PDF).</p>
                   </div>
                 </div>
               </div>
@@ -1042,7 +1049,7 @@
               <svg aria-hidden="true"><use href="#i-info"/></svg>
               <div>
                 <p class="callout__title">Setelah file diunduh</p>
-                <p>Buka di Microsoft Word, tekan <kbd>Ctrl</kbd> + <kbd>A</kbd> lalu <kbd>F9</kbd> untuk memperbarui nomor halaman Daftar Isi secara otomatis.</p>
+                <p>Nomor halaman Daftar Isi sudah terisi otomatis. Bila Microsoft Word bertanya <em>"update the fields?"</em>, pilih <strong>Yes</strong> agar nomornya disesuaikan dengan Word. Untuk dikumpulkan/dicetak, pakai <strong>Simpan PDF</strong>: tata letaknya tidak berubah di perangkat mana pun.</p>
               </div>
             </div>
 
@@ -1050,6 +1057,10 @@
               <button type="button" class="btn btn--primary btn--lg" data-action="generate-docx">
                 <svg aria-hidden="true"><use href="#i-download"/></svg>
                 Generate &amp; Unduh Laporan (.docx)
+              </button>
+              <button type="button" class="btn btn--secondary btn--lg" data-action="preview-pdf">
+                <svg aria-hidden="true"><use href="#i-file"/></svg>
+                Pratinjau &amp; Simpan PDF
               </button>
               <p class="generate-panel__meta">Nama file: <strong data-out="file_name">Laporan_PKL_[Nama]_[Kelas].docx</strong></p>
               <div class="inline-status" data-generate-status role="status" aria-live="polite" hidden></div>
@@ -1104,6 +1115,7 @@
   <script src="pengaturan.js"></script>   <!-- nama sekolah, kepala sekolah, Kajur & pendamping per prodi -->
   <script src="js/data/master-sekolah.js"></script>
   <script src="js/data/writing-prompts.js"></script>
+  <script src="js/data/karakter-svg.js"></script>
   <script src="js/core/calculations.js"></script>
   <script src="js/core/state.js"></script>
   <script src="js/wizard/steps.js"></script>
@@ -1114,11 +1126,14 @@
   <script src="js/wizard/dialog.js"></script>
   <script src="js/wizard/toast.js"></script>
   <script src="js/wizard/motion.js"></script>
+  <script src="js/wizard/hero-stage.js"></script>
   <script src="js/wizard/writing-guides.js"></script>
   <script src="js/core/csv-importer.js"></script>
   <script src="js/core/image-db.js"></script>
+  <script src="js/core/page-layout.js"></script>
   <script src="js/core/docx-generator.js"></script>
   <script src="js/wizard/image-slots.js"></script>
+  <script src="js/wizard/pdf-preview.js"></script>
   <script src="js/wizard/generate-panel.js"></script>
   <script src="js/wizard/auto-rows.js"></script>
   <script src="js/wizard/holiday-mark.js"></script>

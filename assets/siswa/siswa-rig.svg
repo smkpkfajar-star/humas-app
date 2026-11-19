@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="320" height="360" role="img" aria-labelledby="siswa-rig-title siswa-rig-desc">
+  <title id="siswa-rig-title">Karakter Siswa SMK Tamansiswa Jetis (Modular Rig)</title>
+  <desc id="siswa-rig-desc">Aset vektor siswa SMK laki-laki dengan layer terpisah untuk animasi interaktif: kepala, mata, pupil, kelopak, mulut, lengan, badan, tas, dan bayangan.</desc>
+  <!--
+    PANDUAN PIVOT (transform-origin) UNTUK ANIMASI CSS/JS:
+    - #bayangan      : 160px 336px (scaleX saat melompat/mengambang)
+    - #karakter      : 160px 330px (breathing / bounce seluruh tubuh)
+    - #badan         : 160px 250px (sway / breathing torso)
+    - #tas-belakang  : 160px 215px (follow-through sway)
+    - #lengan-kiri   : 124px 188px (ayun lengan kiri)
+    - #lengan-kanan  : 196px 188px (melambai / menunjuk)
+    - #kepala        : 160px 158px (mengangguk / miring kepala)
+    - #pupil-kiri    : 142px 120px (eye tracking kursor, geser max ±3px)
+    - #pupil-kanan   : 178px 120px (eye tracking kursor, geser max ±3px)
+    - #kelopak       : toggle opacity 0 -> 1 untuk kedip mata
+    - #mulut-senyum / #mulut-senang / #mulut-bicara : toggle display/opacity untuk ganti ekspresi
+  -->
+  <defs>
+    <linearGradient id="bg-aura" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E6F2EC"/>
+      <stop offset="100%" stop-color="#CBE5D7"/>
+    </linearGradient>
+    <linearGradient id="tie-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2A8A61"/>
+      <stop offset="100%" stop-color="#1E6B4B"/>
+    </linearGradient>
+    <linearGradient id="pants-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="bag-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2A8A61"/>
+      <stop offset="100%" stop-color="#165239"/>
+    </linearGradient>
+    <clipPath id="clip-eye-l">
+      <ellipse cx="142" cy="120" rx="7.5" ry="8.5"/>
+    </clipPath>
+    <clipPath id="clip-eye-r">
+      <ellipse cx="178" cy="120" rx="7.5" ry="8.5"/>
+    </clipPath>
+  </defs>
+
+  <!-- Bayangan lantai -->
+  <g id="bayangan" data-part="shadow">
+    <ellipse cx="160" cy="336" rx="56" ry="10" fill="#1E6B4B" opacity="0.14"/>
+  </g>
+
+  <!-- Dekorasi mengambang (opsional untuk animasi float/twinkle) -->
+  <g id="dekorasi" data-part="decorations">
+    <g id="sparkle-1" transform="translate(244 74)">
+      <path d="M0 -9 Q1.8 -1.8 9 0 Q1.8 1.8 0 9 Q-1.8 1.8 -9 0 Q-1.8 -1.8 0 -9 Z" fill="#F4B942"/>
+    </g>
+    <g id="sparkle-2" transform="translate(76 112)">
+      <path d="M0 -6 Q1.2 -1.2 6 0 Q1.2 1.2 0 6 Q-1.2 1.2 -6 0 Q-1.2 -1.2 0 -6 Z" fill="#2A8A61" opacity="0.8"/>
+    </g>
+    <circle id="dot-1" cx="256" cy="128" r="3.5" fill="#1E6B4B" opacity="0.35"/>
+  </g>
+
+  <!-- Karakter Utama -->
+  <g id="karakter" data-part="character">
+
+    <!-- Tas Ransel (di belakang tubuh) -->
+    <g id="tas-belakang" data-part="backpack">
+      <rect x="108" y="176" width="104" height="82" rx="22" fill="url(#bag-grad)" stroke="#1F2933" stroke-width="2.4"/>
+      <path d="M122 184 H198" stroke="#E6F2EC" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+    </g>
+
+    <!-- Kaki & Sepatu -->
+    <g id="kaki" data-part="legs">
+      <!-- Kaki Kiri -->
+      <g id="kaki-kiri" data-part="leg-left">
+        <path d="M132 248 L130 312 Q130 316 135 316 H153 Q156 316 156 312 L158 248 Z" fill="url(#pants-grad)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+        <!-- Kaos kaki putih -->
+        <rect x="135" y="314" width="16" height="8" rx="2" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+        <!-- Sepatu kiri -->
+        <path d="M153 319 H134 C124 319 119 325 119 331 C119 334 122 335 127 335 H152 C155 335 156 333 156 330 V322 C156 320 155 319 153 319 Z" fill="#1F2933"/>
+        <path d="M122 332 H154" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- Kaki Kanan -->
+      <g id="kaki-kanan" data-part="leg-right">
+        <path d="M162 248 L164 312 Q164 316 167 316 H185 Q190 316 190 312 L188 248 Z" fill="url(#pants-grad)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+        <!-- Kaos kaki putih -->
+        <rect x="169" y="314" width="16" height="8" rx="2" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+        <!-- Sepatu kanan -->
+        <path d="M167 319 H186 C196 319 201 325 201 331 C201 334 198 335 193 335 H168 C165 335 164 333 164 330 V322 C164 320 165 319 167 319 Z" fill="#1F2933"/>
+        <path d="M166 332 H198" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- Lengan Kiri (pivot: 124px 188px) -->
+    <g id="lengan-kiri" data-part="arm-left">
+      <!-- Lengan bawah & tangan -->
+      <path d="M119 214 L112 244 C110 251 114 256 120 256 C125 256 128 251 129 245 L133 216 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Lengan baju pendek putih -->
+      <path d="M128 178 C118 181 113 190 110 206 L111 217 L133 220 L136 184 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <!-- Ibu jari lembut -->
+      <path d="M125 247 C129 247 131 251 128 254" fill="none" stroke="#1F2933" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- Lengan Kanan (pivot: 196px 188px) -->
+    <g id="lengan-kanan" data-part="arm-right">
+      <!-- Lengan bawah & tangan -->
+      <g id="tangan-kanan" data-part="hand-right">
+        <path d="M201 214 L208 244 C210 251 206 256 200 256 C195 256 192 251 191 245 L187 216 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M195 247 C191 247 189 251 192 254" fill="none" stroke="#1F2933" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <!-- Lengan baju pendek putih -->
+      <path d="M192 178 C202 181 207 190 210 206 L209 217 L187 220 L184 184 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Badan / Seragam -->
+    <g id="badan" data-part="torso">
+      <!-- Pinggang celana + ikat pinggang -->
+      <path d="M131 242 H189 L190 258 H130 Z" fill="#475569" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <!-- Kemeja Putih SMK -->
+      <path d="M128 178 C136 173 148 171 160 171 C172 171 184 173 192 178 L190 246 H130 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <!-- Shading lembut kemeja -->
+      <path d="M132 239 H188 V245 H132 Z" fill="#E6F2EC"/>
+      <!-- Sabuk hitam & gesper emas -->
+      <rect x="130" y="244" width="60" height="8" rx="2" fill="#1F2933"/>
+      <rect x="154" y="243" width="12" height="10" rx="2" fill="#F4B942" stroke="#1F2933" stroke-width="1.6"/>
+
+      <!-- Tali Tas Ransel -->
+      <path d="M135 176 C131 196 130 218 132 243" fill="none" stroke="#1E6B4B" stroke-width="7" stroke-linecap="round"/>
+      <path d="M135 176 C131 196 130 218 132 243" fill="none" stroke="#1F2933" stroke-width="2" stroke-linecap="round" opacity="0.25"/>
+      <path d="M185 176 C189 196 190 218 188 243" fill="none" stroke="#1E6B4B" stroke-width="7" stroke-linecap="round"/>
+      <path d="M185 176 C189 196 190 218 188 243" fill="none" stroke="#1F2933" stroke-width="2" stroke-linecap="round" opacity="0.25"/>
+
+      <!-- Saku Kemeja & Emblem Sekolah -->
+      <path d="M168 202 H182 V215 C182 218 179 220 175 220 C171 220 168 218 168 215 Z" fill="#F8FAFC" stroke="#1F2933" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="175" cy="210" r="3.4" fill="#1E6B4B"/>
+      <circle cx="175" cy="210" r="1.4" fill="#F4B942"/>
+
+      <!-- Dasi Hijau Zamrud SMK -->
+      <g id="dasi" data-part="tie">
+        <path d="M156 184 L164 184 L166 232 L160 240 L154 232 Z" fill="url(#tie-grad)" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M155.5 212 L164.8 206" stroke="#F4B942" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M155.2 220 L165.1 214" stroke="#E6F2EC" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+        <polygon points="155,179 165,179 163,187 157,187" fill="#1E6B4B" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+      </g>
+
+      <!-- Kerah Kemeja -->
+      <path d="M148 171 L160 183 L144 188 L140 174 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M172 171 L160 183 L176 188 L180 174 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Kepala (pivot: 160px 158px) -->
+    <g id="kepala" data-part="head">
+      <!-- Leher -->
+      <path d="M151 153 V172 C151 177 169 177 169 172 V153 Z" fill="#E3AD84" stroke="#1F2933" stroke-width="2.4"/>
+
+      <!-- Rambut belakang -->
+      <path d="M113 114 C112 80 132 62 160 62 C188 62 208 80 207 114 Z" fill="#1F2933"/>
+
+      <!-- Telinga -->
+      <g id="telinga" data-part="ears">
+        <circle cx="116" cy="121" r="8.5" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4"/>
+        <path d="M114 118 C112 121 113 124 116 124" fill="none" stroke="#D1956A" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="204" cy="121" r="8.5" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4"/>
+        <path d="M206 118 C208 121 207 124 204 124" fill="none" stroke="#D1956A" stroke-width="1.8" stroke-linecap="round"/>
+      </g>
+
+      <!-- Wajah -->
+      <g id="wajah" data-part="face">
+        <path d="M118 112 C118 84 135 72 160 72 C185 72 202 84 202 112 C202 142 185 161 160 161 C135 161 118 142 118 112 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4"/>
+        <!-- Rona pipi -->
+        <g id="pipi" data-part="cheeks" opacity="0.38">
+          <ellipse cx="131" cy="134" rx="7.5" ry="4.2" fill="#F08A78"/>
+          <ellipse cx="189" cy="134" rx="7.5" ry="4.2" fill="#F08A78"/>
+        </g>
+
+        <!-- Alis -->
+        <g id="alis" data-part="eyebrows">
+          <path id="alis-kiri" d="M133 106 Q142 102 150 105" fill="none" stroke="#1F2933" stroke-width="2.6" stroke-linecap="round"/>
+          <path id="alis-kanan" d="M170 105 Q178 102 187 106" fill="none" stroke="#1F2933" stroke-width="2.6" stroke-linecap="round"/>
+        </g>
+
+        <!-- Mata & Pupil Terpisah (untuk eye-tracking) -->
+        <g id="mata" data-part="eyes">
+          <!-- Mata Kiri -->
+          <g id="mata-kiri" data-part="eye-left">
+            <ellipse cx="142" cy="120" rx="7.5" ry="8.5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+            <g id="pupil-kiri" data-part="pupil-left" clip-path="url(#clip-eye-l)">
+              <circle cx="143" cy="120.5" r="4.6" fill="#1F2933"/>
+              <circle cx="144.8" cy="118.2" r="1.7" fill="#FFFFFF"/>
+            </g>
+          </g>
+          <!-- Mata Kanan -->
+          <g id="mata-kanan" data-part="eye-right">
+            <ellipse cx="178" cy="120" rx="7.5" ry="8.5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+            <g id="pupil-kanan" data-part="pupil-right" clip-path="url(#clip-eye-r)">
+              <circle cx="179" cy="120.5" r="4.6" fill="#1F2933"/>
+              <circle cx="180.8" cy="118.2" r="1.7" fill="#FFFFFF"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- Kelopak Mata Kedip (default opacity 0; ubah ke 1 saat kedip) -->
+        <g id="kelopak" data-part="eyelids" opacity="0">
+          <ellipse cx="142" cy="120" rx="8.5" ry="9.5" fill="#F3C39A"/>
+          <path d="M134 121 Q142 126 150 121" fill="none" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round"/>
+          <ellipse cx="178" cy="120" rx="8.5" ry="9.5" fill="#F3C39A"/>
+          <path d="M170 121 Q178 126 186 121" fill="none" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+
+        <!-- Hidung -->
+        <path id="hidung" d="M159 126 Q162 130 158 132" fill="none" stroke="#C98D62" stroke-width="2" stroke-linecap="round"/>
+
+        <!-- Mulut (3 variasi siap toggle) -->
+        <g id="mulut" data-part="mouth">
+          <!-- Default: Senyum Ramah -->
+          <path id="mulut-senyum" data-expression="smile" d="M149 140 Q160 150 171 140" fill="none" stroke="#1F2933" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Alternatif 1: Senang / Tertawa (default tersembunyi) -->
+          <g id="mulut-senang" data-expression="happy" opacity="0">
+            <path d="M148 139 Q160 154 172 139 Z" fill="#C94B57" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M151 140 H169" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+          </g>
+          <!-- Alternatif 2: Berbicara / Terkejut (default tersembunyi) -->
+          <ellipse id="mulut-bicara" data-expression="talk" cx="160" cy="143" rx="5.5" ry="4.5" fill="#C94B57" stroke="#1F2933" stroke-width="2.2" opacity="0"/>
+        </g>
+      </g>
+
+      <!-- Rambut Depan (Poni Rapi Siswa) -->
+      <g id="rambut-depan" data-part="hair-front">
+        <path d="M115 113 C112 86 124 64 152 61 C158 55 167 54 172 58 C168 60 165 62 164 63 C192 64 208 82 205 113 C200 100 194 92 184 87 C179 94 172 97 166 98 C168 92 168 88 166 84 C156 94 142 98 130 96 C126 101 121 107 115 113 Z" fill="#1F2933" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+        <!-- Kilau rambut -->
+        <path d="M138 74 C149 69 165 69 178 75" fill="none" stroke="#475569" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+      </g>
+    </g>
+  </g>
+</svg>

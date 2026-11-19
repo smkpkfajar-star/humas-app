@@ -22,7 +22,7 @@ Nilai `"IMAGE_BUFFER_FROM_INDEXEDDB"` di bawah berarti **string kunci IndexedDB*
   "tahun_ajaran": "2026/2027",
   "tahun_cetak": "2026",
   "kota_pengesahan": "Yogyakarta",
-  "tgl_pengesahan": "20 November 2026",
+  "tgl_pengesahan": "21 November 2026",   // OTOMATIS: tanggal generate + 2 hari (PKL.calc.approvalDate), tidak diisi siswa
 
   "kompetensi_keahlian": "Rekayasa Perangkat Lunak (RPL)",
 

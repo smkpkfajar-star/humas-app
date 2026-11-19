@@ -1,0 +1,78 @@
+/* ================================================================
+   Pratinjau & cetak PDF (js/core/page-layout.js, js/wizard/pdf-preview.js)
+   Halaman A4 tersusun dari dokumen .docx hasil generate. Ukuran dalam px @96 dpi
+   (1 twip = 1/15 px) agar sama persis dengan perhitungan tata letak.
+   ================================================================ */
+
+/* ---------- Isi halaman (dipakai juga oleh wadah pengukur) ---------- */
+.pv-root { color: #000; font-kerning: normal; -webkit-font-smoothing: antialiased; }
+.pv-root .pv-p { margin: 0; white-space: pre-wrap; overflow-wrap: break-word; word-break: normal; }
+.pv-root .pv-mark { display: inline-block; text-indent: 0; white-space: pre; }
+.pv-root .pv-tab { display: inline-block; }
+/* inline-block: reset aplikasi (base.css) membuat img display:block → tidak ikut rata tengah paragraf. */
+.pv-root .pv-img { display: inline-block; vertical-align: baseline; max-width: none; }
+.pv-root .pv-tabr { display: flex; align-items: baseline; text-indent: 0 !important; }
+.pv-root .pv-tl { flex: 0 1 auto; min-width: 0; }
+/* rtl: titik dipotong dari kiri sehingga titik terakhir tepat menempel nomor halaman. */
+.pv-root .pv-lead { flex: 1 1 0; min-width: 12px; overflow: hidden; white-space: nowrap; direction: rtl; text-align: right; }
+.pv-root .pv-lead--dot::before {
+  content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+  padding-right: 3px;
+}
+.pv-root .pv-tn { flex: none; padding-left: 3px; }
+.pv-root .pv-tbl { border-collapse: collapse; table-layout: fixed; border-spacing: 0; }
+.pv-root .pv-td { overflow-wrap: break-word; }
+
+.pv-measure, .pv-offscreen {
+  position: absolute !important; left: -20000px !important; top: 0 !important;
+  visibility: hidden !important; pointer-events: none; contain: layout;
+}
+
+.pv-page { position: relative; overflow: hidden; background: #fff; flex: none; }
+.pv-body { position: absolute; }
+.pv-foot { position: absolute; line-height: 1.15; }
+
+/* ---------- Overlay pratinjau ---------- */
+.pv-overlay {
+  position: fixed; inset: 0; z-index: 120;
+  display: flex; flex-direction: column;
+  background: #5b616b;
+}
+.pv-overlay[hidden] { display: none; }
+.pv-toolbar {
+  display: flex; align-items: center; gap: var(--space-3, 12px); flex-wrap: wrap;
+  padding: var(--space-3, 12px) var(--space-4, 16px);
+  background: var(--bg-surface, #fff); border-bottom: 1px solid var(--border-soft, #ddd);
+  font-family: var(--font-ui, system-ui, sans-serif);
+}
+.pv-toolbar__info { flex: 1 1 auto; min-width: 0; color: var(--text-secondary, #555); font-size: var(--fs-help, 14px); }
+.pv-toolbar__info strong { color: var(--text-primary, #111); }
+.pv-scroll { flex: 1 1 auto; overflow: auto; -webkit-overflow-scrolling: touch; padding: 24px 16px 48px; }
+.pv-pages { display: flex; flex-direction: column; align-items: center; gap: 20px; transform-origin: top center; }
+.pv-pages .pv-page { box-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
+
+@media (max-width: 640px) {
+  .pv-toolbar { gap: var(--space-2, 8px); }
+  .pv-toolbar__info { order: 3; flex-basis: 100%; }
+  .pv-toolbar .btn { flex: 1 1 auto; }
+  .pv-scroll { padding: 12px 8px 32px; }
+  .pv-pages { gap: 12px; }
+}
+
+/* ---------- Cetak / Simpan sebagai PDF ---------- */
+@media print {
+  @page { size: A4; margin: 0; }
+  html.pv-open, html.pv-open body { background: #fff !important; margin: 0 !important; padding: 0 !important; height: auto !important; overflow: visible !important; }
+  html.pv-open body > *:not(.pv-overlay) { display: none !important; }
+  html.pv-open .pv-overlay { position: static; display: block; background: none; }
+  html.pv-open .pv-toolbar { display: none !important; }
+  html.pv-open .pv-scroll { overflow: visible; padding: 0; }
+  html.pv-open .pv-pages { display: block; zoom: 1 !important; transform: none !important; height: auto !important; }
+  html.pv-open .pv-page {
+    width: 210mm !important; height: 296.8mm !important;
+    box-shadow: none !important; margin: 0 !important;
+    break-after: page; page-break-after: always;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  html.pv-open .pv-page:last-child { break-after: auto; page-break-after: auto; }
+}

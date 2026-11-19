@@ -347,6 +347,8 @@
     PKL.imageSlots.init();
     PKL.generatePanel.init();
     PKL.completeness.init();
+    // Hiasan saja: gagal pun aplikasi tetap jalan.
+    try { PKL.heroStage.init(); } catch (e) { if (window.console) console.warn('Karakter Home tidak tampil:', e); }
 
     // 1) Nilai bawaan form (value="Yogyakarta", baris kosong, dst.)
     var defaults = PKL.form.collectAll();

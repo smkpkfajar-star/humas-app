@@ -942,89 +942,151 @@ kbd {
   .draft-card .btn { width: 100%; }
 }
 
-/* ---------- Halaman awal: kiri penjelasan, kanan pilih jurusan ---------- */
-.landing { display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-4) 0; }
+/* ---------- Halaman awal (Home) ----------
+   Seluler: panggung karakter → teks → pilih jurusan.
+   ≥ 880px: teks kiri, panggung kanan; pilih jurusan selebar halaman di bawahnya. */
+.landing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-2) 0 var(--space-4);
+}
+.landing__hero { display: flex; flex-direction: column; gap: var(--space-5); }
+.landing__hero .hero-stage { order: -1; }
 
-.landing__intro .hero__logo { margin: 0 0 var(--space-4); }
-.landing__intro .hero__lead { margin: var(--space-3) 0 0; max-width: 46ch; }
+.landing__school {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 4px 12px 4px 4px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  font-size: var(--fs-help);
+  font-weight: 600;
+  color: var(--brand-primary);
+}
+.landing__school img { width: 26px; height: 26px; object-fit: contain; display: block; }
+
+.landing__title {
+  margin-top: var(--space-4);
+  font-size: clamp(2rem, 1.35rem + 2.6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  text-wrap: balance;
+  max-width: 14ch;
+}
+.landing__lead {
+  margin-top: var(--space-4);
+  max-width: 44ch;
+  font-size: clamp(1rem, .95rem + .3vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
 
 .landing__points {
   list-style: none;
   padding: 0;
   margin: var(--space-5) 0 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: var(--space-2);
   font-size: var(--fs-label);
+  color: var(--text-primary);
 }
 .landing__points li { display: flex; align-items: center; gap: var(--space-2); }
 .landing__points svg {
-  width: 20px; height: 20px; padding: 3px; flex-shrink: 0;
+  width: 22px; height: 22px; padding: 4px; flex-shrink: 0;
   border-radius: 50%;
   background: var(--brand-tint);
   color: var(--brand-primary);
 }
-
 .landing__intro .draft-card { margin-top: var(--space-5); }
-.landing__intro .privacy-note { justify-content: flex-start; text-align: left; margin-top: var(--space-5); }
 
-.landing__pick .card__header { margin-bottom: var(--space-4); }
+/* Pilih jurusan */
+.landing__pick { padding: var(--space-5); }
+.landing__pick-head { margin-bottom: var(--space-4); }
+.landing__pick-head .card__desc { margin-top: 2px; }
+
+.landing .major-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
+.landing .major:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.landing .major {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  min-height: 100%;
+  transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+}
+.landing .major__code {
+  width: auto; height: 32px; padding: 0 10px;
+  border-radius: var(--radius-sm);
+  background: var(--brand-tint);
+  color: var(--brand-primary);
+  font-size: var(--fs-help);
+  letter-spacing: .02em;
+}
+.landing .major__name { font-size: var(--fs-help); line-height: 1.35; padding-right: 22px; }
+.landing .major__check {
+  position: absolute; top: 10px; right: 10px;
+  width: 22px; height: 22px; padding: 4px;
+  border-radius: 50%;
+  background: var(--brand-primary); color: var(--text-on-brand);
+  opacity: 0; transform: scale(.5);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-base) cubic-bezier(.3, 1.4, .5, 1);
+}
+.landing .major:has(input:checked) { border-color: var(--brand-primary); background: var(--brand-tint); box-shadow: 0 0 0 1px var(--brand-primary) inset; }
+.landing .major:has(input:checked) .major__code { background: var(--brand-primary); color: var(--text-on-brand); }
+.landing .major:has(input:checked) .major__check { opacity: 1; transform: none; }
+@media (hover: hover) {
+  .landing .major:hover { border-color: var(--brand-border); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+}
 
 .landing-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
+  flex-direction: column-reverse;   /* seluler: tombol utama di atas */
+  gap: var(--space-2);
   margin-top: var(--space-5);
 }
-.landing-actions .btn { flex: 1 1 auto; }
-@media (max-width: 480px) {
-  .landing-actions .btn { width: 100%; }
+.landing-actions .btn { width: 100%; }
+
+.landing .app-credit { margin: 0; text-align: center; }
+
+@media (min-width: 600px) {
+  .landing__pick { padding: var(--space-6); }
+  /* 3 + 2: kotak baris terakhir melebar mengisi baris (tanpa slot kosong) */
+  .landing .major-grid { display: flex; flex-wrap: wrap; }
+  .landing .major { flex: 1 1 180px; min-height: 0; }
+  .landing .major:last-child:nth-child(odd) { grid-column: auto; }
+  .landing-actions { flex-direction: row; justify-content: flex-end; }
+  .landing-actions .btn { width: auto; }
+  .landing-actions .btn--primary { min-width: 240px; }
 }
 
-@media (min-width: 900px) {
-  /* Seluruh halaman awal muat satu layar: konten di tengah secara vertikal */
-  .is-landing .workspace {
-    display: flex;
-    align-items: center;
-    min-height: calc(100vh - var(--header-height));
-    padding: var(--space-6) var(--space-8);
-  }
-  .is-landing .workspace__inner { width: 100%; max-width: 1080px; }
+@media (min-width: 880px) {
+  .is-landing .workspace { padding: var(--space-8) var(--space-8) var(--space-6); }
+  .is-landing .workspace__inner { width: 100%; max-width: 1160px; }
 
-  .landing {
+  .landing { gap: var(--space-6); padding: 0; }
+  .landing__hero {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 470px);
-    gap: var(--space-12);
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
     align-items: center;
-    padding: 0;
+    gap: var(--space-10);
   }
-  .landing__intro .hero__title { font-size: clamp(1.75rem, 1rem + 1.6vw, 2.4rem); }
+  .landing__hero .hero-stage { order: 0; }
 
-  /* Jurusan satu kolom ringkas */
-  .landing__pick .major-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-2); }
-  .landing__pick .major { padding: var(--space-2) var(--space-3); }
-  .landing__pick .major__code { width: 40px; height: 40px; }
+  .landing__pick-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+  .landing .major-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .landing .major { padding: var(--space-4); }
+  .landing .major__name { font-size: var(--fs-label); }
 }
 
-/* Layar laptop pendek: perkecil elemen agar tetap tanpa scroll */
-@media (min-width: 900px) and (max-height: 700px) {
-  .is-landing .workspace { padding-top: var(--space-4); padding-bottom: var(--space-4); }
-  .landing__intro .hero__logo { width: 52px; height: 52px; margin-bottom: var(--space-3); }
-  .landing__intro .hero__title { font-size: 1.75rem; }
+@media (min-width: 880px) and (max-height: 760px) {
+  .landing__title { font-size: clamp(2rem, 1.2rem + 2vw, 2.8rem); }
   .landing__points { margin-top: var(--space-4); }
-  .landing__intro .draft-card { margin-top: var(--space-4); padding: var(--space-3) var(--space-4); }
-  .landing__intro .privacy-note { margin-top: var(--space-4); }
-  .landing__pick { padding: var(--space-5); }
-  .landing__pick .card__desc { display: none; }
-  .landing__pick .card__header { margin-bottom: var(--space-3); }
-  .landing__pick .major__code { width: 34px; height: 34px; }
-  .landing-actions { margin-top: var(--space-4); }
-  .landing-actions .btn--lg { min-height: 44px; }
-}
-/* Layar sangat pendek + ada draft: kartu "Lanjutkan Draft" lebih penting dari poin keunggulan */
-@media (min-width: 900px) and (max-height: 660px) {
-  .landing__intro:has(.draft-card:not([hidden])) .landing__points { display: none; }
-  .landing__intro .hero__lead { font-size: var(--fs-label); }
 }
 
 .privacy-note {

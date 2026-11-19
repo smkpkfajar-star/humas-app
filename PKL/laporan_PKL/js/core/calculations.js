@@ -27,6 +27,16 @@
     return withDay ? HARI[d.getDay()] + ', ' + s : s;
   }
 
+  /** Jarak tanggal pengesahan dari hari laporan dibuat (hari kalender). */
+  var APPROVAL_OFFSET_DAYS = 2;
+
+  /** Tanggal pengesahan otomatis (ISO): tanggal generate + 2 hari. `now` opsional (uji). */
+  function approvalDate(now) {
+    var d = now ? new Date(now.getTime()) : new Date();
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + APPROVAL_OFFSET_DAYS, 12);
+    return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate());
+  }
+
   function daysBetween(a, b) {
     return Math.round((Date.UTC(b.getFullYear(), b.getMonth(), b.getDate()) -
                        Date.UTC(a.getFullYear(), a.getMonth(), a.getDate())) / 86400000);
@@ -256,6 +266,8 @@
     describeDays: describeDays,
     parseISO: parseISO,
     formatDate: formatDate,
+    approvalDate: approvalDate,
+    APPROVAL_OFFSET_DAYS: APPROVAL_OFFSET_DAYS,
     duration: duration,
     toDays: toDays,
     attendance: attendance,

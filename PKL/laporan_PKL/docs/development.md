@@ -43,7 +43,8 @@ pkl-report-generator/
 │   │   ├── calculations.js             # Hitung durasi PKL, penomoran otomatis, & presensi (fungsi murni)
 │   │   ├── completeness.js             # Persentase kelengkapan, status langkah, checklist, tanda *
 │   │   ├── csv-importer.js             # Parser CSV jurnal (Lampiran 2): deteksi , ; Tab, UTF-8/ANSI, RFC 4180
-│   │   └── docx-generator.js           # buildData() + muat templat (fetch / cache) + render + gambar
+│   │   ├── docx-generator.js           # buildData() + muat templat (fetch / cache) + render + gambar + isi Daftar Isi
+│   │   └── page-layout.js              # .docx hasil render → halaman A4 (PDF & nomor Daftar Isi)
 │   ├── wizard/
 │   │   ├── steps.js                    # Definisi 7 langkah (judul, sub-bab)
 │   │   ├── step-renderer.js            # Navigasi langkah, tampil/sembunyi view, progres
@@ -52,7 +53,8 @@ pkl-report-generator/
 │   │   ├── dialog.js                   # Dialog pilihan <dialog> native (mis. Tambahkan / Ganti Semua)
 │   │   ├── writing-guides.js           # Memasang panduan & contoh penulisan sesuai jurusan
 │   │   ├── image-slots.js              # Dropzone → kompres → IndexedDB → pratinjau; GC gambar yatim
-│   │   ├── generate-panel.js           # Tombol Generate, status, pemilih templat (fallback file://)
+│   │   ├── generate-panel.js           # Tombol Generate .docx & Pratinjau PDF, status, pemilih templat
+│   │   ├── pdf-preview.js              # Overlay pratinjau PDF + Simpan sebagai PDF (dialog cetak)
 │   │   ├── auto-rows.js                # Jurnal & Presensi otomatis dari tanggal PKL + Hari Kerja
 │   │   ├── word-count.js               # Penghitung kata + saran panjang minimal isian narasi
 │   │   └── repeater.js                 # Komponen tabel dinamis (+ Tambah / Hapus baris)
@@ -92,8 +94,8 @@ pkl-report-generator/
 Pada `Template_Laporan_PKL_Otomatis_v12.docx`, setiap tabel dinamis cukup memiliki 1 baris isi: `{#list_kompetensi}{no} | {kompetensi} | {target} | {ketercapaian}{/list_kompetensi}`. Docxtemplater otomatis mengulang seluruh baris tabel. Di dalam loop, field ditulis tanpa awalan (`{no}`, bukan `{item.no}`).
 * Sebelum memanggil `doc.render(data)`, `docx-generator.js` memastikan setiap array (`list_kompetensi`, `list_peralatan`, `list_kendala`, `list_jurnal`, `list_presensi_bulanan`, `list_dokumentasi`) memiliki minimal 1 objek (jika siswa mengosongkannya, diisi 1 baris default berisi tanda `"-"`) agar tabel Word tidak berantakan.
 
-### D. Pembaruan Nomor Halaman Daftar Isi
-Karena JavaScript di browser tidak menjalankan mesin tata letak Microsoft Word, nomor halaman pada Daftar Isi di dalam templat `.docx` akan diperbarui secara instan oleh siswa saat membuka file hasil unduhan di Microsoft Word / LibreOffice Writer menggunakan pintasan **Ctrl + A** lalu menekan **F9** (*Update Field*). Panduan visual 2 langkah ini ditampilkan jelas di **Scene 9 (Langkah 7)**.
+### D. Nomor Halaman Daftar Isi & PDF
+Browser tidak menjalankan mesin tata letak Word, jadi aplikasi punya penata halaman sendiri (`js/core/page-layout.js`, lihat bagian 9). Saat **Generate .docx**, dokumen ditata ke halaman A4 di wadah tersembunyi, lalu hasil field `PAGEREF` di Daftar Isi diisi nomor halamannya, sehingga Daftar Isi sudah terisi walau dibuka di WPS, Google Docs, atau penampil HP. Word tetap menawarkan pembaruan field saat file dibuka (`updateFields`); **Ctrl + A → F9** tetap berlaku sebagai cadangan. Tata letak yang sama dipakai untuk **Pratinjau & Simpan PDF**.
 
 ---
 
@@ -227,3 +229,33 @@ Uji: `fitur-test.js` (25 cek).
 - Semua animasi mati otomatis bila sistem diset "kurangi gerakan" (`prefers-reduced-motion`).
 
 Uji: `interaksi-test.js` (16 cek); uji lama memakai `auto-dialog.js` sebagai pengganti `page.on('dialog')`.
+
+## 9. PDF, Daftar Isi Otomatis, & Pemotongan Halaman (v12 revisi 7)
+
+**Pemotongan halaman di templat** (`fix_page_flow()` di `tools/tidy_template.py`):
+
+| Masalah | Perbaikan |
+| :--- | :--- |
+| Halaman kosong sebelum BAB/Lampiran (paragraf kosong berisi *page break* terdorong sendirian ke halaman baru) | Paragraf itu dihapus; judulnya diberi **Page break before** |
+| Tanda tangan pengesahan terpisah dari "Mengetahui, Kepala Sekolah" | "Disahkan di …", tabel tanda tangan, dan blok Kepala Sekolah *keep with next* |
+| Tanda tangan Kata Pengantar sendirian di halaman baru | Paragraf sebelumnya *keep with next* |
+| Tabel kecil terbelah (Tabel 3.1, identitas, Lampiran 1, presensi + persentase) | Seluruh baris *keep with next* |
+| Gambar besar memakan ruang 1,5× (spasi 1,5) | Paragraf gambar spasi tunggal |
+
+Baris tabel sudah *cantSplit* dan baris judul tabel berulang (*tblHeader*) sejak revisi sebelumnya. Tinggi tampil scan Lampiran 6 dibatasi 700 px saat generate (`SCAN_MAX_H`) agar judul Lampiran 6 + scan muat satu halaman.
+
+**Penata halaman** (`PKL.pageLayout.layout(zip, host)`): mengubah `word/document.xml` hasil render menjadi HTML (paragraf, run, tab Daftar Isi bertitik, daftar menggantung, tabel, gambar, field PAGEREF, section & footer), mengukur tiap blok di wadah tersembunyi, lalu memotong ke halaman A4 dengan aturan Word: *keep with next*, *keep lines together*, *page break before*, baris tabel tidak terbelah + judul berulang, kontrol baris janda/yatim 2 baris, dan spasi-sebelum dihapus di awal halaman. Penomoran halaman mengikuti `pgNumType` tiap section (romawi i–v, angka mulai BAB I). Satuan: 1 twip = 1/15 px @96 dpi; tinggi 1 baris = 1,15 × ukuran font (Arial).
+
+* **Font:** Arial; bila tidak ada (Android), dipakai **Arimo** (metrik identik) dari `vendor/fonts/arimo.css` (base64, aman di `file://`). Hasil sama di semua perangkat.
+* **PDF:** overlay pratinjau → tombol *Simpan sebagai PDF* memanggil `window.print()`; CSS cetak (`css/print-view.css`) menyembunyikan aplikasi, `@page { size: A4; margin: 0 }`. Siswa memilih tujuan **Simpan sebagai PDF**. Judul dokumen diganti sementara dengan nama file agar nama PDF bawaan sesuai.
+* **Batasan:** nomor Daftar Isi dihitung oleh penata halaman aplikasi, bukan oleh Word. Di Word bisa berbeda ±1 halaman pada kasus tertentu; Word menawarkan pembaruan field saat file dibuka. PDF selalu cocok dengan Daftar Isi-nya sendiri.
+* **Format .doc (Word 97–2003):** tidak dibuat di browser. Format biner `.doc` tidak bisa ditulis oleh library JavaScript yang ada; `.doc` berbasis HTML justru merusak tata letak templat. Bila perlu `.doc`, buka `.docx` di Word → *Save As* → *Word 97-2003 Document*.
+
+
+## 10. Karakter Animasi di Home
+
+* **Sumber aset:** `assets/siswa/*.svg` di akar repo (dibuat tim DKV). Yang dipakai di Home: `siswa-melambai.svg` & `siswi-laptop.svg`.
+* **Build:** `python tools/build-karakter.py` → `js/data/karakter-svg.js`. Jalankan ulang bila SVG diubah. SVG disematkan sebagai string JS (aman di `file://`), setiap ID diberi awalan (`kw-`, `kl-`) karena kedua karakter memakai ID yang sama, dan `transform` pose bawaan dipindah ke grup dalam agar tidak tertimpa animasi CSS.
+* **Animasi** (`css/hero-stage.css`): muncul bergantian sekali, lalu bernapas, berkedip, melambai tiap 7 detik, badge dokumen melayang. Titik putar mengikuti panduan di tiap file SVG (`transform-box: view-box`).
+* **Interaksi** (`js/wizard/hero-stage.js`): pupil mengikuti kursor/sentuhan (maks. 3 satuan SVG); melompat kecil saat memilih kompetensi keahlian.
+* **Kurangi gerakan:** semua animasi mati bila sistem meminta *reduce motion*.
