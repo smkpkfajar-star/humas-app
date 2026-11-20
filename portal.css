@@ -242,10 +242,23 @@ a.app:focus-visible { outline: 3px solid var(--c); outline-offset: 3px; }
 a.app:hover .app__foot svg { transform: translateX(3px); }
 
 /* Belum tersedia: warna tetap terlihat, tapi lebih redup */
-.app--off { box-shadow: none; }
-.app--off .app__band { filter: saturate(.55); opacity: .85; }
-.app--off .app__body { opacity: .75; }
-.app--off .app__foot { color: var(--text-2); font-weight: 600; }
+/* Belum rilis: tidak bisa diklik, tampil abu-abu & kalem agar tidak mencolok */
+.app--off {
+  background: transparent; border: 1px dashed var(--border); box-shadow: none;
+  cursor: not-allowed; user-select: none;
+}
+.app--off .app__band { background: #EEF1EF; color: #7B8794; padding-top: 14px; padding-bottom: 12px; }
+.app--off .app__band::after { display: none; }
+.app--off .app__icon { width: 40px; height: 40px; border-radius: 12px; background: #fff; border-color: var(--border); }
+.app--off .app__icon svg { width: 20px; height: 20px; }
+.app--off .app__code { font-size: 1.1rem; }
+.app--off .app__status { background: transparent; border: 1px solid #CBD2D9; color: #7B8794; font-weight: 600; }
+.app--off .app__body { padding-top: 12px; }
+.app--off .app__name { font-size: .95rem; color: var(--text-2); }
+.app--off .app__desc { color: #8A97A6; }
+.app--off .app__tags .tag { background: transparent; border-color: var(--border); color: #8A97A6; }
+.app--off .app__foot { justify-content: flex-start; gap: 6px; color: #8A97A6; font-weight: 600; font-size: .8rem; }
+.app--off .app__foot svg { width: 14px; height: 14px; }
 
 /* ---------- Langkah singkat ---------- */
 .steps { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin: 0; padding: 0; list-style: none; counter-reset: step; }
