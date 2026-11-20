@@ -14,29 +14,49 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/portal.css">
+    <link rel="stylesheet" href="/animasi.css">
 </head>
 
 <body>
     <header class="top">
         <div class="wrap top__inner">
-            <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="40" height="40">
-            <div class="top__text">
-                <p class="top__title">Layanan PKL</p>
-                <p class="top__sub">SMK Tamansiswa Jetis</p>
-            </div>
-            <a class="top__back" href="/" aria-label="Kembali ke semua aplikasi">&larr; Beranda</a>
+            <a class="top__brand" href="/" aria-label="Superapp Humas — beranda">
+                <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="40" height="40">
+                <span class="top__text">
+                    <span class="top__title">Layanan PKL</span>
+                    <span class="top__sub">SMK Tamansiswa Jetis</span>
+                </span>
+            </a>
+            <a class="top__back" href="/" aria-label="Kembali ke semua aplikasi">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Beranda</span>
+            </a>
         </div>
     </header>
 
     <main class="wrap">
+        <ol class="crumbs" aria-label="Lokasi halaman">
+            <li><a href="/">Beranda</a></li>
+            <li aria-current="page">Layanan PKL</li>
+        </ol>
+
         <section class="hero">
-            <p class="hero__eyebrow">Layanan PKL</p>
-            <h1>Praktik Kerja Lapangan</h1>
-            <p class="hero__lead">Alat bantu untuk siswa dan guru pendamping PKL.</p>
+            <div class="hero__text">
+                <p class="hero__eyebrow"><img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="">Layanan PKL</p>
+                <h1>Praktik Kerja Lapangan</h1>
+                <p class="hero__lead">Alat bantu untuk siswa dan guru pendamping PKL: susun laporan dengan mudah, rapi, dan sesuai templat sekolah.</p>
+                <ul class="hero__facts">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Tersimpan otomatis</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Data tetap di perangkatmu</li>
+                </ul>
+            </div>
+            <img class="hero__art" src="/assets/siswa/siswi-laptop.svg" alt="" width="220" height="248" data-anim="laptop">
         </section>
 
-        <section aria-labelledby="h-tools">
-            <h2 id="h-tools" class="section-title">Alat</h2>
+        <section class="section" aria-labelledby="h-tools">
+            <div class="section-head">
+                <h2 id="h-tools" class="section-title">Alat</h2>
+            </div>
             <div class="grid">
                 <a class="card" href="/PKL/laporan_PKL/">
                     <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -46,28 +66,47 @@
                         </svg></span>
                     <span class="card__body">
                         <span class="card__name">Generator Laporan PKL</span>
-                        <span class="card__desc">Isi formulir langkah demi langkah, unduh laporan .docx siap
-                            cetak.</span>
+                        <span class="card__desc">Isi formulir langkah demi langkah, lalu unduh laporan Word (.docx) atau simpan PDF yang siap cetak.</span>
+                        <span class="card__tags">
+                            <span class="tag tag--ok">Tersedia</span>
+                            <span class="tag">7 langkah</span>
+                            <span class="tag">Word &amp; PDF</span>
+                        </span>
                     </span>
-                    <span class="card__go" aria-hidden="true">&rarr;</span>
+                    <span class="card__go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                 </a>
             </div>
         </section>
+
+        <section class="section" aria-labelledby="h-steps">
+            <div class="section-head">
+                <h2 id="h-steps" class="section-title">Cara membuat laporan</h2>
+            </div>
+            <ol class="steps">
+                <li><div><strong>Pilih kompetensi keahlian</strong><span>Contoh penulisan menyesuaikan jurusanmu.</span></div></li>
+                <li><div><strong>Isi 7 langkah</strong><span>Identitas, Bab I–V, profil DUDI, dan lampiran.</span></div></li>
+                <li><div><strong>Unduh laporan</strong><span>Word atau PDF, daftar isi terisi otomatis.</span></div></li>
+            </ol>
+        </section>
     </main>
 
-    <footer class="wrap foot">
-        <div class="credit">
-            <span class="credit__label">Dibuat oleh</span>
-            <ul class="credit__list">
-                <li>Jurusan DKV</li>
-                <li>Jurusan RPL</li>
-                <li>Humas</li>
-            </ul>
+
+    <footer class="foot">
+        <div class="wrap foot__inner">
+            <div class="credit">
+                <span class="credit__label">Dibuat oleh</span>
+                <ul class="credit__list">
+                    <li>Jurusan DKV</li>
+                    <li>Jurusan RPL</li>
+                    <li>Humas</li>
+                </ul>
+            </div>
+            <p>&copy; <span id="year"></span> SMK Tamansiswa Jetis</p>
         </div>
-        <p>&copy; <span id="year"></span> SMK Tamansiswa Jetis</p>
     </footer>
 
     <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+    <script src="/animasi.js"></script>
 </body>
 
 </html>

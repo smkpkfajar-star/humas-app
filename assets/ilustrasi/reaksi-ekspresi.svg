@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 200" width="420" height="200" role="img" aria-labelledby="reaksi-title reaksi-desc">
+  <title id="reaksi-title">Stiker Reaksi Mikro untuk Karakter</title>
+  <desc id="reaksi-desc">Kumpulan 6 balon reaksi mikro (senang, semangat, ide, tanya, centang, seru) siap muncul pop-in di samping kepala karakter saat interaksi pengguna.</desc>
+  <!--
+    Grup terpisah siap pop-in (scale 0 -> 1.08 -> 1):
+    - #reaksi-senang
+    - #reaksi-semangat
+    - #reaksi-ide
+    - #reaksi-tanya
+    - #reaksi-centang
+    - #reaksi-seru
+  -->
+
+  <!-- 1. Reaksi Senang / Suka -->
+  <g id="reaksi-senang" data-part="reaction-love" transform="translate(56 54)">
+    <path d="M-28 -22 H28 C34 -22 38 -18 38 -12 V12 C38 18 34 22 28 22 H-6 L-20 32 L-16 22 H-28 C-34 22 -38 18 -38 12 V-12 C-38 -18 -34 -22 -28 -22 Z" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M0 10 C-10 3 -15 -3 -15 -9 C-15 -14 -11 -17 -7 -17 C-3.5 -17 -1 -15 0 -12.5 C1 -15 3.5 -17 7 -17 C11 -17 15 -14 15 -9 C15 -3 10 3 0 10 Z" fill="#E11D48"/>
+  </g>
+
+  <!-- 2. Reaksi Semangat / Bintang -->
+  <g id="reaksi-semangat" data-part="reaction-star" transform="translate(158 54)">
+    <path d="M-28 -22 H28 C34 -22 38 -18 38 -12 V12 C38 18 34 22 28 22 H-6 L-20 32 L-16 22 H-28 C-34 22 -38 18 -38 12 V-12 C-38 -18 -34 -22 -28 -22 Z" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M0 -14 L4 -4.5 L14 -3.8 L6.4 2.8 L8.8 12.8 L0 7.4 L-8.8 12.8 L-6.4 2.8 L-14 -3.8 L-4 -4.5 Z" fill="#F4B942" stroke="#1F2933" stroke-width="1.6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 3. Reaksi Ide / Tips -->
+  <g id="reaksi-ide" data-part="reaction-idea" transform="translate(260 54)">
+    <path d="M-28 -22 H28 C34 -22 38 -18 38 -12 V12 C38 18 34 22 28 22 H-6 L-20 32 L-16 22 H-28 C-34 22 -38 18 -38 12 V-12 C-38 -18 -34 -22 -28 -22 Z" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M-9 -3 C-9 -10 -5 -14 0 -14 C5 -14 9 -10 9 -3 C9 2 6 4 5 8 H-5 C-6 4 -9 2 -9 -3 Z" fill="#FDE68A" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="-4.5" y="8" width="9" height="4.5" rx="1.5" fill="#64748B" stroke="#1F2933" stroke-width="1.6"/>
+  </g>
+
+  <!-- 4. Reaksi Tanya -->
+  <g id="reaksi-tanya" data-part="reaction-question" transform="translate(362 54)">
+    <path d="M-28 -22 H28 C34 -22 38 -18 38 -12 V12 C38 18 34 22 28 22 H-6 L-20 32 L-16 22 H-28 C-34 22 -38 18 -38 12 V-12 C-38 -18 -34 -22 -28 -22 Z" fill="#E6F2EC" stroke="#1E6B4B" stroke-width="2.4" stroke-linejoin="round"/>
+    <text x="0" y="9" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="24" font-weight="700" fill="#1E6B4B">?</text>
+  </g>
+
+  <!-- 5. Reaksi Centang / Selesai -->
+  <g id="reaksi-centang" data-part="reaction-check" transform="translate(106 146)">
+    <path d="M-32 -22 H32 C38 -22 42 -18 42 -12 V12 C42 18 38 22 32 22 H-6 L-20 32 L-16 22 H-32 C-38 22 -42 18 -42 12 V-12 C-42 -18 -38 -22 -32 -22 Z" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M-12 1 L-4 9 L13 -8" fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 6. Reaksi Seru / Siap! -->
+  <g id="reaksi-seru" data-part="reaction-ready" transform="translate(260 146)">
+    <path d="M-46 -22 H46 C52 -22 56 -18 56 -12 V12 C56 18 52 22 46 22 H-14 L-28 32 L-24 22 H-46 C-52 22 -56 18 -56 12 V-12 C-56 -18 -52 -22 -46 -22 Z" fill="#F4B942" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    <text x="0" y="7" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="700" fill="#1F2933">Siap!</text>
+  </g>
+</svg>

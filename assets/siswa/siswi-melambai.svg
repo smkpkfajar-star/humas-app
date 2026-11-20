@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="320" height="360" role="img" aria-labelledby="siswi-wave-title siswi-wave-desc">
+  <title id="siswi-wave-title">Siswi SMK Menyapa dan Melambai</title>
+  <desc id="siswi-wave-desc">Aset vektor siswi SMK berhijab melambaikan tangan sambil membawa map laporan hijau, pasangan dari siswa-melambai.svg.</desc>
+  <!--
+    PANDUAN PIVOT (transform-origin):
+    - #lengan-kanan : 194px 186px (ayun melambai)
+    - #tangan-kanan : 230px 142px (goyang pergelangan)
+    - #kepala       : 160px 158px (angguk ramah)
+    - #garis-lambai : kedip opacity bergantian
+  -->
+  <defs>
+    <linearGradient id="skirt-fw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="hijab-fw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EDF5F0"/>
+    </linearGradient>
+    <linearGradient id="tie-fw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2A8A61"/>
+      <stop offset="100%" stop-color="#1E6B4B"/>
+    </linearGradient>
+    <clipPath id="clip-fwl">
+      <ellipse cx="142" cy="120" rx="7.5" ry="8.5"/>
+    </clipPath>
+    <clipPath id="clip-fwr">
+      <ellipse cx="178" cy="120" rx="7.5" ry="8.5"/>
+    </clipPath>
+  </defs>
+
+  <g id="bayangan" data-part="shadow">
+    <ellipse cx="160" cy="336" rx="56" ry="10" fill="#1E6B4B" opacity="0.14"/>
+  </g>
+
+  <g id="dekorasi" data-part="decorations">
+    <g id="garis-lambai" stroke="#2A8A61" stroke-width="2.6" stroke-linecap="round" fill="none">
+      <path d="M254 106 Q262 115 260 126"/>
+      <path d="M263 111 Q269 118 268 126" opacity="0.55"/>
+    </g>
+    <g id="sparkle-1" transform="translate(76 86)">
+      <path d="M0 -8 Q1.6 -1.6 8 0 Q1.6 1.6 0 8 Q-1.6 1.6 -8 0 Q-1.6 -1.6 0 -8 Z" fill="#F4B942"/>
+    </g>
+    <g id="sparkle-2" transform="translate(242 72)">
+      <path d="M0 -6 Q1.2 -1.2 6 0 Q1.2 1.2 0 6 Q-1.2 1.2 -6 0 Q-1.2 -1.2 0 -6 Z" fill="#F4B942" opacity="0.9"/>
+    </g>
+  </g>
+
+  <g id="karakter" data-part="character">
+    <g id="tas-belakang" data-part="backpack">
+      <rect x="108" y="178" width="104" height="78" rx="22" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.4"/>
+    </g>
+
+    <g id="kaki" data-part="legs">
+      <g id="kaki-kiri" data-part="leg-left">
+        <rect x="137" y="308" width="14" height="14" rx="2" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+        <path d="M153 319 H135 C125 319 121 325 121 331 C121 334 124 335 129 335 H152 C155 335 156 333 156 330 V322 C156 320 155 319 153 319 Z" fill="#1F2933"/>
+        <path d="M124 332 H154" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <g id="kaki-kanan" data-part="leg-right">
+        <rect x="169" y="308" width="14" height="14" rx="2" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+        <path d="M167 319 H185 C195 319 199 325 199 331 C199 334 196 335 191 335 H168 C165 335 164 333 164 330 V322 C164 320 165 319 167 319 Z" fill="#1F2933"/>
+        <path d="M166 332 H196" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- Lengan Kanan Panjang Terangkat Melambai -->
+    <g id="lengan-kanan" data-part="arm-right">
+      <path d="M188 180 C204 176 220 164 233 142 L244 150 C230 176 212 195 190 202 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M229 148 L240 155" stroke="#DCE2DD" stroke-width="2.2"/>
+      <g id="tangan-kanan" data-part="hand-right">
+        <path d="M231 141 C228 135 226 126 229 123 C232 120 235 126 236 130 C237 123 239 117 242 117 C245 117 245 125 244 130 C247 124 251 120 253 122 C256 124 252 132 249 136 C252 133 256 132 257 135 C258 138 252 144 247 147 C242 150 235 148 231 141 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+      </g>
+    </g>
+
+    <!-- Badan & Rok -->
+    <g id="badan" data-part="torso">
+      <path d="M132 244 H188 L199 311 C199 314 196 316 192 316 H128 C124 316 121 314 121 311 Z" fill="url(#skirt-fw)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M148 250 L144 314" stroke="#334155" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
+      <path d="M172 250 L176 314" stroke="#334155" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
+
+      <path d="M128 179 C136 174 148 172 160 172 C172 172 184 174 192 179 L189 246 H131 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <rect x="131" y="242" width="58" height="7" rx="2" fill="#1F2933"/>
+      <rect x="155" y="241" width="10" height="9" rx="2" fill="#F4B942" stroke="#1F2933" stroke-width="1.5"/>
+
+      <path d="M135 178 C132 198 131 218 133 241" fill="none" stroke="#1E6B4B" stroke-width="6.5" stroke-linecap="round"/>
+      <path d="M185 178 C188 198 189 218 187 241" fill="none" stroke="#1E6B4B" stroke-width="6.5" stroke-linecap="round"/>
+
+      <g id="dasi" data-part="tie">
+        <path d="M156 196 L164 196 L166 232 L160 239 L154 232 Z" fill="url(#tie-fw)" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M155.5 216 L164.6 211" stroke="#F4B942" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- Lengan Kiri Memeluk Map Laporan -->
+    <g id="lengan-kiri" data-part="arm-left">
+      <g id="properti" data-part="prop-folder" transform="rotate(-7 118 232)">
+        <rect x="96" y="212" width="44" height="52" rx="6" fill="#2A8A61" stroke="#1F2933" stroke-width="2.2"/>
+        <rect x="108" y="222" width="22" height="5" rx="2" fill="#FFFFFF" opacity="0.9"/>
+        <rect x="108" y="232" width="16" height="4" rx="2" fill="#E6F2EC" opacity="0.7"/>
+      </g>
+      <path d="M129 179 C116 184 109 198 109 220 C109 233 116 240 135 239 L136 223 H124 L133 190 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <ellipse cx="139" cy="231" rx="7" ry="6" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2"/>
+    </g>
+
+    <!-- Kepala & Hijab -->
+    <g id="kepala" data-part="head" transform="rotate(-3 160 158)">
+      <g id="hijab-belakang" data-part="hijab-back">
+        <path d="M110 118 C110 78 130 60 160 60 C190 60 210 78 210 118 C210 150 206 174 196 192 C185 203 173 206 160 206 C147 206 135 203 124 192 C114 174 110 150 110 118 Z" fill="url(#hijab-fw)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      </g>
+      <path d="M122 110 C122 83 137 72 160 72 C183 72 198 83 198 110 Z" fill="#1E6B4B"/>
+
+      <g id="wajah" data-part="face">
+        <path d="M122 114 C122 89 137 79 160 79 C183 79 198 89 198 114 C198 142 183 160 160 160 C137 160 122 142 122 114 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2"/>
+        <g id="pipi" data-part="cheeks" opacity="0.46">
+          <ellipse cx="133" cy="134" rx="8" ry="4.5" fill="#F08A78"/>
+          <ellipse cx="187" cy="134" rx="8" ry="4.5" fill="#F08A78"/>
+        </g>
+
+        <g id="alis" data-part="eyebrows">
+          <path id="alis-kiri" d="M134 104 Q142 99 150 103" fill="none" stroke="#1F2933" stroke-width="2.3" stroke-linecap="round"/>
+          <path id="alis-kanan" d="M170 103 Q178 99 186 104" fill="none" stroke="#1F2933" stroke-width="2.3" stroke-linecap="round"/>
+        </g>
+
+        <g id="mata" data-part="eyes">
+          <g id="mata-kiri" data-part="eye-left">
+            <ellipse cx="142" cy="120" rx="7.5" ry="8.5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+            <path d="M135 115 L132 113" stroke="#1F2933" stroke-width="2" stroke-linecap="round"/>
+            <g id="pupil-kiri" data-part="pupil-left" clip-path="url(#clip-fwl)">
+              <circle cx="143.5" cy="120" r="4.6" fill="#1F2933"/>
+              <circle cx="145.3" cy="117.7" r="1.7" fill="#FFFFFF"/>
+            </g>
+          </g>
+          <g id="mata-kanan" data-part="eye-right">
+            <ellipse cx="178" cy="120" rx="7.5" ry="8.5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+            <path d="M185 115 L188 113" stroke="#1F2933" stroke-width="2" stroke-linecap="round"/>
+            <g id="pupil-kanan" data-part="pupil-right" clip-path="url(#clip-fwr)">
+              <circle cx="179.5" cy="120" r="4.6" fill="#1F2933"/>
+              <circle cx="181.3" cy="117.7" r="1.7" fill="#FFFFFF"/>
+            </g>
+          </g>
+        </g>
+
+        <g id="kelopak" data-part="eyelids" opacity="0">
+          <ellipse cx="142" cy="120" rx="8.5" ry="9.5" fill="#F3C39A"/>
+          <path d="M134 121 Q142 126 150 121" fill="none" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round"/>
+          <ellipse cx="178" cy="120" rx="8.5" ry="9.5" fill="#F3C39A"/>
+          <path d="M170 121 Q178 126 186 121" fill="none" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+
+        <path id="hidung" d="M159 126 Q162 130 158 132" fill="none" stroke="#C98D62" stroke-width="2" stroke-linecap="round"/>
+
+        <g id="mulut" data-part="mouth">
+          <path d="M148 139 Q160 153 172 139 Z" fill="#C94B57" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+          <path d="M151 140.5 H169" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="hijab-depan" data-part="hijab-front">
+        <path d="M123 145 C132 162 146 168 160 168 C174 168 188 162 197 145 C200 164 195 182 184 193 C174 201 167 204 160 204 C153 204 146 201 136 193 C125 182 120 164 123 145 Z" fill="url(#hijab-fw)" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M134 176 Q160 190 186 176" fill="none" stroke="#C5D8CE" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="160" cy="168" r="4.5" fill="#1E6B4B" stroke="#1F2933" stroke-width="1.6"/>
+        <circle cx="160" cy="168" r="1.8" fill="#F4B942"/>
+      </g>
+    </g>
+  </g>
+</svg>

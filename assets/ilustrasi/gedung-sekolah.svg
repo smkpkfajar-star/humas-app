@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300" role="img" aria-labelledby="gedung-title gedung-desc">
+  <title id="gedung-title">Ilustrasi Gedung Sekolah SMK Interaktif</title>
+  <desc id="gedung-desc">Ilustrasi vektor gedung sekolah SMK dengan layer terpisah (awan, matahari, bendera berkibar, gedung utama, jendela, dan pepohonan) siap untuk animasi parallax dan ambient.</desc>
+  <!--
+    PANDUAN LAYER ANIMASI:
+    - #matahari     : 540px 64px (putar pelan / pulse cahaya)
+    - #awan-1       : geser horizontal lambat (drift)
+    - #awan-2       : geser horizontal lebih lambat (parallax)
+    - #bendera      : 102px 104px (animasi berkibar skewY / scaleX)
+    - #pohon-kiri   : 66px 258px (bergoyang tertiup angin)
+    - #pohon-kanan  : 570px 258px (bergoyang tertiup angin)
+    - #jendela      : highlight menyala saat hover
+  -->
+  <defs>
+    <linearGradient id="atap-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2A8A61"/>
+      <stop offset="100%" stop-color="#1E6B4B"/>
+    </linearGradient>
+    <linearGradient id="dinding-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F5F2"/>
+    </linearGradient>
+    <linearGradient id="kaca-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E6F2EC"/>
+      <stop offset="100%" stop-color="#B7D8C8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Matahari -->
+  <g id="matahari" data-part="sun" transform="translate(544 62)">
+    <circle cx="0" cy="0" r="24" fill="#FDE68A" opacity="0.55"/>
+    <circle cx="0" cy="0" r="16" fill="#F4B942" stroke="#1F2933" stroke-width="2"/>
+  </g>
+
+  <!-- Awan 1 & 2 (untuk parallax / drift) -->
+  <g id="awan-1" data-part="cloud-1" transform="translate(116 44)">
+    <path d="M12 24 H66 C73 24 78 19 78 13 C78 7 73 3 67 3 C65 -3 58 -7 50 -7 C41 -7 34 -1 32 7 C29 5 25 4 21 4 C13 4 6 10 6 17 C6 21 9 24 12 24 Z" fill="#FFFFFF" stroke="#DCE2DD" stroke-width="2"/>
+  </g>
+  <g id="awan-2" data-part="cloud-2" transform="translate(396 36)">
+    <path d="M10 20 H54 C60 20 64 16 64 11 C64 6 60 2 55 2 C53 -3 47 -6 41 -6 C33 -6 27 -1 26 6 C23 4 20 3 17 3 C10 3 5 8 5 14 C5 18 7 20 10 20 Z" fill="#FFFFFF" stroke="#DCE2DD" stroke-width="2"/>
+  </g>
+
+  <!-- Tanah / Lapangan -->
+  <g id="tanah" data-part="ground">
+    <path d="M24 264 H616" stroke="#1E6B4B" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="320" cy="274" rx="260" ry="12" fill="#E6F2EC"/>
+  </g>
+
+  <!-- Tiang & Bendera Merah Putih -->
+  <g id="tiang-bendera" data-part="flagpole">
+    <rect x="96" y="252" width="12" height="12" rx="2" fill="#CBD5E1" stroke="#1F2933" stroke-width="2"/>
+    <path d="M102 100 V252" stroke="#475569" stroke-width="3.2" stroke-linecap="round"/>
+    <circle cx="102" cy="98" r="4" fill="#F4B942" stroke="#1F2933" stroke-width="1.8"/>
+    <g id="bendera" data-part="flag">
+      <path d="M104 104 Q118 100 132 104 Q142 107 150 104 V116 Q142 119 132 116 Q118 112 104 116 Z" fill="#DC2626" stroke="#1F2933" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M104 116 Q118 112 132 116 Q142 119 150 116 V128 Q142 131 132 128 Q118 124 104 128 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="1.8" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Gedung Utama Sekolah -->
+  <g id="gedung" data-part="building">
+    <!-- Sayap Kiri -->
+    <rect x="148" y="156" width="112" height="108" rx="4" fill="url(#dinding-grad)" stroke="#1F2933" stroke-width="2.4"/>
+    <path d="M138 156 L158 124 H260 V156 Z" fill="url(#atap-grad)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+
+    <!-- Sayap Kanan -->
+    <rect x="380" y="156" width="112" height="108" rx="4" fill="url(#dinding-grad)" stroke="#1F2933" stroke-width="2.4"/>
+    <path d="M502 156 L482 124 H380 V156 Z" fill="url(#atap-grad)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+
+    <!-- Bagian Tengah / Lobi Utama -->
+    <rect x="252" y="128" width="136" height="136" rx="4" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4"/>
+    <!-- Atap Segitiga Utama -->
+    <path d="M238 130 L320 74 L402 130 Z" fill="url(#atap-grad)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M256 126 L320 84 L384 126 Z" fill="#165239" opacity="0.35"/>
+
+    <!-- Jam / Emblem Sekolah di Puncak -->
+    <circle cx="320" cy="108" r="12" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+    <circle cx="320" cy="108" r="8" fill="#E6F2EC"/>
+    <path d="M320 103 V108 L324 110" fill="none" stroke="#1E6B4B" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Papan Nama Sekolah -->
+    <rect x="272" y="138" width="96" height="20" rx="4" fill="#1E6B4B" stroke="#1F2933" stroke-width="2"/>
+    <rect x="284" y="146" width="72" height="4" rx="2" fill="#F4B942"/>
+
+    <!-- Jendela (terpisah untuk efek hover glow) -->
+    <g id="jendela" data-part="windows">
+      <!-- Kiri atas & bawah -->
+      <rect x="166" y="172" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M180 172 V198 M166 185 H194" stroke="#1F2933" stroke-width="1.6"/>
+      <rect x="208" y="172" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M222 172 V198 M208 185 H236" stroke="#1F2933" stroke-width="1.6"/>
+      <rect x="166" y="214" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M180 214 V240 M166 227 H194" stroke="#1F2933" stroke-width="1.6"/>
+      <rect x="208" y="214" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M222 214 V240 M208 227 H236" stroke="#1F2933" stroke-width="1.6"/>
+
+      <!-- Kanan atas & bawah -->
+      <rect x="404" y="172" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M418 172 V198 M404 185 H432" stroke="#1F2933" stroke-width="1.6"/>
+      <rect x="446" y="172" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M460 172 V198 M446 185 H474" stroke="#1F2933" stroke-width="1.6"/>
+      <rect x="404" y="214" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M418 214 V240 M404 227 H432" stroke="#1F2933" stroke-width="1.6"/>
+      <rect x="446" y="214" width="28" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <path d="M460 214 V240 M446 227 H474" stroke="#1F2933" stroke-width="1.6"/>
+
+      <!-- Jendela Tengah Atas -->
+      <rect x="274" y="170" width="24" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+      <rect x="342" y="170" width="24" height="26" rx="4" fill="url(#kaca-grad)" stroke="#1F2933" stroke-width="2"/>
+    </g>
+
+    <!-- Pintu Masuk Utama -->
+    <g id="pintu" data-part="entrance">
+      <path d="M298 264 V216 C298 206 307 198 320 198 C333 198 342 206 342 216 V264 Z" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.4"/>
+      <path d="M320 198 V264" stroke="#1F2933" stroke-width="2"/>
+      <circle cx="314" cy="236" r="2.2" fill="#F4B942"/>
+      <circle cx="326" cy="236" r="2.2" fill="#F4B942"/>
+      <!-- Tangga kecil -->
+      <rect x="288" y="256" width="64" height="8" rx="2" fill="#E2E8F0" stroke="#1F2933" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- Pohon Kiri (pivot: 66px 262px) -->
+  <g id="pohon-kiri" data-part="tree-left">
+    <rect x="61" y="220" width="10" height="44" rx="3" fill="#8B5E3C" stroke="#1F2933" stroke-width="2"/>
+    <circle cx="66" cy="196" r="28" fill="#2A8A61" stroke="#1F2933" stroke-width="2.4"/>
+    <circle cx="50" cy="212" r="18" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.2"/>
+    <circle cx="82" cy="212" r="18" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.2"/>
+    <circle cx="60" cy="186" r="8" fill="#E6F2EC" opacity="0.22"/>
+  </g>
+
+  <!-- Pohon Kanan (pivot: 564px 262px) -->
+  <g id="pohon-kanan" data-part="tree-right">
+    <rect x="559" y="224" width="10" height="40" rx="3" fill="#8B5E3C" stroke="#1F2933" stroke-width="2"/>
+    <circle cx="564" cy="202" r="26" fill="#2A8A61" stroke="#1F2933" stroke-width="2.4"/>
+    <circle cx="548" cy="216" r="16" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.2"/>
+    <circle cx="580" cy="216" r="16" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.2"/>
+    <circle cx="558" cy="192" r="7" fill="#E6F2EC" opacity="0.22"/>
+  </g>
+
+  <!-- Semak Depan -->
+  <g id="semak" data-part="bushes">
+    <path d="M124 264 C124 252 136 248 144 254 C150 246 164 248 168 258 C174 254 182 258 182 264 Z" fill="#2A8A61" stroke="#1F2933" stroke-width="2"/>
+    <path d="M466 264 C466 254 476 250 484 256 C490 247 506 248 510 258 C518 254 526 258 526 264 Z" fill="#2A8A61" stroke="#1F2933" stroke-width="2"/>
+  </g>
+</svg>

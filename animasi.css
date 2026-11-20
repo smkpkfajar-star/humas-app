@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Animasi karakter (pasangan animasi.js) — sengaja dibuat tenang & sederhana.
+   Selektor memakai data-k="<id asli di file SVG>"; titik putar mengikuti
+   assets/README.md (satuan viewBox, berkat transform-box: view-box).
+   ========================================================================== */
+
+.anim { display: block; position: relative; }
+.anim__svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.anim [data-k] { transform-box: view-box; }
+.anim.is-paused, .anim.is-paused * { animation-play-state: paused !important; }
+.anim-pupil { transition: transform .2s ease-out; }
+
+/* ---------- Semua karakter ---------- */
+.anim { animation: a-masuk .6s ease-out both; }
+.anim [data-k="karakter"] { transform-origin: 160px 330px; animation: a-napas 4.5s ease-in-out infinite; }
+.anim [data-k="kelopak"] { animation: a-kedip 5.5s steps(1, end) infinite; }
+
+/* ---------- Melambai: sesekali menyapa ---------- */
+.anim--melambai [data-k="lengan-kanan"] { transform-origin: 194px 186px; animation: a-lambai 8s ease-in-out 1s infinite; }
+.anim--melambai [data-k="tangan-kanan"] { transform-origin: 230px 142px; animation: a-pergelangan 8s ease-in-out 1s infinite; }
+
+/* ---------- Laptop & berpikir: properti melayang pelan ---------- */
+.anim--laptop [data-k="badge-dokumen"],
+.anim--berpikir [data-k="badge-ide"] { animation: a-melayang 3.5s ease-in-out infinite alternate; }
+
+/* ---------- Sukses: pantulan kecil ---------- */
+.anim--sukses [data-k="karakter"] { animation: a-pantul 2.8s ease-in-out infinite; }
+
+/* ---------- Keyframes ---------- */
+@keyframes a-masuk { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes a-napas { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.012); } }
+@keyframes a-kedip { 0%, 96%, 100% { opacity: 0; } 96.5%, 98.5% { opacity: 1; } }
+@keyframes a-melayang { from { transform: translateY(0); } to { transform: translateY(-5px); } }
+@keyframes a-pantul { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-5px); } }
+@keyframes a-lambai { 0%, 24%, 100% { transform: rotate(0); } 4%, 12% { transform: rotate(-9deg); } 8%, 16% { transform: rotate(10deg); } 20% { transform: rotate(-3deg); } }
+@keyframes a-pergelangan { 0%, 24%, 100% { transform: rotate(0); } 6%, 14% { transform: rotate(7deg); } 10%, 18% { transform: rotate(-5deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim, .anim * { animation: none !important; transition: none !important; }
+}

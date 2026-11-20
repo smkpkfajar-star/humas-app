@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Tracer Study — Superapp Humas</title>
+    <meta name="description" content="Tracer Study alumni SMK Tamansiswa Jetis.">
+    <meta name="theme-color" content="#A8520E">
+    <meta name="color-scheme" content="only light">
+    <link rel="icon" href="/PKL/laporan_PKL/assets/logo-sekolah.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="/portal.css">
+    <link rel="stylesheet" href="/animasi.css">
+    <!-- Wajib login: belum masuk -> dialihkan ke /Tracer/masuk/ sebelum halaman tampil -->
+    <script src="/auth.js"></script>
+    <script>var AUTH = buatAuth({ kode: 'Tracer', dasar: '/Tracer/' }); AUTH.wajibMasuk();</script>
+</head>
+
+<body class="tema-oranye">
+    <header class="top">
+        <div class="wrap top__inner">
+            <a class="top__brand" href="/" aria-label="Superapp Humas — beranda">
+                <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="40" height="40">
+                <span class="top__text">
+                    <span class="top__title">Tracer Study</span>
+                    <span class="top__sub">SMK Tamansiswa Jetis</span>
+                </span>
+            </a>
+            <div class="user-chip" id="user-chip" hidden>
+                <span class="user-chip__avatar" data-user-initial aria-hidden="true">?</span>
+                <span class="user-chip__text">
+                    <span class="user-chip__name" data-user-name>—</span>
+                    <span class="user-chip__role" data-user-role>—</span>
+                </span>
+                <button type="button" class="btn-out" data-action="keluar" aria-label="Keluar dari Tracer Study">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                    <span>Keluar</span>
+                </button>
+            </div>
+            <a class="top__back" href="/" aria-label="Kembali ke semua aplikasi">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>Beranda</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <ol class="crumbs" aria-label="Lokasi halaman">
+            <li><a href="/">Beranda</a></li>
+            <li aria-current="page">Tracer Study</li>
+        </ol>
+
+        <section class="hero">
+            <div class="hero__text">
+                <p class="hero__eyebrow"><img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="">Tracer Study</p>
+                <h1>Tracer Study Alumni</h1>
+                <p class="hero__lead">Membantu sekolah menelusuri jejak alumni setelah lulus: bekerja, kuliah, atau berwirausaha.</p>
+                <ul class="hero__facts">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Untuk alumni</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Bisa di HP &amp; laptop</li>
+                </ul>
+            </div>
+            <img class="hero__art" src="/assets/siswa/siswi-sukses.svg" alt="" width="220" height="248" data-anim="sukses">
+        </section>
+
+        <div class="notice" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <div>
+                <strong>Layanan ini sedang disiapkan</strong>
+                <p>Kuesioner Tracer Study masih dalam pengembangan. Informasi lebih lanjut akan disampaikan melalui Humas.</p>
+            </div>
+        </div>
+
+        <section class="section" aria-labelledby="h-tools">
+            <div class="section-head">
+                <h2 id="h-tools" class="section-title">Alat</h2>
+                <p class="section-note">Segera hadir</p>
+            </div>
+            <div class="grid">
+                <div class="card card--off" aria-disabled="true">
+                    <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h6"/></svg></span>
+                    <span class="card__body">
+                        <span class="card__name">Kuesioner Alumni</span>
+                        <span class="card__desc">Isi kuesioner singkat tentang kegiatanmu setelah lulus dari SMK Tamansiswa Jetis.</span>
+                        <span class="card__tags"><span class="tag">Segera hadir</span><span class="tag">Alumni</span></span>
+                    </span>
+                </div>
+                <div class="card card--off" aria-disabled="true">
+                    <span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16v-4M12 16V8M17 16v-7"/></svg></span>
+                    <span class="card__body">
+                        <span class="card__name">Rekap Tracer Study</span>
+                        <span class="card__desc">Ringkasan data alumni untuk kebutuhan sekolah dan Humas.</span>
+                        <span class="card__tags"><span class="tag">Segera hadir</span><span class="tag">Humas</span></span>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="h-steps">
+            <div class="section-head">
+                <h2 id="h-steps" class="section-title">Cara kerja nantinya</h2>
+                <p class="section-note">Rencana</p>
+            </div>
+            <ol class="steps steps--plan">
+                <li><div><strong>Buka kuesioner</strong><span>Alumni membuka tautan dari Humas atau grup angkatan.</span></div></li>
+                <li><div><strong>Isi status setelah lulus</strong><span>Bekerja, kuliah, berwirausaha, atau lainnya.</span></div></li>
+                <li><div><strong>Data direkap</strong><span>Sekolah memakai rekap untuk evaluasi dan kerja sama industri.</span></div></li>
+            </ol>
+        </section>
+    </main>
+
+
+    <footer class="foot">
+        <div class="wrap foot__inner">
+            <div class="credit">
+                <span class="credit__label">Dibuat oleh</span>
+                <ul class="credit__list">
+                    <li>Jurusan DKV</li>
+                    <li>Jurusan RPL</li>
+                    <li>Humas</li>
+                </ul>
+            </div>
+            <p>&copy; <span id="year"></span> SMK Tamansiswa Jetis</p>
+        </div>
+    </footer>
+
+    <script src="/animasi.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        AUTH.pasangKartuPengguna({ alumni: 'Alumni', humas: 'Petugas Humas' });
+    </script>
+</body>
+
+</html>

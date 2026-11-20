@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 260" width="880" height="260" preserveAspectRatio="xMidYMid slice" role="img" aria-labelledby="pola-title pola-desc">
+  <title id="pola-title">Pola Dekorasi Latar Hero Parallax</title>
+  <desc id="pola-desc">Aset dekorasi latar transparan 3 lapis (belakang, tengah, depan) untuk efek mouse-parallax dan gerak ambient lembut di banner hero hijau SMK.</desc>
+  <!--
+    PANDUAN PARALLAX 3 LAPIS (gerakkan dengan kecepatan berbeda saat mousemove/scroll):
+    - #layer-belakang : gerak paling lambat (misal 0.3x)
+    - #layer-tengah   : gerak sedang (misal 0.6x)
+    - #layer-depan    : gerak paling responsif (misal 1.0x)
+  -->
+
+  <!-- Layer Belakang: lengkung organik & lingkaran besar lembut -->
+  <g id="layer-belakang" data-depth="0.3">
+    <circle cx="770" cy="40" r="140" fill="#FFFFFF" opacity="0.06"/>
+    <circle cx="110" cy="230" r="110" fill="#FFFFFF" opacity="0.05"/>
+    <path d="M-20 220 Q220 140 460 200 T900 130" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.12"/>
+    <path d="M-20 242 Q260 164 500 224 T900 158" fill="none" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.1"/>
+  </g>
+
+  <!-- Layer Tengah: pola titik & bentuk geometris halus -->
+  <g id="layer-tengah" data-depth="0.6">
+    <!-- Grid titik kanan atas -->
+    <g fill="#FFFFFF" opacity="0.18">
+      <circle cx="640" cy="40" r="2.5"/><circle cx="660" cy="40" r="2.5"/><circle cx="680" cy="40" r="2.5"/><circle cx="700" cy="40" r="2.5"/>
+      <circle cx="640" cy="60" r="2.5"/><circle cx="660" cy="60" r="2.5"/><circle cx="680" cy="60" r="2.5"/><circle cx="700" cy="60" r="2.5"/>
+      <circle cx="640" cy="80" r="2.5"/><circle cx="660" cy="80" r="2.5"/><circle cx="680" cy="80" r="2.5"/><circle cx="700" cy="80" r="2.5"/>
+    </g>
+    <!-- Cincin lembut -->
+    <circle cx="520" cy="210" r="22" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.14"/>
+    <rect x="802" y="168" width="28" height="28" rx="8" fill="none" stroke="#F4B942" stroke-width="2.2" opacity="0.35" transform="rotate(18 816 182)"/>
+  </g>
+
+  <!-- Layer Depan: bintang sparkle & aksen daun mengambang -->
+  <g id="layer-depan" data-depth="1.0">
+    <g transform="translate(756 76)">
+      <path d="M0 -11 Q2.2 -2.2 11 0 Q2.2 2.2 0 11 Q-2.2 2.2 -11 0 Q-2.2 -2.2 0 -11 Z" fill="#F4B942" opacity="0.85"/>
+    </g>
+    <g transform="translate(592 128)">
+      <path d="M0 -7 Q1.4 -1.4 7 0 Q1.4 1.4 0 7 Q-1.4 1.4 -7 0 Q-1.4 -1.4 0 -7 Z" fill="#FFFFFF" opacity="0.55"/>
+    </g>
+    <g transform="translate(830 124)">
+      <path d="M0 -6 Q1.2 -1.2 6 0 Q1.2 1.2 0 6 Q-1.2 1.2 -6 0 Q-1.2 -1.2 0 -6 Z" fill="#FFFFFF" opacity="0.45"/>
+    </g>
+    <!-- Daun tipis aksen hijau muda -->
+    <path d="M680 186 C694 174 712 178 714 196 C696 202 682 196 680 186 Z" fill="#E6F2EC" opacity="0.24"/>
+  </g>
+</svg>

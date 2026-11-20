@@ -66,6 +66,14 @@
   gap: var(--space-3);
 }
 
+/* Tombol keluar ke halaman utama portal (/) — selalu tampil, termasuk di Home */
+.app-header__home { flex-shrink: 0; text-decoration: none; }
+.is-landing .app-header__home { margin-left: auto; }
+@media (max-width: 640px) {
+  .app-header__home { width: 34px; padding: 0; }
+  .app-header__home-text { display: none; }
+}
+
 /* ---------- Kerangka Aplikasi ---------- */
 .app-shell {
   display: grid;

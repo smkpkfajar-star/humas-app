@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" width="260" height="220" role="img" aria-labelledby="empty-title empty-desc">
+  <title id="empty-title">Ilustrasi Status Kosong dan Pencarian</title>
+  <desc id="empty-desc">Aset vektor map arsip terbuka dengan kaca pembesar dan tanda tanya mengambang untuk tampilan data kosong atau belum ditemukan.</desc>
+  <!--
+    PANDUAN PIVOT (transform-origin):
+    - #kaca-pembesar : 158px 118px (gerak memindai memutar / mengambang)
+    - #tanda-tanya   : 188px 54px (float naik-turun)
+    - #kertas-kosong : 114px 104px (geser keluar masuk map)
+  -->
+  <ellipse id="bayangan" cx="128" cy="196" rx="74" ry="10" fill="#1E6B4B" opacity="0.14"/>
+
+  <!-- Dekorasi mengambang -->
+  <g id="dekorasi">
+    <g id="tanda-tanya" data-part="question-bubble" transform="translate(188 52)">
+      <circle cx="0" cy="0" r="18" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2.2"/>
+      <text x="0" y="7" text-anchor="middle" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="700" fill="#1E6B4B">?</text>
+    </g>
+    <g id="sparkle-1" transform="translate(52 66)">
+      <path d="M0 -7 Q1.4 -1.4 7 0 Q1.4 1.4 0 7 Q-1.4 1.4 -7 0 Q-1.4 -1.4 0 -7 Z" fill="#F4B942"/>
+    </g>
+    <circle cx="212" cy="112" r="3.5" fill="#2A8A61" opacity="0.45"/>
+  </g>
+
+  <!-- Map Arsip Belakang -->
+  <g id="map-arsip" data-part="folder">
+    <path d="M48 76 C48 68 54 62 62 62 H96 L108 74 H174 C182 74 188 80 188 88 V168 C188 176 182 182 174 182 H62 C54 182 48 176 48 168 Z" fill="#165239" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    <!-- Lembar kertas kosong menyembul -->
+    <g id="kertas-kosong" data-part="paper">
+      <rect x="64" y="80" width="106" height="82" rx="8" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+      <rect x="78" y="96" width="46" height="6" rx="3" fill="#E6F2EC"/>
+      <rect x="78" y="110" width="76" height="5" rx="2.5" fill="#DCE2DD"/>
+    </g>
+    <!-- Penutup depan map -->
+    <path d="M44 108 C44 102 49 98 55 98 H181 C187 98 192 102 192 108 L186 172 C185 178 180 182 174 182 H62 C56 182 51 178 50 172 Z" fill="#2A8A61" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect x="96" y="132" width="44" height="10" rx="5" fill="#E6F2EC" opacity="0.8"/>
+  </g>
+
+  <!-- Kaca Pembesar Interaktif -->
+  <g id="kaca-pembesar" data-part="magnifier" transform="translate(154 116)">
+    <!-- Gagang -->
+    <path d="M22 22 L44 44" stroke="#1F2933" stroke-width="11" stroke-linecap="round"/>
+    <path d="M22 22 L44 44" stroke="#F4B942" stroke-width="6" stroke-linecap="round"/>
+    <!-- Bingkai Lensa -->
+    <circle cx="0" cy="0" r="30" fill="#E6F2EC" fill-opacity="0.72" stroke="#1F2933" stroke-width="3.2"/>
+    <circle cx="0" cy="0" r="24" fill="none" stroke="#1E6B4B" stroke-width="2.4"/>
+    <!-- Kilau Kaca -->
+    <path d="M-13 -10 Q-7 -18 5 -16" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+</svg>

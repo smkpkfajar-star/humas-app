@@ -14,83 +14,150 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="/portal.css">
+    <link rel="stylesheet" href="/animasi.css">
 </head>
 
 <body>
     <header class="top">
         <div class="wrap top__inner">
-            <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="40" height="40">
-            <div class="top__text">
-                <p class="top__title">Superapp Humas</p>
-                <p class="top__sub">SMK Tamansiswa Jetis</p>
-            </div>
+            <a class="top__brand" href="/" aria-label="Superapp Humas — beranda">
+                <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="40" height="40">
+                <span class="top__text">
+                    <span class="top__title">Superapp Humas</span>
+                    <span class="top__sub">SMK Tamansiswa Jetis</span>
+                </span>
+            </a>
         </div>
     </header>
 
     <main class="wrap">
         <section class="hero">
-            <p class="hero__eyebrow">Superapp Humas</p>
-            <h1>Semua layanan Humas, satu pintu.</h1>
-            <p class="hero__lead">Pilih aplikasi yang ingin Anda gunakan. Semua berjalan langsung di browser, tidak perlu instal apa pun.</p>
+            <div class="hero__text">
+                <p class="hero__eyebrow"><img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="">Superapp Humas</p>
+                <h1>Semua layanan Humas, satu pintu.</h1>
+                <p class="hero__lead">Pilih aplikasi yang ingin kamu gunakan. Semuanya berjalan langsung di browser, tanpa perlu instal apa pun.</p>
+                <ul class="hero__facts">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Tanpa instal</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Bisa di HP &amp; laptop</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Gratis</li>
+                </ul>
+            </div>
+            <img class="hero__art" src="/assets/siswa/siswa-melambai.svg" alt="" width="220" height="248" data-anim="melambai">
         </section>
 
-        <section aria-labelledby="h-apps">
-            <h2 id="h-apps" class="section-title">Aplikasi</h2>
-            <div class="grid" id="apps"></div>
+        <section class="section" aria-labelledby="h-apps">
+            <div class="section-head">
+                <h2 id="h-apps" class="section-title">Kegiatan &amp; Aplikasi</h2>
+                <p class="section-note" id="apps-count"></p>
+            </div>
+            <div class="apps" id="apps"></div>
         </section>
+
     </main>
 
-    <footer class="wrap foot">
-        <div class="credit">
-            <span class="credit__label">Dibuat oleh</span>
-            <ul class="credit__list">
-                <li>Jurusan DKV</li>
-                <li>Jurusan RPL</li>
-                <li>Humas</li>
-            </ul>
+
+    <footer class="foot">
+        <div class="wrap foot__inner">
+            <div class="credit">
+                <span class="credit__label">Dibuat oleh</span>
+                <ul class="credit__list">
+                    <li>Jurusan DKV</li>
+                    <li>Jurusan RPL</li>
+                    <li>Humas</li>
+                </ul>
+            </div>
+            <p>&copy; <span id="year"></span> SMK Tamansiswa Jetis</p>
         </div>
-        <p>&copy; <span id="year"></span> SMK Tamansiswa Jetis</p>
     </footer>
 
     <script>
         /* ================================================================
-           DAFTAR APLIKASI SUPERAPP
-           Untuk menambah aplikasi baru:
-           1. Buat folder baru (misal /Alumni/) berisi index.html.
-           2. Tambahkan satu objek di daftar di bawah ini.
-           status: "aktif" = bisa dibuka, "segera" = tampil tapi belum bisa dibuka.
+           DAFTAR APLIKASI / KEGIATAN SUPERAPP
+           Untuk menambah atau mengaktifkan kegiatan:
+           1. Buat folder kegiatan (misal /KI/ atau /Tracer/) berisi index.html.
+           2. Tambahkan / ubah satu objek di daftar di bawah ini.
+           kode    : singkatan besar di ubin (PKL, KI, Tracer).
+           jenis   : keterangan kecil di bawah kode.
+           tema    : warna khas kegiatan -> hijau | biru | oranye | ungu.
+           ikon    : briefcase | factory | graduation | file | grid.
+           status  : "aktif"     = layanan berjalan, bisa dibuka.
+                     "persiapan" = halaman sudah ada (bisa dibuka), alatnya segera hadir.
+                     "segera"    = tampil saja, belum bisa dibuka.
+           label   : kata singkat yang tampil sebagai label kecil (opsional).
            ================================================================ */
         var APPS = [
             {
-                nama: 'Praktik Kerja Lapangan (PKL)',
-                deskripsi: 'Layanan PKL: generator laporan PKL siswa otomatis ke format Word.',
+                kode: 'PKL',
+                jenis: 'Praktik Kerja Lapangan',
+                nama: 'Generator Laporan PKL',
+                deskripsi: 'Isi langkah demi langkah, lalu unduh laporan Word atau PDF yang rapi sesuai templat sekolah.',
                 url: '/PKL/',
+                tema: 'hijau',
                 ikon: 'briefcase',
-                status: 'aktif'
+                status: 'aktif',
+                label: ['Siswa', 'Word & PDF']
             },
-
+            {
+                kode: 'KI',
+                jenis: 'Kunjungan Industri',
+                nama: 'Layanan Kunjungan Industri',
+                deskripsi: 'Persiapan, catatan pengamatan, dan laporan Kunjungan Industri siswa dalam satu tempat.',
+                url: '/KI/',
+                tema: 'biru',
+                ikon: 'factory',
+                status: 'persiapan',
+                label: ['Siswa', 'Perlu login']
+            },
+            {
+                kode: 'Tracer',
+                jenis: 'Tracer Study Alumni',
+                nama: 'Tracer Study Alumni',
+                deskripsi: 'Penelusuran jejak alumni setelah lulus: bekerja, kuliah, atau berwirausaha.',
+                url: '/Tracer/',
+                tema: 'oranye',
+                ikon: 'graduation',
+                status: 'persiapan',
+                label: ['Alumni', 'Perlu login']
+            }
         ];
 
         var ICONS = {
             briefcase: '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/>',
+            factory: '<path d="M2 20V9l6 4V9l6 4V4h4l2 16z"/><path d="M2 20h20M7 16h2M12 16h2"/>',
+            graduation: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 10v6"/>',
             file: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/>',
             grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>'
         };
+        var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        var TEMA = ['hijau', 'biru', 'oranye', 'ungu'];
 
         function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
         document.getElementById('apps').innerHTML = APPS.map(function (a) {
             var aktif = a.status === 'aktif';
-            var tag = aktif ? 'a href="' + esc(a.url) + '"' : 'div aria-disabled="true"';
-            return '<' + tag + ' class="card' + (aktif ? '' : ' card--off') + '">' +
-                '<span class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[a.ikon] || ICONS.grid) + '</svg></span>' +
-                '<span class="card__body"><span class="card__name">' + esc(a.nama) + '</span>' +
-                '<span class="card__desc">' + esc(a.deskripsi) + '</span></span>' +
-                (aktif ? '<span class="card__go" aria-hidden="true">&rarr;</span>' : '<span class="badge">Segera</span>') +
-                '</' + (aktif ? 'a' : 'div') + '>';
+            var bisaDibuka = aktif || a.status === 'persiapan';
+            var tema = TEMA.indexOf(a.tema) >= 0 ? a.tema : 'hijau';
+            var open = bisaDibuka ? '<a href="' + esc(a.url) + '"' : '<div aria-disabled="true"';
+            var tags = (a.label || []).map(function (l) { return '<span class="tag">' + esc(l) + '</span>'; }).join('');
+            return open + ' class="app app--' + tema + (bisaDibuka ? '' : ' app--off') + '">' +
+                '<span class="app__band">' +
+                    '<span class="app__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[a.ikon] || ICONS.grid) + '</svg></span>' +
+                    '<span><span class="app__code">' + esc(a.kode) + '</span><span class="app__kind">' + esc(a.jenis) + '</span></span>' +
+                    '<span class="app__status">' + (aktif ? 'Tersedia' : 'Segera hadir') + '</span>' +
+                '</span>' +
+                '<span class="app__body"><span class="app__name">' + esc(a.nama) + '</span>' +
+                    '<span class="app__desc">' + esc(a.deskripsi) + '</span>' +
+                    (tags ? '<span class="app__tags">' + tags + '</span>' : '') +
+                '</span>' +
+                '<span class="app__foot">' + (aktif ? 'Buka layanan ' + esc(a.kode) + ARROW : bisaDibuka ? 'Lihat rencana layanan' + ARROW : 'Belum bisa dibuka') + '</span>' +
+                '</' + (bisaDibuka ? 'a' : 'div') + '>';
         }).join('');
+        var nAktif = APPS.filter(function (a) { return a.status === 'aktif'; }).length;
+        document.getElementById('apps-count').textContent = nAktif + ' tersedia · ' + (APPS.length - nAktif) + ' segera hadir';
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+    <script src="/animasi.js"></script>
+
 </body>
 
 </html>

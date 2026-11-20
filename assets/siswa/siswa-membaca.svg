@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" width="320" height="360" role="img" aria-labelledby="siswa-read-title siswa-read-desc">
+  <title id="siswa-read-title">Siswa SMK Membaca Buku Panduan</title>
+  <desc id="siswa-read-desc">Aset vektor siswa SMK laki-laki membaca buku panduan terbuka dengan partikel baca mengambang, cocok untuk halaman panduan, FAQ, atau loading.</desc>
+  <!--
+    PANDUAN PIVOT (transform-origin):
+    - #buku-terbuka : 160px 232px (ayun lembut seiring napas)
+    - #halaman-gerak: 160px 236px (animasi membalik halaman)
+    - #pupil-kiri   : 142px 120px | #pupil-kanan : 178px 120px (geser kiri-kanan seolah membaca)
+    - #kepala       : 160px 158px (sedikit menunduk)
+  -->
+  <defs>
+    <linearGradient id="pants-rd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#475569"/>
+    </linearGradient>
+    <linearGradient id="bag-rd" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2A8A61"/>
+      <stop offset="100%" stop-color="#165239"/>
+    </linearGradient>
+    <clipPath id="clip-rdl">
+      <ellipse cx="142" cy="120" rx="7.5" ry="8.5"/>
+    </clipPath>
+    <clipPath id="clip-rdr">
+      <ellipse cx="178" cy="120" rx="7.5" ry="8.5"/>
+    </clipPath>
+  </defs>
+
+  <g id="bayangan" data-part="shadow">
+    <ellipse cx="160" cy="336" rx="56" ry="10" fill="#1E6B4B" opacity="0.14"/>
+  </g>
+
+  <g id="dekorasi" data-part="decorations">
+    <g id="sparkle-1" transform="translate(80 100)">
+      <path d="M0 -7 Q1.4 -1.4 7 0 Q1.4 1.4 0 7 Q-1.4 1.4 -7 0 Q-1.4 -1.4 0 -7 Z" fill="#F4B942"/>
+    </g>
+    <g id="sparkle-2" transform="translate(242 114)">
+      <path d="M0 -6 Q1.2 -1.2 6 0 Q1.2 1.2 0 6 Q-1.2 1.2 -6 0 Q-1.2 -1.2 0 -6 Z" fill="#2A8A61" opacity="0.8"/>
+    </g>
+    <!-- Kertas kecil melayang -->
+    <g id="kertas-melayang" transform="translate(230 74) rotate(12)">
+      <rect x="0" y="0" width="24" height="28" rx="4" fill="#FFFFFF" stroke="#1E6B4B" stroke-width="2"/>
+      <path d="M5 9 H19 M5 15 H16 M5 21 H13" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <g id="karakter" data-part="character">
+    <g id="tas-belakang" data-part="backpack">
+      <rect x="108" y="176" width="104" height="82" rx="22" fill="url(#bag-rd)" stroke="#1F2933" stroke-width="2.4"/>
+    </g>
+
+    <g id="kaki" data-part="legs">
+      <g id="kaki-kiri" data-part="leg-left">
+        <path d="M132 248 L130 312 Q130 316 135 316 H153 Q156 316 156 312 L158 248 Z" fill="url(#pants-rd)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+        <rect x="135" y="314" width="16" height="8" rx="2" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+        <path d="M153 319 H134 C124 319 119 325 119 331 C119 334 122 335 127 335 H152 C155 335 156 333 156 330 V322 C156 320 155 319 153 319 Z" fill="#1F2933"/>
+        <path d="M122 332 H154" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <g id="kaki-kanan" data-part="leg-right">
+        <path d="M162 248 L164 312 Q164 316 167 316 H185 Q190 316 190 312 L188 248 Z" fill="url(#pants-rd)" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+        <rect x="169" y="314" width="16" height="8" rx="2" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+        <path d="M167 319 H186 C196 319 201 325 201 331 C201 334 198 335 193 335 H168 C165 335 164 333 164 330 V322 C164 320 165 319 167 319 Z" fill="#1F2933"/>
+        <path d="M166 332 H198" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <g id="badan" data-part="torso">
+      <path d="M131 242 H189 L190 258 H130 Z" fill="#475569" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M128 178 C136 173 148 171 160 171 C172 171 184 173 192 178 L190 246 H130 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M135 176 C131 196 130 218 132 243" fill="none" stroke="#1E6B4B" stroke-width="7" stroke-linecap="round"/>
+      <path d="M185 176 C189 196 190 218 188 243" fill="none" stroke="#1E6B4B" stroke-width="7" stroke-linecap="round"/>
+      <path d="M148 171 L160 183 L144 188 L140 174 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M172 171 L160 183 L176 188 L180 174 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Lengan Memegang Buku -->
+    <g id="lengan-kiri" data-part="arm-left">
+      <path d="M128 179 C114 186 108 202 108 220 L124 222 L134 190 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M109 218 C109 231 116 238 128 238 L128 224 L121 218 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+    <g id="lengan-kanan" data-part="arm-right">
+      <path d="M192 179 C206 186 212 202 212 220 L196 222 L186 190 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M211 218 C211 231 204 238 192 238 L192 224 L199 218 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Buku Panduan Terbuka -->
+    <g id="buku-terbuka" data-part="open-book">
+      <!-- Sampul Hijau Belakang -->
+      <path d="M114 210 Q137 204 160 214 Q183 204 206 210 L209 258 Q184 252 160 262 Q136 252 111 258 Z" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+      <!-- Halaman Kiri & Kanan -->
+      <path d="M119 205 Q139 200 160 211 V255 Q139 246 116 251 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M201 205 Q181 200 160 211 V255 Q181 246 204 251 Z" fill="#F8FAFC" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+      <!-- Garis tulisan halus di punggung sampul / halaman -->
+      <g id="halaman-gerak" data-part="book-page">
+        <path d="M126 218 Q138 216 151 221" stroke="#CBD5E1" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M126 228 Q138 226 151 231" stroke="#CBD5E1" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M169 221 Q182 216 194 218" stroke="#CBD5E1" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M169 231 Q182 226 194 228" stroke="#CBD5E1" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+      <!-- Jari memegang pinggir buku -->
+      <ellipse cx="115" cy="233" rx="6.5" ry="6" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2"/>
+      <ellipse cx="205" cy="233" rx="6.5" ry="6" fill="#F3C39A" stroke="#1F2933" stroke-width="2.2"/>
+    </g>
+
+    <!-- Kepala Sedikit Menunduk Fokus Membaca -->
+    <g id="kepala" data-part="head" transform="translate(0 4)">
+      <path d="M151 153 V172 C151 177 169 177 169 172 V153 Z" fill="#E3AD84" stroke="#1F2933" stroke-width="2.4"/>
+      <path d="M113 114 C112 80 132 62 160 62 C188 62 208 80 207 114 Z" fill="#1F2933"/>
+      <g id="telinga" data-part="ears">
+        <circle cx="116" cy="121" r="8.5" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4"/>
+        <circle cx="204" cy="121" r="8.5" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4"/>
+      </g>
+
+      <g id="wajah" data-part="face">
+        <path d="M118 112 C118 84 135 72 160 72 C185 72 202 84 202 112 C202 142 185 161 160 161 C135 161 118 142 118 112 Z" fill="#F3C39A" stroke="#1F2933" stroke-width="2.4"/>
+        <g id="pipi" data-part="cheeks" opacity="0.34">
+          <ellipse cx="131" cy="134" rx="7" ry="4" fill="#F08A78"/>
+          <ellipse cx="189" cy="134" rx="7" ry="4" fill="#F08A78"/>
+        </g>
+
+        <g id="alis" data-part="eyebrows">
+          <path id="alis-kiri" d="M133 107 Q142 104 150 107" fill="none" stroke="#1F2933" stroke-width="2.5" stroke-linecap="round"/>
+          <path id="alis-kanan" d="M170 107 Q178 104 187 107" fill="none" stroke="#1F2933" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+
+        <!-- Mata melihat ke bawah (ke buku) -->
+        <g id="mata" data-part="eyes">
+          <g id="mata-kiri" data-part="eye-left">
+            <ellipse cx="142" cy="120" rx="7.5" ry="8.5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+            <g id="pupil-kiri" data-part="pupil-left" clip-path="url(#clip-rdl)">
+              <circle cx="142.5" cy="123" r="4.5" fill="#1F2933"/>
+              <circle cx="144.2" cy="121" r="1.5" fill="#FFFFFF"/>
+            </g>
+          </g>
+          <g id="mata-kanan" data-part="eye-right">
+            <ellipse cx="178" cy="120" rx="7.5" ry="8.5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2"/>
+            <g id="pupil-kanan" data-part="pupil-right" clip-path="url(#clip-rdr)">
+              <circle cx="178.5" cy="123" r="4.5" fill="#1F2933"/>
+              <circle cx="180.2" cy="121" r="1.5" fill="#FFFFFF"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- Kacamata bulat pintar (opsional, bisa di-hide) -->
+        <g id="kacamata" data-part="glasses" fill="none" stroke="#1E6B4B" stroke-width="2.4">
+          <circle cx="142" cy="120" r="12.5"/>
+          <circle cx="178" cy="120" r="12.5"/>
+          <path d="M154.5 120 H165.5"/>
+          <path d="M129.5 119 L118 117"/>
+          <path d="M190.5 119 L202 117"/>
+        </g>
+
+        <g id="kelopak" data-part="eyelids" opacity="0">
+          <ellipse cx="142" cy="120" rx="8.5" ry="9.5" fill="#F3C39A"/>
+          <path d="M134 121 Q142 126 150 121" fill="none" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round"/>
+          <ellipse cx="178" cy="120" rx="8.5" ry="9.5" fill="#F3C39A"/>
+          <path d="M170 121 Q178 126 186 121" fill="none" stroke="#1F2933" stroke-width="2.4" stroke-linecap="round"/>
+        </g>
+
+        <path id="hidung" d="M159 126 Q162 130 158 132" fill="none" stroke="#C98D62" stroke-width="2" stroke-linecap="round"/>
+
+        <g id="mulut" data-part="mouth">
+          <path d="M152 141 Q160 146 168 141" fill="none" stroke="#1F2933" stroke-width="2.3" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <g id="rambut-depan" data-part="hair-front">
+        <path d="M115 113 C112 86 124 64 152 61 C158 55 167 54 172 58 C168 60 165 62 164 63 C192 64 208 82 205 113 C200 100 194 92 184 87 C179 94 172 97 166 98 C168 92 168 88 166 84 C156 94 142 98 130 96 C126 101 121 107 115 113 Z" fill="#1F2933" stroke="#1F2933" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M138 74 C149 69 165 69 178 75" fill="none" stroke="#475569" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+      </g>
+    </g>
+  </g>
+</svg>

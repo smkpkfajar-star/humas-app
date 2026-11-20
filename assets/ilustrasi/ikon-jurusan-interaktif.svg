@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" width="480" height="260" role="img" aria-labelledby="jurusan-title jurusan-desc">
+  <title id="jurusan-title">Ikon Ilustrasi Jurusan dan Layanan Interaktif</title>
+  <desc id="jurusan-desc">Kumpulan 4 aset ilustrasi berlayer (RPL, DKV, Humas, PKL) dengan bagian gerak terpisah untuk micro-interaction kartu dan kredit.</desc>
+  <!--
+    4 Grup Mandiri (masing-masing cocok untuk kartu / badge 100x100):
+    1. #ikon-rpl   (sub-layer: #rpl-kursor, #rpl-gear)
+    2. #ikon-dkv   (sub-layer: #dkv-kuas, #dkv-sparkle)
+    3. #ikon-humas (sub-layer: #humas-gelombang-1, #humas-gelombang-2)
+    4. #ikon-pkl   (sub-layer: #pkl-centang, #pkl-kertas)
+  -->
+
+  <!-- 1. RPL (Rekayasa Perangkat Lunak) -->
+  <g id="ikon-rpl" data-part="icon-rpl" transform="translate(24 26)">
+    <rect x="0" y="0" width="96" height="96" rx="22" fill="#E6F2EC"/>
+    <!-- Layar monitor kode -->
+    <rect x="14" y="20" width="68" height="48" rx="8" fill="#1F2933" stroke="#1F2933" stroke-width="2.2"/>
+    <circle cx="24" cy="28" r="2.4" fill="#F4B942"/>
+    <circle cx="32" cy="28" r="2.4" fill="#2A8A61"/>
+    <!-- Tanda kode </> -->
+    <path d="M32 42 L24 49 L32 56" fill="none" stroke="#E6F2EC" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M52 42 L60 49 L52 56" fill="none" stroke="#E6F2EC" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M45 40 L39 58" fill="none" stroke="#F4B942" stroke-width="2.6" stroke-linecap="round"/>
+    <!-- Kursor berkedip -->
+    <rect id="rpl-kursor" x="65" y="42" width="4" height="14" rx="1.5" fill="#2A8A61"/>
+    <!-- Dudukan monitor -->
+    <path d="M38 68 H58 L62 78 H34 Z" fill="#CBD5E1" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    <!-- Roda gigi kecil pojok kanan atas -->
+    <g id="rpl-gear" transform="translate(78 20)">
+      <circle cx="0" cy="0" r="10" fill="#1E6B4B" stroke="#FFFFFF" stroke-width="2"/>
+      <circle cx="0" cy="0" r="3.5" fill="#F4B942"/>
+    </g>
+  </g>
+
+  <!-- 2. DKV (Desain Komunikasi Visual) -->
+  <g id="ikon-dkv" data-part="icon-dkv" transform="translate(144 26)">
+    <rect x="0" y="0" width="96" height="96" rx="22" fill="#E6F2EC"/>
+    <!-- Palet warna -->
+    <path d="M48 16 C28 16 14 30 14 48 C14 66 28 78 46 78 C54 78 58 73 56 67 C54 62 58 58 64 58 H70 C78 58 82 52 82 44 C82 28 67 16 48 16 Z" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    <circle cx="32" cy="40" r="5" fill="#1E6B4B"/>
+    <circle cx="46" cy="30" r="5" fill="#F4B942"/>
+    <circle cx="62" cy="36" r="5" fill="#2A8A61"/>
+    <circle cx="32" cy="56" r="5" fill="#64748B"/>
+    <!-- Kuas / Pen animatable -->
+    <g id="dkv-kuas" transform="translate(56 46) rotate(32)">
+      <rect x="0" y="-4" width="28" height="8" rx="4" fill="#1E6B4B" stroke="#1F2933" stroke-width="2"/>
+      <path d="M0 -4 L-11 0 L0 4 Z" fill="#F4B942" stroke="#1F2933" stroke-width="1.8" stroke-linejoin="round"/>
+    </g>
+    <g id="dkv-sparkle" transform="translate(80 18)">
+      <path d="M0 -7 Q1.4 -1.4 7 0 Q1.4 1.4 0 7 Q-1.4 1.4 -7 0 Q-1.4 -1.4 0 -7 Z" fill="#F4B942"/>
+    </g>
+  </g>
+
+  <!-- 3. Humas (Hubungan Masyarakat / Pengumuman) -->
+  <g id="ikon-humas" data-part="icon-humas" transform="translate(264 26)">
+    <rect x="0" y="0" width="96" height="96" rx="22" fill="#E6F2EC"/>
+    <!-- Megafon -->
+    <path d="M24 44 L58 26 V68 L24 54 Z" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect x="16" y="42" width="10" height="14" rx="4" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.2"/>
+    <path d="M28 56 L33 74 H43 L38 58" fill="#F4B942" stroke="#1F2933" stroke-width="2.2" stroke-linejoin="round"/>
+    <ellipse cx="58" cy="47" rx="5" ry="21" fill="#2A8A61" stroke="#1F2933" stroke-width="2.2"/>
+    <!-- Gelombang suara (animatable pulse) -->
+    <path id="humas-gelombang-1" d="M70 37 Q76 47 70 57" fill="none" stroke="#1E6B4B" stroke-width="2.8" stroke-linecap="round"/>
+    <path id="humas-gelombang-2" d="M78 30 Q86 47 78 64" fill="none" stroke="#2A8A61" stroke-width="2.6" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- 4. PKL (Praktik Kerja Lapangan) -->
+  <g id="ikon-pkl" data-part="icon-pkl" transform="translate(384 26)">
+    <rect x="0" y="0" width="96" height="96" rx="22" fill="#E6F2EC"/>
+    <!-- Dokumen menyembul dari tas -->
+    <g id="pkl-kertas">
+      <rect x="28" y="14" width="40" height="32" rx="5" fill="#FFFFFF" stroke="#1F2933" stroke-width="2.2"/>
+      <path d="M36 24 H60 M36 32 H52" stroke="#94A3B8" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+    <!-- Tas Kerja PKL -->
+    <rect x="16" y="34" width="64" height="44" rx="10" fill="#1E6B4B" stroke="#1F2933" stroke-width="2.4"/>
+    <path d="M16 50 H80" stroke="#165239" stroke-width="3"/>
+    <rect x="42" y="45" width="12" height="10" rx="3" fill="#F4B942" stroke="#1F2933" stroke-width="1.8"/>
+    <!-- Badge centang -->
+    <g id="pkl-centang" transform="translate(74 74)">
+      <circle cx="0" cy="0" r="13" fill="#2A8A61" stroke="#FFFFFF" stroke-width="2.5"/>
+      <path d="M-5 0 L-1.5 3.5 L5.5 -3.5" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Label Opsional (dapat dihapus jika hanya mengambil ikon) -->
+  <g id="label-preview" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#1F2933" text-anchor="middle">
+    <text x="72" y="146">RPL</text>
+    <text x="192" y="146">DKV</text>
+    <text x="312" y="146">Humas</text>
+    <text x="432" y="146">PKL</text>
+  </g>
+</svg>

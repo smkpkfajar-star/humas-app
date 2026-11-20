@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Masuk — Layanan KI</title>
+    <meta name="description" content="Masuk ke layanan Kunjungan Industri SMK Tamansiswa Jetis.">
+    <meta name="theme-color" content="#1D5FA8">
+    <meta name="color-scheme" content="only light">
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/PKL/laporan_PKL/assets/logo-sekolah.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/portal.css">
+    <link rel="stylesheet" href="/animasi.css">
+    <script src="/auth.js"></script>
+    <script>
+        window.MASUK = {"kode": "KI", "dasar": "/KI/", "peran": {"siswa": {"label": "NIS", "ph": "Contoh: 2324101", "mode": "numeric"}, "guru": {"label": "NIP / Nama pengguna", "ph": "Masukkan NIP atau nama pengguna", "mode": "text"}}};
+        /* Sudah masuk? Langsung ke tujuan. */
+        (function (a) { if (a.sesi()) location.replace(a.tujuan()); })(buatAuth(window.MASUK));
+    </script>
+</head>
+
+<body class="tema-biru login-page">
+    <div class="login">
+        <!-- ============ Panel sambutan ============ -->
+        <aside class="login__aside">
+            <div class="login__top">
+                <a class="login__brand" href="/" aria-label="Superapp Humas — beranda">
+                    <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="36" height="36">
+                    <span><strong>Superapp Humas</strong>SMK Tamansiswa Jetis</span>
+                </a>
+                <a class="login__back" href="/">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    <span>Beranda</span>
+                </a>
+            </div>
+
+            <div class="login__intro">
+                <p class="login__tag">Kunjungan Industri</p>
+                <p class="login__headline">Belajar langsung dari dunia industri.</p>
+                <p class="login__lead">Masuk untuk mengisi data kunjungan, mencatat pengamatan, dan menyusun laporan KI.</p>
+            </div>
+
+            <div class="login__stage" aria-hidden="true">
+                <img class="login__art" src="/assets/siswa/siswi-berpikir.svg" alt="" width="240" height="270" data-anim="berpikir">
+                    <div class="login-chip login-chip--1"><span class="login-chip__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span><strong>Data kunjungan</strong>tercatat rapi</span></div>
+                    <div class="login-chip login-chip--2"><span class="login-chip__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span><span><strong>Laporan KI</strong>Word &amp; PDF</span></div>
+            </div>
+
+            <p class="login__credit">Dibuat oleh Jurusan DKV, Jurusan RPL &amp; Humas · &copy; <span data-year></span></p>
+        </aside>
+
+        <!-- ============ Formulir masuk ============ -->
+        <main class="login__main">
+            <section class="login__panel" aria-labelledby="t-masuk">
+                <h1 class="login__title" id="t-masuk">Masuk ke Layanan KI</h1>
+                <p class="login__sub">Gunakan akun yang diberikan sekolah.</p>
+
+                <div class="demo-note" id="demo-note" hidden>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+                    <p><strong>Mode demo:</strong> belum terhubung ke database, isian apa pun diterima.</p>
+                </div>
+
+                <form class="login__form" id="form-masuk" novalidate>
+                    <fieldset class="seg">
+                        <legend class="visually-hidden">Masuk sebagai</legend>
+                            <label class="seg__opt">
+                                <input type="radio" name="peran" value="siswa" checked>
+                                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></svg>Siswa</span>
+                            </label>
+                            <label class="seg__opt">
+                                <input type="radio" name="peran" value="guru">
+                                <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>Guru</span>
+                            </label>
+                    </fieldset>
+
+                    <div class="field">
+                        <label class="field__label" for="f-id" id="l-id">NIS</label>
+                        <div class="field__control">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg>
+                            <input class="field__input" id="f-id" name="id" type="text" inputmode="numeric" autocomplete="username"
+                                placeholder="Contoh: 2324101" required aria-describedby="e-id">
+                        </div>
+                        <p class="field__error" id="e-id" hidden></p>
+                    </div>
+
+                    <div class="field">
+                        <div class="field__row">
+                            <label class="field__label" for="f-sandi">Kata sandi</label>
+                            <button type="button" class="link-btn" id="btn-lupa" aria-expanded="false" aria-controls="lupa-info">Lupa kata sandi?</button>
+                        </div>
+                        <div class="field__control">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                            <input class="field__input" id="f-sandi" name="sandi" type="password" autocomplete="current-password"
+                                placeholder="Masukkan kata sandi" required aria-describedby="e-sandi">
+                            <button type="button" class="field__toggle" id="btn-lihat" aria-label="Tampilkan kata sandi" aria-pressed="false">
+                                <svg class="i-show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="i-hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6C3.8 8.4 2 12 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
+                            </button>
+                        </div>
+                        <p class="field__error" id="e-sandi" hidden></p>
+                        <p class="field__hint" id="caps-hint" hidden>Caps Lock sedang aktif.</p>
+                    </div>
+
+                    <div class="lupa" id="lupa-info" hidden>Hubungi <strong>wali kelas</strong> atau <strong>Humas</strong> untuk mengatur ulang kata sandi.</div>
+
+                    <label class="check">
+                        <input type="checkbox" name="ingat" id="f-ingat">
+                        <span>Ingat saya di perangkat ini</span>
+                    </label>
+
+                    <p class="form-error" id="form-error" role="alert" hidden></p>
+
+                    <button type="submit" class="btn-primary" id="btn-masuk">
+                        <span class="spinner" aria-hidden="true"></span>
+                        <span data-text>Masuk</span>
+                        <svg class="btn-primary__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </form>
+
+                <p class="login__foot">Belum punya akun? Akun dibuat oleh sekolah. Hubungi guru pendamping KI.</p>
+            </section>
+
+            <p class="login__credit login__credit--main">Dibuat oleh Jurusan DKV, Jurusan RPL &amp; Humas · &copy; <span data-year></span> SMK Tamansiswa Jetis</p>
+        </main>
+    </div>
+
+    <script src="/animasi.js"></script>
+    <script src="/masuk.js"></script>
+</body>
+
+</html>
