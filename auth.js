@@ -46,7 +46,9 @@
       DEMO: DEMO,
       kode: cfg.kode,
 
-      sesi: function () { return baca('sessionStorage', kunci) || baca('localStorage', kunci); },
+      sesi: function () {
+        if (window.BELUM_RILIS) return null; // halaman belum rilis: rilis.js yang mengalihkan
+        return baca('sessionStorage', kunci) || baca('localStorage', kunci); },
 
       /**
        * @param {{peran:string, id:string, sandi:string}} data
@@ -79,7 +81,7 @@
 
       /** Panggil di <head>: belum masuk → dialihkan ke halaman masuk sebelum halaman tampil. */
       wajibMasuk: function () {
-        if (this.sesi()) return;
+        if (window.BELUM_RILIS || this.sesi()) return;
         var kembali = location.pathname + location.search + location.hash;
         location.replace(halamanMasuk + '?kembali=' + encodeURIComponent(kembali));
       },

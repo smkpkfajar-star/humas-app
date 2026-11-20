@@ -1,5 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    { "source": "/KI", "destination": "/", "permanent": false },
+    { "source": "/KI/:path*", "destination": "/", "permanent": false },
+    { "source": "/Tracer", "destination": "/", "permanent": false },
+    { "source": "/Tracer/:path*", "destination": "/", "permanent": false }
+  ]
 }
