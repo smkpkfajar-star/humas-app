@@ -13,6 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+    <!-- Mode pengembang & halaman belum rilis (lihat /rilis.js) -->
+    <script src="/rilis.js"></script>
     <link rel="stylesheet" href="/portal.css">
     <link rel="stylesheet" href="/animasi.css">
 </head>
@@ -131,16 +133,18 @@
         var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
         var LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
         var TEMA = ['hijau', 'biru', 'oranye', 'ungu'];
+        var DEV = !!window.MODE_DEV;
 
         function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
         document.getElementById('apps').innerHTML = APPS.map(function (a) {
             var aktif = a.status === 'aktif';
-            var bisaDibuka = aktif || a.status === 'persiapan';
+            var pratinjau = DEV && a.status === 'segera'; // mode pengembang: belum rilis tetap bisa dibuka
+            var bisaDibuka = aktif || a.status === 'persiapan' || pratinjau;
             var tema = TEMA.indexOf(a.tema) >= 0 ? a.tema : 'hijau';
             var open = bisaDibuka ? '<a href="' + esc(a.url) + '"' : '<div aria-disabled="true"';
             var tags = (a.label || []).map(function (l) { return '<span class="tag">' + esc(l) + '</span>'; }).join('');
-            return open + ' class="app app--' + tema + (bisaDibuka ? '' : ' app--off') + '">' +
+            return open + ' class="app app--' + tema + (aktif || a.status === 'persiapan' ? '' : ' app--off') + (pratinjau ? ' app--dev' : '') + '">' +
                 '<span class="app__band">' +
                     '<span class="app__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[a.ikon] || ICONS.grid) + '</svg></span>' +
                     '<span><span class="app__code">' + esc(a.kode) + '</span><span class="app__kind">' + esc(a.jenis) + '</span></span>' +
@@ -150,12 +154,22 @@
                     '<span class="app__desc">' + esc(a.deskripsi) + '</span>' +
                     (tags ? '<span class="app__tags">' + tags + '</span>' : '') +
                 '</span>' +
-                '<span class="app__foot">' + (aktif ? 'Buka layanan ' + esc(a.kode) + ARROW : bisaDibuka ? 'Lihat rencana layanan' + ARROW : LOCK + 'Belum tersedia') + '</span>' +
+                '<span class="app__foot">' + (aktif ? 'Buka layanan ' + esc(a.kode) + ARROW : pratinjau ? 'Pratinjau (mode pengembang)' + ARROW : bisaDibuka ? 'Lihat rencana layanan' + ARROW : LOCK + 'Belum tersedia') + '</span>' +
                 '</' + (bisaDibuka ? 'a' : 'div') + '>';
         }).join('');
         var nAktif = APPS.filter(function (a) { return a.status === 'aktif'; }).length;
         document.getElementById('apps-count').textContent = nAktif + ' tersedia · ' + (APPS.length - nAktif) + ' segera hadir';
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        /* Penanda mode pengembang */
+        if (DEV) {
+            var tanda = document.createElement('div');
+            tanda.className = 'dev-badge';
+            tanda.setAttribute('role', 'status');
+            tanda.innerHTML = '<span class="dev-badge__dot" aria-hidden="true"></span>Mode pengembang' +
+                (window.MODE_DEV_LOKAL ? ' (lokal)' : ' · <a href="/?dev=0">Matikan</a>');
+            document.body.appendChild(tanda);
+        }
     </script>
     <script src="/animasi.js"></script>
 

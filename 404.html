@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Halaman tidak ditemukan — Superapp Humas</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#1E6B4B">
+    <meta name="color-scheme" content="only light">
+    <link rel="icon" href="/PKL/laporan_PKL/assets/logo-sekolah.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/portal.css">
+</head>
+
+<body class="nf-page">
+    <header class="top">
+        <div class="wrap top__inner">
+            <a class="top__brand" href="/" aria-label="Superapp Humas — beranda">
+                <img src="/PKL/laporan_PKL/assets/logo-sekolah.png" alt="" width="40" height="40">
+                <span class="top__text">
+                    <span class="top__title">Superapp Humas</span>
+                    <span class="top__sub">SMK Tamansiswa Jetis</span>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="wrap nf">
+        <div class="nf__art" aria-hidden="true">
+            <span class="nf__kode">404</span>
+            <img src="/assets/ilustrasi/status-kosong-cari.svg" alt="" width="260" height="220">
+        </div>
+        <h1 class="nf__judul">Halaman tidak ditemukan</h1>
+        <p class="nf__teks">Alamat yang kamu buka tidak ada atau belum tersedia. Periksa kembali alamatnya, atau kembali ke beranda.</p>
+        <p class="nf__alamat" id="nf-alamat" hidden></p>
+        <div class="nf__aksi">
+            <a class="btn-primary nf__btn" href="/">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>
+                Kembali ke Beranda
+            </a>
+            <a class="nf__link" href="/PKL/">Buka Layanan PKL</a>
+        </div>
+    </main>
+
+    <footer class="foot">
+        <div class="wrap foot__inner">
+            <p>&copy; <span id="year"></span> SMK Tamansiswa Jetis</p>
+            <p>Superapp Humas</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        /* Tampilkan alamat yang dicoba (sebagai teks biasa) */
+        (function () {
+            var el = document.getElementById('nf-alamat');
+            var p = location.pathname;
+            if (p && p !== '/' && !/^\/(404|tidak-ditemukan)/i.test(p)) {
+                el.textContent = p;
+                el.hidden = false;
+            }
+        })();
+    </script>
+</body>
+
+</html>

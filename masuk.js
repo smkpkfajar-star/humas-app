@@ -77,6 +77,54 @@
     btnText.textContent = ya ? 'Memeriksa…' : 'Masuk';
   }
 
+  /* ---------- Pop up berhasil masuk ----------
+     Kartu di tengah layar: centang beranimasi, sapaan, hitung mundur,
+     lalu otomatis lanjut ke tujuan (atau langsung lewat tombol). */
+  var JEDA_LANJUT = 2200;
+  var kurangiGerak = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
+  }
+
+  function popupBerhasil(sesi) {
+    var tujuan = AUTH.tujuan();
+    var nama = (sesi && (sesi.nama || sesi.id)) || '';
+    var labelPeran = form.querySelector('input[name="peran"]:checked').closest('label').textContent.trim();
+    var sudah = false;
+    function lanjut() {
+      if (sudah) return;
+      sudah = true;
+      location.replace(tujuan);
+    }
+
+    var el = document.createElement('div');
+    el.className = 'sukses';
+    el.innerHTML =
+      '<div class="sukses__card" role="alertdialog" aria-modal="true" aria-labelledby="sukses-judul" aria-describedby="sukses-teks">' +
+        '<div class="sukses__ikon" aria-hidden="true">' +
+          '<span class="sukses__cincin"></span>' +
+          '<span class="sukses__percik">' + new Array(9).join('<i></i>') + '</span>' +
+          '<svg viewBox="0 0 52 52"><circle class="sukses__lingkar" cx="26" cy="26" r="24"/><path class="sukses__centang" d="M15 27l7 7 15-16"/></svg>' +
+        '</div>' +
+        '<p class="sukses__judul" id="sukses-judul">Berhasil masuk!</p>' +
+        '<p class="sukses__teks" id="sukses-teks">Halo, <strong>' + esc(nama) + '</strong>. Mengarahkan ke ' + esc(cfg.kode === 'KI' ? 'Layanan KI' : 'Tracer Study') + '…</p>' +
+        '<span class="sukses__peran">' + esc(labelPeran) + (sesi && sesi.demo ? ' · mode demo' : '') + '</span>' +
+        '<div class="sukses__bar" aria-hidden="true"><span></span></div>' +
+        '<button type="button" class="btn-primary sukses__btn">Lanjut sekarang' +
+          '<svg class="btn-primary__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>' +
+        '</button>' +
+      '</div>';
+    el.style.setProperty('--jeda', JEDA_LANJUT + 'ms');
+    document.body.appendChild(el);
+
+    var tombol = el.querySelector('.sukses__btn');
+    tombol.addEventListener('click', lanjut);
+    // Fokus ke tombol agar Enter / pembaca layar langsung bisa memakainya.
+    requestAnimationFrame(function () { el.classList.add('is-open'); tombol.focus({ preventScroll: true }); });
+    setTimeout(lanjut, kurangiGerak ? 1500 : JEDA_LANJUT);
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var id = fId.value.trim();
@@ -91,8 +139,9 @@
     formErr.hidden = true;
     sibuk(true);
     AUTH.masuk({ peran: peran(), id: id, sandi: sandi }, document.getElementById('f-ingat').checked)
-      .then(function () {
-        location.replace(AUTH.tujuan());
+      .then(function (sesi) {
+        btnText.textContent = 'Berhasil';
+        popupBerhasil(sesi);
       })
       .catch(function (err) {
         formErr.textContent = (err && err.message) || 'Gagal masuk. Coba lagi.';
