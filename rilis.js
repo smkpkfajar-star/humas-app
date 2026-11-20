@@ -1,49 +1,57 @@
 /* ==========================================================================
-   Penjaga halaman yang BELUM RILIS + mode pengembang
+   Penjaga halaman yang BELUM RILIS + mode pengembang (sisi browser)
    --------------------------------------------------------------------------
    Pasang paling atas di <head> (Home & setiap halaman layanan):
      <script src="/rilis.js"></script>
 
-   Pengunjung biasa: halaman di daftar BELUM_RILIS disembunyikan lalu diganti
-   halaman "tidak ditemukan" (/404.html). Lapisan pertama ada di vercel.json:
-   server mengalihkan ke /tidak-ditemukan/ (alamat yang memang tidak ada,
-   sehingga Vercel menampilkan 404.html dengan status 404). File ini lapisan
-   cadangan untuk hosting/server lain.
+   PENGAMAN UTAMA ada di server: middleware.js. Di Vercel, halaman yang belum
+   rilis hanya dikirim bila browser membawa kunci pengembang yang benar
+   (HUMAS_DEV_TOKEN, disimpan di pengaturan Vercel, tidak ada di kode).
+   File ini hanya:
+   - menyimpan kunci yang dimasukkan lewat  /?dev=<kunci>  (cookie humas_dev,
+     30 hari) dan menghapusnya lewat  /?dev=0 ;
+   - menampilkan penanda/ubin pratinjau di Home bila kunci tersimpan;
+   - cadangan di hosting lain: halaman belum rilis diganti halaman 404.
+   Browser TIDAK bisa memeriksa benar/salahnya kunci; yang memutuskan server.
 
-   Pengembang tetap bisa membuka halaman yang belum rilis:
-   - Di komputer sendiri (localhost / 127.0.0.1 / alamat LAN / file://): otomatis.
-   - Di situs online: buka  /?dev=1  sekali untuk menyalakan mode pengembang
-     di browser itu (cookie humas_dev, 30 hari). Matikan dengan  /?dev=0 .
-     vercel.json ikut melewati pengalihan bila cookie ini ada.
-   CATATAN: ini hanya menyembunyikan fitur, BUKAN pengaman. Siapa pun yang
-   tahu caranya bisa menyalakan mode pengembang.
+   Di komputer sendiri (localhost / 127.0.0.1 / alamat LAN / file://) halaman
+   yang belum rilis selalu terbuka agar mudah develop.
 
-   SAAT RILIS: hapus folder layanan dari BELUM_RILIS, hapus pengalihannya di
-   vercel.json, lalu ubah status di index.html menjadi 'aktif'.
+   SAAT RILIS: hapus folder layanan dari BELUM_RILIS di sini dan dari
+   `matcher` di middleware.js, lalu ubah status di index.html menjadi 'aktif'.
    ========================================================================== */
 (function () {
   'use strict';
 
   var BELUM_RILIS = ['/ki/', '/tracer/'];
   var COOKIE = 'humas_dev';
+  var PANJANG_MIN = 16;
 
-  /* ---------- Nyalakan / matikan mode pengembang lewat ?dev=1 / ?dev=0 ---------- */
-  var q = location.search.match(/[?&]dev=([01])/);
+  /* ---------- Simpan / hapus kunci lewat ?dev=<kunci> / ?dev=0 ---------- */
+  var q = location.search.match(/[?&]dev=([^&#]*)/);
   if (q) {
-    document.cookie = COOKIE + '=' + (q[1] === '1' ? '1; max-age=2592000' : '; max-age=0') + '; path=/; SameSite=Lax' +
-      (location.protocol === 'https:' ? '; Secure' : '');
+    var kunci = '';
+    try { kunci = decodeURIComponent(q[1]); } catch (e) { /* abaikan */ }
+    var aman = location.protocol === 'https:' ? '; Secure' : '';
+    if (kunci.length >= PANJANG_MIN) {
+      document.cookie = COOKIE + '=' + encodeURIComponent(kunci) + '; max-age=2592000; path=/; SameSite=Lax' + aman;
+    } else {
+      document.cookie = COOKIE + '=; max-age=0; path=/; SameSite=Lax' + aman; // ?dev=0 atau kunci tidak sah
+    }
+    // Hapus kunci dari alamat & riwayat browser.
     if (window.history && history.replaceState) {
-      var bersih = location.search.replace(/([?&])dev=[01]&?/, '$1').replace(/[?&]$/, '');
+      var bersih = location.search.replace(/([?&])dev=[^&#]*&?/, '$1').replace(/[?&]$/, '');
       history.replaceState(null, '', location.pathname + bersih + location.hash);
     }
   }
 
   var lokal = location.protocol === 'file:' ||
     /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+)$/.test(location.hostname);
-  var cookieDev = new RegExp('(?:^|;\\s*)' + COOKIE + '=1(?:;|$)').test(document.cookie);
+  var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + COOKIE + '=([^;]*)'));
+  var adaKunci = !!(m && m[1].length >= PANJANG_MIN);
 
-  /** true di komputer pengembang atau bila mode pengembang dinyalakan. */
-  window.MODE_DEV = lokal || cookieDev;
+  /** true di komputer pengembang atau bila kunci pengembang tersimpan (benar/salahnya diperiksa server). */
+  window.MODE_DEV = lokal || adaKunci;
   window.MODE_DEV_LOKAL = lokal;
   if (window.MODE_DEV) return;
 

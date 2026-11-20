@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "trailingSlash": true,
-  "redirects": [
-    { "source": "/KI", "missing": [{ "type": "cookie", "key": "humas_dev", "value": "1" }], "destination": "/tidak-ditemukan/", "permanent": false },
-    { "source": "/KI/:path*", "missing": [{ "type": "cookie", "key": "humas_dev", "value": "1" }], "destination": "/tidak-ditemukan/", "permanent": false },
-    { "source": "/Tracer", "missing": [{ "type": "cookie", "key": "humas_dev", "value": "1" }], "destination": "/tidak-ditemukan/", "permanent": false },
-    { "source": "/Tracer/:path*", "missing": [{ "type": "cookie", "key": "humas_dev", "value": "1" }], "destination": "/tidak-ditemukan/", "permanent": false }
-  ]
+  "trailingSlash": true
 }
